@@ -10,3 +10,10 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.topMenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

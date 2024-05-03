@@ -6,21 +6,25 @@ import "./Login.css";
 import { LoginUser } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
 import { decodeToken } from "react-jwt";
-import { Header } from "../../common/Header/Header";
-import { Footer } from "../../common/Footer/Footer";
+import { useDispatch, useSelector } from "react-redux"
+import { login, userData } from "../../app/slices/userSlice"
 
 
 export const Login = () => {
-  const datosUser = JSON.parse(localStorage.getItem("passport"));
-  const navigate = useNavigate();
-  const [tokenStorage, setTokenStorage] = useState(datosUser?.token);
+  const navigate = useNavigate()
 
-  const [credenciales, setCredenciales] = useState({
+  //Redux reading mode
+  const rdxUserData = useSelector(userData)
+  //Redux writing mode
+  const dispatch = useDispatch()
+
+  const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
+  const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials?.token);
 
-  const [credencialesError, setCredencialesError] = useState({
+  const [credentialsError, setCredentialsError] = useState({
     emailError: "",
     passwordError: "",
   });
@@ -35,7 +39,7 @@ export const Login = () => {
   }, [tokenStorage]);
 
   const inputHandler = (e) => {
-    setCredenciales((prevState) => ({
+    setCredentials((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
@@ -44,7 +48,7 @@ export const Login = () => {
   const checkError = (e) => {
     const error = validame(e.target.name, e.target.value);
 
-    setCredencialesError((prevState) => ({
+    setCredentialsError((prevState) => ({
       ...prevState,
       [e.target.name + "Error"]: error,
     }));
@@ -52,21 +56,21 @@ export const Login = () => {
 
   const loginMe = async () => {
     try {
-      for (let elemento in credenciales) {
-        if (credenciales[elemento] === "") {
+      for (let elemento in credentials) {
+        if (credentials[elemento] === "") {
           throw new Error("All fields are required");
         }
       }
 
-      const fetched = await LoginUser(credenciales);
+      const fetched = await LoginUser(credentials);
       const decoded = decodeToken(fetched.token);
       const passport = {
         token: fetched.token,
         decoded: decoded,
       };
 
-      localStorage.setItem("passport", JSON.stringify(passport));
-
+      //Saving passport to RDX (with both, token and all the decoded info)
+      dispatch(login({ credentials: passport }))
       setMsg(`Hi ${decoded.username}, welcome to Taps`);
       navigate('/');
     } catch (error) {
@@ -76,43 +80,38 @@ export const Login = () => {
 
   return (
     <>
-      <Header />
       <div className="loginDesign">
-        <div className="error">Don't have an account yet? <a href="./register">Sign up</a> <br /><br /> </div>
+        <div className="error">Don't have an account yet? <span className="lime" onClick={() => { navigate('/register') }}>Sign up</span> <br /><br /> </div>
         <CInput
-          className={`inputDesign ${credencialesError.emailError !== "" ? "inputDesignError" : ""
+          className={`inputDesign ${credentialsError.emailError !== "" ? "inputDesignError" : ""
             }`}
           type={"email"}
           placeholder={"email"}
           name={"email"}
           disabled={""}
-          value={credenciales.email || ""}
+          value={credentials.email || ""}
           onChangeFunction={(e) => inputHandler(e)}
           onBlurFunction={(e) => checkError(e)}
         />
         <CInput
-          className={`inputDesign ${credencialesError.passwordError !== "" ? "inputDesignError" : ""
+          className={`inputDesign ${credentialsError.passwordError !== "" ? "inputDesignError" : ""
             }`}
           type={"password"}
           placeholder={"password"}
           name={"password"}
           disabled={""}
-          value={credenciales.password || ""}
+          value={credentials.password || ""}
           onChangeFunction={(e) => inputHandler(e)}
           onBlurFunction={(e) => checkError(e)}
         />
-
         <CButton
           className={"cButtonDesign"}
           title={"Login"}
           functionEmit={loginMe}
         />
-        <div className="error">{credencialesError.emailError || credencialesError.passwordError}</div>
-        {/* <div className="error">{}</div> */}
+        <div className="error">{credentialsError.emailError || credentialsError.passwordError}</div>
         <div className="error">{msgError}</div>
       </div>
-
-      <Footer />
     </>
   );
 };
