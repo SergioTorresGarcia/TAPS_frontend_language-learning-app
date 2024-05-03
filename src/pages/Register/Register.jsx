@@ -64,6 +64,7 @@ export const Register = () => {
     <>
       <Header />
       <div className="registerDesign">
+        <div className="error">Already registered? <a href="./login">Log in here</a> <br /><br /> </div>
         {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
         <CInput
           className={`inputDesign ${userError.usernameError !== "" ? "inputDesignError" : ""

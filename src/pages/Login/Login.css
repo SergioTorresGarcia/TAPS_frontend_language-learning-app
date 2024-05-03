@@ -1,6 +1,6 @@
 .loginDesign {
 
-    height: 70vh;
+    height: 100vh;
     width: 100vw;
 
     background-color: lightseagreen;
@@ -14,4 +14,5 @@
 .error {
     height: 1.5em;
     color: white;
+    margin-bottom: 1em;
 }

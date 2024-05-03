@@ -11,8 +11,6 @@
 }
 
 .navigatorDesign:hover {
-  color: grey;
-
   cursor: pointer;
   height: 5em;
   width: 5em;

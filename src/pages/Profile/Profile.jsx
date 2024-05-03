@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import { Header } from "../../common/Header/Header";
 import { CButton } from "../../common/CButton/CButton";
 import { Footer } from "../../common/Footer/Footer";
+import { validame } from "../../utils/functions";
 
 export const Profile = () => {
   const datosUser = JSON.parse(localStorage.getItem("passport"));
@@ -32,6 +33,15 @@ export const Profile = () => {
     }));
   };
 
+  const checkError = (e) => {
+    const error = validame(e.target.name, e.target.value);
+
+    setUserError((prevState) => ({
+      ...prevState,
+      [e.target.name + "Error"]: error,
+    }));
+  };
+
   useEffect(() => {
     if (!tokenStorage) {
       navigate("/");
@@ -42,7 +52,6 @@ export const Profile = () => {
     const getUserProfile = async () => {
       try {
         const fetched = await GetProfile(tokenStorage);
-
         setLoadedData(true);
 
         setUser({
@@ -80,10 +89,26 @@ export const Profile = () => {
     <>
       <Header />
       <div className="profileDesign">
+
         {!loadedData ? (
           <div>CARGANDO</div>
         ) : (
-          <div>
+          <div className="vertical">
+            <div className="leftText">
+              <CButton
+                className={"leftText"}
+                title={"◹ Check the rules?"}
+                functionEmit={() => { navigate("/rules") }}
+              />
+              <br />
+              <CButton
+                className={"leftText"}
+                title={"◹ Check your progress?"}
+                functionEmit={() => { navigate("/progress") }}
+              />
+              <br /><br />
+              <div className="leftText">◹ Your data:</div>
+            </div>
             <CInput
               className={`inputDesign ${userError.usernameError !== "" ? "inputDesignError" : ""
                 }`}
@@ -108,9 +133,10 @@ export const Profile = () => {
             />
             <CButton
               className={write === "" ? "cButtonGreen cButtonDesign" : "cButtonDesign"}
-              title={write === "" ? "Confirm" : "Edit"}
+              title={write === "" ? <span className="whiteTick">✓</span> : "Edit"}
               functionEmit={write === "" ? updateData : () => setWrite("")}
             />
+            <div className="error">{userError.usernameError}</div>
           </div>
         )}
       </div>

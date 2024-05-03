@@ -13,5 +13,15 @@
 }
 
 .footMenu {
-    padding-bottom: 0.5em;
+
+    display: flex;
+    flex-direction: row;
+
 }
+
+/* .authMenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+} */

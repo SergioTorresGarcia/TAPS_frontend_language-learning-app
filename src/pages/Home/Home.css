@@ -26,4 +26,11 @@
 
 .text {
     font-size: 200%;
+    color: white;
+}
+
+.logo {
+    width: 5em;
+    height: 5em;
+    color: white;
 }

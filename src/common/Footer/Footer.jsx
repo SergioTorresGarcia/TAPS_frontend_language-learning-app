@@ -7,13 +7,21 @@ export const Footer = () => {
     const passport = JSON.parse(localStorage.getItem("passport"));
 
     return (
-        <div className="footerDesign footMenu">
-            <div>
-                {passport?.token ? (<Navigator title={"play"} destination={"/"} />) : ("")}
-            </div>
-            <div>
-                <Navigator title={"rules"} destination={"/rules"} />
-            </div>
+        <div className="footerDesign">
+            {passport?.token ? (
+                <>
+                    <div className="footMenu">
+                        {/* <Navigator title={"PLAY"} destination={"/"} /> */}
+                    </div>
+
+
+                    <div>
+                        <Navigator title={passport?.decoded?.username} destination={"/profile/me"} />
+                    </div>
+                </>
+            ) : (
+                <div></div>
+            )}
         </div>
     );
 };

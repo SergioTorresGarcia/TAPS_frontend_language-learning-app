@@ -78,6 +78,7 @@ export const Login = () => {
     <>
       <Header />
       <div className="loginDesign">
+        <div className="error">Don't have an account yet? <a href="./register">Sign up</a> <br /><br /> </div>
         <CInput
           className={`inputDesign ${credencialesError.emailError !== "" ? "inputDesignError" : ""
             }`}
@@ -106,10 +107,11 @@ export const Login = () => {
           title={"Login"}
           functionEmit={loginMe}
         />
-        <div className="error">{credencialesError.emailError}</div>
-        <div className="error">{credencialesError.passwordError}</div>
+        <div className="error">{credencialesError.emailError || credencialesError.passwordError}</div>
+        {/* <div className="error">{}</div> */}
         <div className="error">{msgError}</div>
       </div>
+
       <Footer />
     </>
   );
