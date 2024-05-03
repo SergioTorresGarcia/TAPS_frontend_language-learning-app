@@ -1,11 +1,10 @@
-import { Footer } from "../../common/Footer/Footer";
-import { Header } from "../../common/Header/Header";
+
 import "./Rules.css";
 
+// PAGE TO BE UPDATED!
 export const Rules = () => {
     return (
         <>
-            <Header />
             <div className="rulesDesign">
                 <p className="text">General rules</p>
                 <p>
@@ -15,9 +14,7 @@ export const Rules = () => {
                     <br />
                     Choose if the offered pair is correct or not
                 </p>
-
             </div >
-            <Footer />
         </>
     );
 };

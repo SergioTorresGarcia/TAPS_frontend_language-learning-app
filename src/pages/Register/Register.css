@@ -15,3 +15,12 @@
     height: 1.5em;
     color: white;
 }
+
+.lime {
+    color: lime;
+}
+
+.lime:hover {
+    color: limegreen;
+    cursor: pointer;
+}

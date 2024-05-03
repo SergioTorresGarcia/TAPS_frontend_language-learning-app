@@ -1,21 +1,29 @@
-import { useNavigate } from "react-router-dom";
-import { Footer } from "../../common/Footer/Footer";
-import { Header } from "../../common/Header/Header";
+import { useDispatch, useSelector } from "react-redux";
 import "./Home.css";
+import { userData } from "../../app/slices/userSlice";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
+  //Redux reading mode
+  const rdxUserData = useSelector(userData);
+  //Redux writing mode
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
-  const passport = JSON.parse(localStorage.getItem("passport"));
+
   return (
     <>
-      <Header />
-      {passport?.token ? (
-        <div className="homeDesign" onClick={navigate('/play')}><div className=""><span className="text"><img className="logo" src="../../src/assets/playroundedbuttonoutline_104668.png" alt="" /> </span ></div ></div>
+      <div className="homeDesign">
+        {rdxUserData.credentials?.token ? (
 
-      ) : (
-        <div className="homeDesign"><div className="circle"><span className="text">TAPS</span ></div></div >
-      )}
-      <Footer />
+          <div className="logo" onClick={() => { navigate('/play') }}><img className="logo" src="../../src/assets/playroundedbuttonoutline_104668.png" alt="click the play button to start the game" /></div>
+
+        ) : (
+
+          <div className="homeDesign"><div className="circle"><span className="text">TAPS</span ></div></div>
+
+        )}
+      </div>
     </>
   );
 };

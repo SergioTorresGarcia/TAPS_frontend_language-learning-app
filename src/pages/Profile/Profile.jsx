@@ -1,20 +1,22 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import "./Profile.css";
 import { GetProfile, UpdateProfile } from "../../services/apiCalls";
 import { CInput } from "../../common/CInput/CInput";
-import dayjs from "dayjs";
-import { Header } from "../../common/Header/Header";
 import { CButton } from "../../common/CButton/CButton";
-import { Footer } from "../../common/Footer/Footer";
 import { validame } from "../../utils/functions";
+import { useSelector } from "react-redux";
+import { userData } from "../../app/slices/userSlice";
 
 export const Profile = () => {
-  const datosUser = JSON.parse(localStorage.getItem("passport"));
+  //Redux reading mode
+  const rdxUserData = useSelector(userData)
+
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [write, setWrite] = useState("disabled");
-  const [tokenStorage, setTokenStorage] = useState(datosUser?.token);
+  const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
   const [loadedData, setLoadedData] = useState(false);
   const [user, setUser] = useState({
     username: "",
@@ -69,6 +71,11 @@ export const Profile = () => {
     }
   }, [user]);
 
+  //Syncronising the menu username when editing profile
+  useEffect(() => {
+    rdxUserData.credentials.decoded.username = user.username
+  }, [user]);
+
   const updateData = async () => {
 
     try {
@@ -87,7 +94,6 @@ export const Profile = () => {
 
   return (
     <>
-      <Header />
       <div className="profileDesign">
 
         {!loadedData ? (
@@ -140,7 +146,6 @@ export const Profile = () => {
           </div>
         )}
       </div>
-      <Footer />
     </>
   );
 };

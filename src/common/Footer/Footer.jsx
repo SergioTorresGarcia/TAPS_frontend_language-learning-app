@@ -1,23 +1,29 @@
 import { Navigator } from "../Navigator/Navigator";
-import { useNavigate } from "react-router-dom";
 import "./Footer.css";
 
+import { useSelector } from "react-redux"
+import { userData } from "../../app/slices/userSlice"
+import { useLocation } from "react-router-dom";
+
 export const Footer = () => {
-    const navigate = useNavigate();
-    const passport = JSON.parse(localStorage.getItem("passport"));
+    //Redux reading mode
+    const rdxUserData = useSelector(userData)
+    //useLocation to control menu display
+    const location = useLocation();
 
     return (
         <div className="footerDesign">
-            {passport?.token ? (
+            {rdxUserData.credentials?.token ? (
                 <>
                     <div className="footMenu">
-                        {/* <Navigator title={"PLAY"} destination={"/"} /> */}
+                        {rdxUserData.credentials.decoded.roleName === "admin" && (
+                            <Navigator title={"ADMIN"} path="/admin" />
+                        )}
                     </div>
 
-
-                    <div>
-                        <Navigator title={passport?.decoded?.username} destination={"/profile/me"} />
-                    </div>
+                    {(location.pathname !== '/profile/me')
+                        ? <Navigator title={rdxUserData.credentials.decoded.username} destination={"/profile/me"} />
+                        : <div></div>}
                 </>
             ) : (
                 <div></div>

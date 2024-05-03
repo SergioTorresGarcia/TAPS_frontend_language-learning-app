@@ -32,6 +32,6 @@ export const validame = (type, value) => {
 
       return "";
     default:
-      console.log("whattttttttttt???");
+      console.log("it is all good");
   }
 };

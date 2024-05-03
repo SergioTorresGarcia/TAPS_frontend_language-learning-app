@@ -5,8 +5,9 @@ import { CButton } from "../../common/CButton/CButton";
 import { RegisterUser } from "../../services/apiCalls";
 import { validame } from "../../utils/functions";
 import { useNavigate } from "react-router-dom";
-import { Header } from "../../common/Header/Header";
-import { Footer } from "../../common/Footer/Footer";
+import { login } from "../../app/slices/userSlice";
+import { useDispatch } from "react-redux";
+
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ export const Register = () => {
     }));
   };
 
-  //function emit que también está aqui en el padre...en este caso para registrar...
+  //funcion emit in father, for registering
   const registerMe = async () => {
     try {
       for (let elemento in user) {
@@ -54,6 +55,7 @@ export const Register = () => {
 
       const fetched = await RegisterUser(user);
       setMsgError(fetched.message);
+      navigate('/login');
 
     } catch (error) {
       setMsgError(error.message);
@@ -62,13 +64,12 @@ export const Register = () => {
 
   return (
     <>
-      <Header />
       <div className="registerDesign">
-        <div className="error">Already registered? <a href="./login">Log in here</a> <br /><br /> </div>
-        {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
+        <div className="error">Already registered?
+          <span className="lime" onClick={() => { navigate('/login') }}>Log in here</span><br /><br />
+        </div>
         <CInput
-          className={`inputDesign ${userError.usernameError !== "" ? "inputDesignError" : ""
-            }`}
+          className={`inputDesign ${userError.usernameError !== "" ? "inputDesignError" : ""}`}
           type={"text"}
           placeholder={"username"}
           name={"username"}
@@ -77,8 +78,7 @@ export const Register = () => {
           onBlurFunction={(e) => checkError(e)}
         />
         <CInput
-          className={`inputDesign ${userError.emailError !== "" ? "inputDesignError" : ""
-            }`}
+          className={`inputDesign ${userError.emailError !== "" ? "inputDesignError" : ""}`}
           type={"email"}
           placeholder={"email"}
           name={"email"}
@@ -86,10 +86,8 @@ export const Register = () => {
           onChangeFunction={(e) => inputHandler(e)}
           onBlurFunction={(e) => checkError(e)}
         />
-
         <CInput
-          className={`inputDesign ${userError.passwordError !== "" ? "inputDesignError" : ""
-            }`}
+          className={`inputDesign ${userError.passwordError !== "" ? "inputDesignError" : ""}`}
           type={"password"}
           placeholder={"password"}
           name={"password"}
@@ -97,7 +95,6 @@ export const Register = () => {
           onChangeFunction={(e) => inputHandler(e)}
           onBlurFunction={(e) => checkError(e)}
         />
-
         <CButton
           className={"cButtonDesign"}
           title={"Register"}
@@ -108,7 +105,6 @@ export const Register = () => {
         <div className="error">{userError.passwordError}</div>
         <div className="error">{msgError}</div>
       </div>
-      <Footer />
     </>
   );
 };
