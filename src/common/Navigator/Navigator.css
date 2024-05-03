@@ -1,0 +1,22 @@
+.navigatorDesign {
+  height: 5em;
+  width: 5em;
+  color: white;
+  font-weight: bold;
+
+  margin: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navigatorDesign:hover {
+  color: grey;
+
+  cursor: pointer;
+  height: 5em;
+  width: 5em;
+
+  border-radius: 50%;
+  border: 0.1em solid white
+}

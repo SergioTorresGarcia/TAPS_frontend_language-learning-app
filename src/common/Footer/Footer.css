@@ -1,0 +1,17 @@
+.footerDesign {
+
+    height: 15vh;
+    width: 100vw;
+
+
+    background-color: lightseagreen;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footMenu {
+    padding-bottom: 0.5em;
+}

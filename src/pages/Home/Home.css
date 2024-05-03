@@ -1,0 +1,29 @@
+.homeDesign {
+
+    height: 70vh;
+    width: 100vw;
+
+    background-color: lightseagreen;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.circle {
+    width: 10em;
+    height: 10em;
+    border: 0.5em dotted white;
+    border-radius: 50%;
+    background-color: lightseagreen;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text {
+    font-size: 200%;
+}
