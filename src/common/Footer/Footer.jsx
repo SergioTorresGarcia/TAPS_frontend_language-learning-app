@@ -20,10 +20,11 @@ export const Footer = () => {
                             <Navigator title={"ADMIN"} path="/admin" />
                         )}
                     </div>
-
-                    {(location.pathname !== '/profile/me')
-                        ? <Navigator title={rdxUserData.credentials.decoded.username} destination={"/profile/me"} />
-                        : <div></div>}
+                    <div>
+                        {(location.pathname === '/')
+                            ? <Navigator title={rdxUserData.credentials.decoded.username} destination={"/profile/me"} />
+                            : <div></div>}
+                    </div>
                 </>
             ) : (
                 <div></div>

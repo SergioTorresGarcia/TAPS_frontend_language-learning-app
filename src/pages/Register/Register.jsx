@@ -5,8 +5,7 @@ import { CButton } from "../../common/CButton/CButton";
 import { RegisterUser } from "../../services/apiCalls";
 import { validame } from "../../utils/functions";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../app/slices/userSlice";
-import { useDispatch } from "react-redux";
+
 
 
 export const Register = () => {
@@ -66,7 +65,7 @@ export const Register = () => {
     <>
       <div className="registerDesign">
         <div className="error">Already registered?
-          <span className="lime" onClick={() => { navigate('/login') }}>Log in here</span><br /><br />
+          <span className="lime" onClick={() => { navigate('/login') }}> Log in here</span><br /><br />
         </div>
         <CInput
           className={`inputDesign ${userError.usernameError !== "" ? "inputDesignError" : ""}`}

@@ -5,6 +5,7 @@
 
     background-color: lightseagreen;
 
+    margin-top: -3em;
     display: flex;
     flex-direction: column;
     justify-content: center;

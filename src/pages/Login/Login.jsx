@@ -81,7 +81,7 @@ export const Login = () => {
   return (
     <>
       <div className="loginDesign">
-        <div className="error">Don't have an account yet? <span className="lime" onClick={() => { navigate('/register') }}>Sign up</span> <br /><br /> </div>
+        <div className="error">Don't have an account yet? <span className="lime" onClick={() => { navigate('/register') }}> Sign up</span> <br /><br /> </div>
         <CInput
           className={`inputDesign ${credentialsError.emailError !== "" ? "inputDesignError" : ""
             }`}
