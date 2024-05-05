@@ -1,5 +1,5 @@
 
-import "./Play.css";
+import "./Play2.css";
 
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import { GetWordToPlay } from "../../services/apiCalls";
 import { CButton } from "../../common/CButton/CButton";
 
 
-export const Play = () => {
+export const Play2 = () => {
     // Redux reading mode
     const rdxUserData = useSelector(userData);
     // Redux writing mode
@@ -17,7 +17,8 @@ export const Play = () => {
     const navigate = useNavigate();
 
     const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
-    const [words, setWords] = useState([]); // State to store fetched words
+    const [word, setWord] = useState([]);  // State to store current word to play
+    const [otherWords, setOtherWords] = useState([]); // State to store fetched words to divert
     const [loadedData, setLoadedData] = useState(false);
 
     useEffect(() => {
@@ -25,7 +26,7 @@ export const Play = () => {
             try {
                 const fetched = await GetWordToPlay(tokenStorage);
                 console.log(111111, fetched);
-                setWords(fetched.data.word);
+                setWord(fetched.data.word);
                 setLoadedData(true);
             } catch (error) {
                 console.log(error);
@@ -35,16 +36,14 @@ export const Play = () => {
         if (!loadedData) {
             getCurrentWord();
         }
+
+
     }, [loadedData]); // Call getAllWords only when loadedData changes
 
     return (
         <>
             <div className="playDesign">
 
-                {/* ---dev info--- <br />
-                "LEARN THE WORD" view<br />
-                [ Level: {words.levelId} | Challenge: {words.challengeId} ]<br />
-                -------------- */}
                 {rdxUserData.credentials?.token ? (
                     <>
                         {loadedData && (
@@ -52,10 +51,12 @@ export const Play = () => {
                                 <div className="game">
                                     <div className="borderConcept">
                                         <br />
-                                        <img className="img text" src={`../../src/assets/${words.image.slice(2)}`} alt="" />
-                                        <h3 className="text2">{words.JP}</h3>
-                                        <h5 className="white">'{words.romanji}'</h5>
-                                        <h4 className="text2">{words.EN}</h4>
+                                        {/* <h3 className="text2">{otherWord.JP}</h3>
+                                        <h5 className="white">'{otherWord.romanji}'</h5> */}
+                                        <img className="img text" src={`../../src/assets/${word.image.slice(2)}`} alt="" />
+                                        <h3 className="text2">{word.JP}</h3>
+                                        <h5 className="white">'{word.romanji}'</h5>
+                                        <h4 className="text2">{word.EN}</h4>
                                         <br />
                                     </div>
                                     <div className="rowBtns">

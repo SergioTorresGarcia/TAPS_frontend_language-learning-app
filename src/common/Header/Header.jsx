@@ -23,22 +23,25 @@ export const Header = () => {
     <div className="headerDesign">
       <div>
         {rdxUserData.credentials?.token ? (
-
-          (loc === '/profile/me' || loc === '/rules' || loc === '/progress' || loc === '/play')
-            ? (<div className="authMenu">
-              <Navigator title={"⇠"} destination={(loc === '/profile/me' || loc === '/play') ? "/" : "/profile/me"} />
-            </div>)
-            : (<div className="topMenu"><div onClick={logOut}>
-              <Navigator title={"log out"} destination={"/"} />
-            </div></div>)
-
+          <>
+            {loc === '/profile/me' || loc === '/play' || loc === '/words' ? (
+              <Navigator title={"⇠"} destination={"/"} />
+            ) : null}
+            {loc === '/rules' || loc === '/progress' ? (
+              <Navigator title={"⇠"} destination={"/profile/me"} />
+            ) : null}
+            {loc === '/' ? (
+              <div onClick={logOut}><Navigator title={"log out"} destination={"/"} /></div>
+            ) : null}
+          </>
 
         ) : (
 
-          (loc === '/login' || loc === '/register')
-            ? <Navigator title={"⇠"} destination={"/"} />
-            : <Navigator title={"login"} destination={"/login"} />
-
+          loc === '/login' || loc === '/register' ? (
+            <Navigator title={"⇠"} destination={"/"} />
+          ) : (
+            <Navigator title={"login"} destination={"/login"} />
+          )
         )}
       </div>
     </div>

@@ -122,3 +122,30 @@ export const GetWords = async (token) => {
     throw error;
   }
 };
+
+export const GetWordToPlay = async (token) => {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  };
+
+  try {
+    const response = await fetch(`${root}words/current`, options);
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    console.log("data", data);
+    console.log("response", response);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

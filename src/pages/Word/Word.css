@@ -1,25 +1,10 @@
-.playDesign {
-
-    height: 70vh;
-    padding-bottom: 15vh;
-    width: 100vw;
-
-    background-color: lightseagreen;
-
-    overflow-y: hidden;
-}
-
-.game {
+.wordDesign {
 
     height: 85vh;
-
-}
-
-.rowBtns {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    width: 100vw;
+    margin-top: -15vh;
+    background-color: lightseagreen;
+    overflow-y: scroll;
 }
 
 .circle {
@@ -54,26 +39,13 @@
     font-size: 200%;
 }
 
-.whiteCross {
-    color: white;
-    font-size: 300%;
-    margin-bottom: 0.3em;
-}
-
 .img {
     width: 5em;
 }
 
-.borderConcept {
+.border {
     border: 0.1em solid white;
     border-radius: 1em;
     margin: 1em;
-    background-color: orange;
-}
-
-.cButtonDesign:hover {
-
-    cursor: pointer;
-    transition: 0.2s;
-    background-color: orange;
+    background-color: lightgreen;
 }

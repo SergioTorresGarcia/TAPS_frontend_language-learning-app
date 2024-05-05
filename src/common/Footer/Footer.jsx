@@ -17,7 +17,19 @@ export const Footer = () => {
                 <>
                     <div className="footMenu">
                         {rdxUserData.credentials.decoded.roleName === "admin" && (
-                            <Navigator title={"ADMIN"} path="/admin" />
+                            <>
+                                {location.pathname !== '/admin' ?
+                                    <Navigator title={"ADMIN"} destination={"/admin"} />
+                                    : <div></div>}
+
+                                {location.pathname === '/admin/words' ?
+                                    <Navigator title={"+ NEW"} destination={"/admin/words/new"} />
+                                    : <Navigator title={"WORDS"} destination={"/admin/words"} />}
+
+                                {location.pathname !== '/' ?
+                                    <Navigator title={"HOME"} destination={"/"} />
+                                    : null}
+                            </>
                         )}
                     </div>
                     <div>
