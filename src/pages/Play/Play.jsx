@@ -1,14 +1,11 @@
 
 import "./Play.css";
-
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login, userData } from "../../app/slices/userSlice";
+import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { GetWords, GetWordsLearnt } from "../../services/apiCalls";
 import { CButton } from "../../common/CButton/CButton";
-import { Word } from "../Word/Word";
-
 
 export const Play = () => {
     // Redux reading mode
@@ -18,80 +15,77 @@ export const Play = () => {
     const navigate = useNavigate();
 
     const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
-    const [loadedData, setLoadedData] = useState(false);
+    const [words, setWords] = useState([]); // State to store fetched ALL words
+    const [allConcepts, setAllConcepts] = useState([]); // State to store fetched ALL words
+    const [learntWords, setLearntWords] = useState([]);// State to store fetched LEARNT words
+    const [learntConcepts, setLearntConcepts] = useState([]);// State to store fetched LEARNT words
 
-    const [words, setWords] = useState([]); // State to store fetched words
-    const [wordToPlay, setWordToPlay] = useState([]); // State to store fetched words
-    const [learntWords, setLearntWords] = useState([]);
+    const [wordToPlay, setWordToPlay] = useState({});
+    const [loadedData1, setLoadedData1] = useState(false);
+    const [loadedData2, setLoadedData2] = useState(false);
 
     useEffect(() => {
         const getAllWords = async () => {
             try {
-                const allWords = await GetWords(); // ALL WORDS FROM THE GAME
-                setWords(allWords);
-                setLoadedData(true);
+                const fetched = await GetWords(tokenStorage); // ALL WORDS FROM THE GAME
+                setWords(fetched.data);
+                setLoadedData1(true);
             } catch (error) {
                 console.error('Failed to fetch all words:', error);
             }
         };
-        if (!loadedData) {
+        if (!loadedData1) {
             getAllWords();
         }
-    }, [loadedData]);
+    }, [loadedData1]);
 
     useEffect(() => {
         const fetchLearntWords = async () => { // ALL LEARNT WORDS
             try {
-                const words = await GetWordsLearnt(tokenStorage);
-                console.log("words", words);
-                setLearntWords(words.data);
-                setLoadedData(true);
+                const fetched = await GetWordsLearnt(tokenStorage);
+                setLearntWords(fetched.data);
+                setLoadedData2(true);
             } catch (error) {
                 console.error('Failed to fetch learnt words:', error);
             }
         };
-
-        if (!loadedData) {
+        if (!loadedData2) {
             fetchLearntWords();
         }
-    }, [loadedData]);
+    }, [loadedData2]);
 
     useEffect(() => {
-        // const getCurrentWord = () => {// ALL LEARNT WORDS
-        //     try {
-        const learntConcepts = learntWords.map(item => item.word.EN)
-        console.log("words", learntWords);
-        console.log("concepts", learntConcepts);
-        // const wordToPlay = words.find(word => includes(word.word.EN));
+        if (words.length > 0) {
+            const allConcepts = words.map(item => item.EN);
+            setAllConcepts(allConcepts);
+        }
+    }, [words]);
+    useEffect(() => {
+        if (learntWords.length > 0) {
+            const learntConcepts = learntWords.map(item => item.word.EN);
+            setLearntConcepts(learntConcepts);
+        }
+    }, [learntWords]);
 
-        console.log(3333, learntWords);
-        console.log(444, words);
-        console.log(111111, wordToPlay);
-        setWordToPlay(wordToPlay)
-        //     } catch (error) {
-        //         console.log(error);
-        //     }
-        // };
-
-        // if (learntWords.length) {
-        //     getCurrentWord();
-        // }
-    }, [loadedData]);
-
-
+    useEffect(() => {
+        if (allConcepts.length > 0 && learntConcepts.length > 0) {
+            const wordToPlay = words.find(word => !learntConcepts.includes(word.EN));
+            setWordToPlay(wordToPlay);
+        }
+    }, [allConcepts, learntConcepts]);
 
     return (
         <>
             <div className="playDesign">
                 {rdxUserData.credentials?.token ? (
                     <>
-                        {loadedData && (
+                        {loadedData1 && loadedData2 && (
                             <>
                                 <div className="game">
                                     <div className="borderConcept">
 
                                         <br />
-                                        <img className="img text" src={`../../src/assets/${wordToPlay.image.slice(2)}`} alt="" />
+                                        <img className="img text" src={wordToPlay && wordToPlay.image ? `../../src/assets/${wordToPlay.image.slice(2)}` : ''} alt="" />
                                         <h3 className="text2">{wordToPlay.JP}</h3>
                                         <h5 className="white">'{wordToPlay.romanji}'</h5>
                                         <h4 className="text2">{wordToPlay.EN}</h4>

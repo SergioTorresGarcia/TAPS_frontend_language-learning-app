@@ -81,6 +81,20 @@ export const Play2 = () => {
     console.log(4, "one of the learnt", learntWord?.word.JP);
 
     const loc = location.pathname;
+
+    const gotItRight = () => {
+        console.log('YEAH! THAT IS THE CORRECT ANSWER! :D');
+        navigate(loc.slice(0, -1) + (parseInt(loc.slice(-1)) + 1));
+        learntWords.append(currentWord);
+    }
+
+    const gotItWrong = () => {
+        console.log('NOPE... THAT IS NOT THE CORRECT ANSWER, SORRY :(');
+        navigate(loc.slice(0, -1) + (parseInt(loc.slice(-1)) + 1));
+    }
+
+
+
     return (
         <>
             <div className="playDesign">
@@ -92,22 +106,15 @@ export const Play2 = () => {
                                 <div className="game">
                                     <div className="borderPlay2">
                                         <br />
-                                        <div className="wrong" onClick={() => {
-                                            gotItWrong(),
-                                                navigate(loc.slice(0, -1) + (parseInt(loc.slice(-1)) + 1))
-                                        }}>
+                                        <div className="wrong" onClick={() => { gotItWrong() }}>
                                             <h3 className="text3">{learntWord?.word.JP}</h3>
-                                            <span className="white">'{learntWord?.word?.romanji.toLowerCase()}'</span><br />
+                                            <span className="white">'{learntWord?.word?.romanji}'</span><br /><br />
                                         </div>
 
-                                        <img className="img text" src={`../../src/assets/${currentWord.image.slice(2)}`} alt={currentWord.EN} /><br />
-                                        <div className="right" onClick={() => {
-                                            gotItRight(),
-                                                navigate(loc.slice(0, -1) + (parseInt(loc.slice(-1)) + 1)),
-                                                learntWords.append(currentWord)
-                                        }}>
+                                        <img className="img text" src={currentWord && currentWord.image ? `../../src/assets/${currentWord.image.slice(2)}` : ''} alt="" />
+                                        <div className="right" onClick={() => { gotItRight() }}>
                                             <h3 className="text3">{currentWord.JP}</h3>
-                                            <span className="white">'{currentWord.romanji.toLowerCase()}'</span><br /><br />
+                                            <span className="white">'{currentWord.romanji}'</span><br /><br />
                                             <br />
                                         </div>
                                     </div>
