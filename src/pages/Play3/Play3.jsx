@@ -1,15 +1,16 @@
 
-import "./Play2.css";
+import "./Play3.css";
 
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { GetWordToPlay, GetWordsLearnt, GetWordsToDivert } from "../../services/apiCalls";
+import { CButton } from "../../common/CButton/CButton";
 import { gotItRight, gotItWrong } from "../../utils/functions";
 
 
-export const Play2 = () => {
+export const Play3 = () => {
     // Redux reading mode
     const rdxUserData = useSelector(userData);
     // Redux writing mode
@@ -17,9 +18,8 @@ export const Play2 = () => {
     const navigate = useNavigate();
 
     const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
-
-    const [otherWords, setOtherWords] = useState([]); // State to store fetched words already learnt
     const [currentWord, setCurrentWord] = useState([]);  // State to store current word to play
+    const [otherWords, setOtherWords] = useState([]); // State to store fetched words already learnt
     const [learntWords, setLearntWords] = useState([]); // State to store fetched words to divert
     const [loadedData, setLoadedData] = useState(false);
 
@@ -62,6 +62,8 @@ export const Play2 = () => {
         const getOtherWords = async () => {
             try {
                 const fetched = await GetWordsToDivert(tokenStorage);
+                // console.log(222222, fetched);
+                // console.log(222222, fetched.data);
 
                 setOtherWords(fetched.data);
                 setLoadedData(true);
@@ -76,51 +78,40 @@ export const Play2 = () => {
     }, [loadedData]);
     console.log(3, "otherWords", otherWords);
 
+
+
     const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
     const learntWord = learntWords[random(0, learntWords.length)]
     console.log(4, "one of the learnt", learntWord?.word.JP);
 
-    const loc = location.pathname;
+
+
     return (
-        <>
-            <div className="playDesign">
-
-                {rdxUserData.credentials?.token ? (
-                    <>
-                        {loadedData && (
-                            <>
-                                <div className="game">
-                                    <div className="borderPlay2">
-                                        <br />
-                                        <div className="wrong" onClick={() => {
-                                            gotItWrong(),
-                                                navigate(loc.slice(0, -1) + (parseInt(loc.slice(-1)) + 1))
-                                        }}>
-                                            <h3 className="text3">{learntWord?.word.JP}</h3>
-                                            <span className="white">'{learntWord?.word?.romanji.toLowerCase()}'</span><br />
-                                        </div>
-
-                                        <img className="img text" src={`../../src/assets/${currentWord.image.slice(2)}`} alt={currentWord.EN} /><br />
-                                        <div className="right" onClick={() => {
-                                            gotItRight(),
-                                                navigate(loc.slice(0, -1) + (parseInt(loc.slice(-1)) + 1)),
-                                                learntWords.append(currentWord)
-                                        }}>
-                                            <h3 className="text3">{currentWord.JP}</h3>
-                                            <span className="white">'{currentWord.romanji.toLowerCase()}'</span><br /><br />
-                                            <br />
-                                        </div>
-                                    </div>
-                                </div>
-                            </>
-                        )}
-                    </>
-                ) : (
-                    <div className="playDesign">
-                        <div className="circle"><span className="text">TAPS</span></div>
+        <div className="playDesign">
+            {loadedData && (
+                <div className="game">
+                    <div className="borderConcept">
+                        <br />
+                        <img className="img text" src={`../../src/assets/${currentWord.image.slice(2)}`} alt={currentWord.EN} />
+                        <h3 className="text2">{learntWord.JP}</h3>
+                        <h5 className="white">'{learntWord.romanji}'</h5>
+                        {/* <h4 className="text2">{learntWord.EN}</h4> */}
+                        <br />
                     </div>
-                )}
-            </div >
-        </>
+                    <div className="rowBtns">
+                        <CButton
+                            className={"cButtonRed cButtonDesign"}
+                            title={<span className="whiteCross">𐄂</span>}
+                            functionEmit={() => { gotItRight() }}
+                        />
+                        <CButton
+                            className={"cButtonGreen cButtonDesign"}
+                            title={<span className="whiteTick">✓</span>}
+                            functionEmit={() => { gotItWrong() }}
+                        />
+                    </div>
+                </div>
+            )}
+        </div>
     );
 };

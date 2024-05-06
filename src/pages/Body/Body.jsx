@@ -8,6 +8,8 @@ import { Progress } from "../Progress/Progress";
 import { Word } from "../Word/Word";
 import { Play } from "../Play/Play";
 import { Admin } from "../Admin/Admin";
+import { Play2 } from "../Play2/Play2";
+import { Play3 } from "../Play3/Play3";
 
 export const Body = () => {
   return (
@@ -23,6 +25,8 @@ export const Body = () => {
       <Route path="/admin" element={<Admin />} />
       <Route path="/admin/words" element={<Word />} />
       <Route path="/play" element={<Play />} />
+      <Route path="/play2" element={<Play2 />} />
+      <Route path="/play3" element={<Play3 />} />
     </Routes>
   );
 };

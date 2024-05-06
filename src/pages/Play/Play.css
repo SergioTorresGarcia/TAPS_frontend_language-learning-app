@@ -68,12 +68,12 @@
     border: 0.1em solid white;
     border-radius: 1em;
     margin: 1em;
-    background-color: orange;
+    background-color: lightcoral;
 }
 
 .cButtonDesign:hover {
 
     cursor: pointer;
     transition: 0.2s;
-    background-color: orange;
+    background-color: lightcoral;
 }
