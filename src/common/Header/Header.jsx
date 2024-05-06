@@ -24,7 +24,7 @@ export const Header = () => {
       <div>
         {rdxUserData.credentials?.token ? (
           <>
-            {loc === '/profile/me' || loc === '/play' || loc === '/words' ? (
+            {loc === '/profile/me' || loc === '/words' || loc === '/play' || loc === '/play2' ? (
               <Navigator title={"⇠"} destination={"/"} />
             ) : null}
             {loc === '/rules' || loc === '/progress' ? (

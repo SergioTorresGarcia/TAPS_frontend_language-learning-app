@@ -1,3 +1,5 @@
+import { useLocation, useNavigate } from "react-router-dom";
+
 export const validame = (type, value) => {
   switch (type) {
     case "name":
@@ -35,3 +37,14 @@ export const validame = (type, value) => {
       console.log("it is all good");
   }
 };
+
+
+export const gotItWrong = async () => {
+
+  console.log('NOPE, THAT IS NOT THE CORRECT ANSWER :(');
+  // navigate(location.pathname.slice(0, -1) + (location.pathname[-1] + 1))
+}
+
+export const gotItRight = async () => {
+  console.log('YEAH! THAT IS THE CORRECT ANSWER! :D');
+}

@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { GetWords } from "../../services/apiCalls";
-import { Navigator } from "../../common/Navigator/Navigator";
 
 
 export const Word = () => {
