@@ -18,7 +18,7 @@ export const Header = () => {
     dispatch(logout({ credentials: {} }));
     navigate("/login");
   };
-
+  console.log(rdxUserData);
   return (
     <div className="headerDesign">
       <div>

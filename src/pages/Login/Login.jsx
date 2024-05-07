@@ -63,7 +63,14 @@ export const Login = () => {
       }
 
       const fetched = await LoginUser(credentials);
+      // if (!fetched) {
+      //   setMsgError(error, "User not found");
+      //   return navigate("/");
+      // }
       const decoded = decodeToken(fetched.token);
+      console.log(1, decoded);
+      console.log(2, fetched);
+      console.log(3, fetched.token);
       const passport = {
         token: fetched.token,
         decoded: decoded,
@@ -71,7 +78,7 @@ export const Login = () => {
 
       //Saving passport to RDX (with both, token and all the decoded info)
       dispatch(login({ credentials: passport }))
-      setMsg(`Hi ${decoded.username}, welcome to Taps`);
+      setMsg(`Hi ${decoded?.username}, welcome to Taps`);
       navigate('/');
     } catch (error) {
       setMsgError(error.message);

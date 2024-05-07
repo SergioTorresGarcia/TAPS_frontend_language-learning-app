@@ -24,6 +24,7 @@ export const RegisterUser = async (user) => {
 };
 
 export const LoginUser = async (credenciales) => {
+  console.log(credenciales);
   const options = {
     method: "POST",
     headers: {
@@ -34,13 +35,15 @@ export const LoginUser = async (credenciales) => {
 
   try {
     const response = await fetch(`${root}auth/login`, options);
+    if (!response) {
+      throw new Error("User not found");
+    }
     const data = await response.json();
 
     if (!data.success) {
       throw new Error(data.message);
     }
-    console.log(222, response);
-    console.log(data);
+
     return data;
   } catch (error) {
     return error;

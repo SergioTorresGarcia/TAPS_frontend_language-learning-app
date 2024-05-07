@@ -34,7 +34,7 @@ export const Footer = () => {
                     </div>
                     <div>
                         {(location.pathname === '/')
-                            ? <Navigator title={rdxUserData.credentials.decoded.username} destination={"/profile/me"} />
+                            ? <Navigator title={rdxUserData.credentials?.decoded?.username} destination={"/profile/me"} />
                             : <div></div>}
                     </div>
                 </>
