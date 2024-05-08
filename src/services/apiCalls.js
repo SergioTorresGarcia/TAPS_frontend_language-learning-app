@@ -238,7 +238,7 @@ export const GetWordsLearnt = async (token) => {
 //words/current-level
 
 
-export const AddUserWord = async (token, wordId) => {
+export const SetUpWordAsLearnt = async (token, wordId) => {
   const options = {
     method: "POST",
     headers: {
@@ -249,7 +249,7 @@ export const AddUserWord = async (token, wordId) => {
   };
 
   try {
-    const response = await fetch(`${root}add-to-learnt`, options);
+    const response = await fetch(`${root}words/add-to-learnt`, options);
 
     if (!response.ok) {
       throw new Error('Failed to add user word');

@@ -8,7 +8,6 @@ import { GetWordToPlay } from "../../services/apiCalls";
 import { CButton } from "../../common/CButton/CButton";
 
 export const Play = () => {
-    // Redux reading mode
     const rdxUserData = useSelector(userData);
 
     const navigate = useNavigate();

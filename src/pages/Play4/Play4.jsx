@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { AddUserWord, GetWordToPlay, GetWordsFromLevelToDivert } from "../../services/apiCalls";
+import { GetWordToPlay, GetWordsFromLevelToDivert, SetUpWordAsLearnt } from "../../services/apiCalls";
 import { CButton } from "../../common/CButton/CButton";
 
 export const Play4 = () => {
@@ -60,8 +60,11 @@ export const Play4 = () => {
     const gotItRight = async () => {
         setAnswer(1);
         try {
+            const userId = rdxUserData?.credentials?.decoded?.userId;
+            const wordId = wordToPlay?.id;
             // Add the learned word to the user_words table
-            await AddUserWord(rdxUserData?.credentials?.decoded?.userId, wordToPlay?.id);
+            await SetUpWordAsLearnt(tokenStorage, wordId)
+            console.log("args", tokenStorage, wordId);
         } catch (error) {
             console.error('Failed to add learned word:', error);
         }
@@ -80,6 +83,11 @@ export const Play4 = () => {
         }, 1500);
     }
 
+    // const userId = rdxUserData?.credentials?.decoded?.userId;
+    // const wordId = wordToPlay?.id;
+
+    // console.log("args", userId, wordId);
+    // SetUpWordAsLearnt(userId, wordId)
     return (
         <>
             <div className="playDesign">

@@ -64,12 +64,12 @@ export const Play3 = () => {
 
     const gotItRight = async () => {
         setAnswer(1);
-        try {
-            // Add the learned word to the user_words table
-            await AddUserWord(rdxUserData?.credentials?.decoded?.userId, wordToPlay?.id);
-        } catch (error) {
-            console.error('Failed to add learned word:', error);
-        }
+        // try {
+        //     // Add the learned word to the user_words table
+        //     await AddUserWord(rdxUserData?.credentials?.decoded?.userId, wordToPlay?.id);
+        // } catch (error) {
+        //     console.error('Failed to add learned word:', error);
+        // }
         setTimeout(() => {
             navigate('/play4');
             setAnswer(0);

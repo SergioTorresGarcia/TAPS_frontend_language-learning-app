@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { AddUserWord, GetWordToPlay, GetWordsFromLevelToDivert } from "../../services/apiCalls";
+import { GetWordToPlay, GetWordsFromLevelToDivert } from "../../services/apiCalls";
 
 export const Play2 = () => {
     // Redux reading mode
@@ -58,12 +58,12 @@ export const Play2 = () => {
 
     const gotItRight = async () => {
         setAnswer(1);
-        try {
-            // Add the learned word to the user_words table
-            await AddUserWord(rdxUserData?.credentials?.decoded?.userId, wordToPlay?.id);
-        } catch (error) {
-            console.error('Failed to add learned word:', error);
-        }
+        // try {
+        //     // Add the learned word to the user_words table
+        //     await AddUserWord(rdxUserData?.credentials?.decoded?.userId, wordToPlay?.id);
+        // } catch (error) {
+        //     console.error('Failed to add learned word:', error);
+        // }
         setTimeout(() => {
             navigate('/play3');
             setAnswer(0);
