@@ -58,16 +58,10 @@ export const Play2 = () => {
 
     const gotItRight = async () => {
         setAnswer(1);
-        // try {
-        //     // Add the learned word to the user_words table
-        //     await AddUserWord(rdxUserData?.credentials?.decoded?.userId, wordToPlay?.id);
-        // } catch (error) {
-        //     console.error('Failed to add learned word:', error);
-        // }
         setTimeout(() => {
             navigate('/play3');
             setAnswer(0);
-        }, 1500);
+        }, 500);
     }
 
     const gotItWrong = () => {
@@ -75,7 +69,7 @@ export const Play2 = () => {
         setTimeout(() => {
             navigate('/play3');
             setAnswer(0)
-        }, 1500);
+        }, 500);
     }
 
     return (
@@ -88,18 +82,32 @@ export const Play2 = () => {
                                 <div className="game">
                                     <div className="borderPlay2">
                                         <br />
-                                        <div className="right" onClick={() => { gotItRight() }}>
-                                            <h3 className="text2">{wordToPlay?.JP}</h3>
-                                            <h5 className="white">'{wordToPlay?.romanji}'</h5>
-                                        </div>
-                                        <br />
+                                        {wordToPlay?.id % 2 == 0
+                                            ?
+                                            (<div className="right" onClick={() => { gotItRight() }}>
+                                                <h3 className="text2">{wordToPlay?.JP}</h3>
+                                                <h5 className="white">'{wordToPlay?.romanji}'</h5>
+                                            </div>)
+                                            : (<div className="wrong" onClick={() => { gotItWrong() }}>
+                                                <h3 className="text2">{oneToDivert?.JP}</h3>
+                                                <h5 className="white">'{oneToDivert?.romanji}'</h5>
+                                            </div>)
+                                        }
 
+                                        <br />
                                         <img className="img text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
 
-                                        <div className="wrong" onClick={() => { gotItWrong() }}>
-                                            <h3 className="text2">{oneToDivert?.JP}</h3>
-                                            <h5 className="white">'{oneToDivert?.romanji}'</h5>
-                                        </div>
+                                        {wordToPlay?.id % 2 != 0
+                                            ?
+                                            (<div className="right" onClick={() => { gotItRight() }}>
+                                                <h3 className="text2">{wordToPlay?.JP}</h3>
+                                                <h5 className="white">'{wordToPlay?.romanji}'</h5>
+                                            </div>)
+                                            : (<div className="wrong" onClick={() => { gotItWrong() }}>
+                                                <h3 className="text2">{oneToDivert?.JP}</h3>
+                                                <h5 className="white">'{oneToDivert?.romanji}'</h5>
+                                            </div>)
+                                        }
                                         <div className="layerUp">
                                             {answer == 1 ? <div className="goodAnswer whiteTick cButtonGreen ">✓</div> : ""}
                                             {answer == 2 ? <div className="badAnswer whiteTick cButtonRed ">❌</div> : ""}

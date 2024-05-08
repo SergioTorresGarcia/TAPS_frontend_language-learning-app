@@ -18,6 +18,7 @@ export const Play3 = () => {
     const [loadedData1, setLoadedData1] = useState(false);
     const [loadedData2, setLoadedData2] = useState(false);
     const [answer, setAnswer] = useState(0);
+    const [shuffledAnswers, setShuffledAnswers] = useState([]);
 
     useEffect(() => {
         const getWordAtPlay = async () => {
@@ -62,14 +63,17 @@ export const Play3 = () => {
         }
     }, [loadedData2]);
 
+    // Function to shuffle array elements
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
     const gotItRight = async () => {
         setAnswer(1);
-        // try {
-        //     // Add the learned word to the user_words table
-        //     await AddUserWord(rdxUserData?.credentials?.decoded?.userId, wordToPlay?.id);
-        // } catch (error) {
-        //     console.error('Failed to add learned word:', error);
-        // }
         setTimeout(() => {
             navigate('/play4');
             setAnswer(0);
@@ -83,7 +87,7 @@ export const Play3 = () => {
             setAnswer(0)
         }, 1500);
     }
-
+    const shuffledOptions = shuffleArray([wordToPlay, wordsToDivert[0], wordsToDivert[1], wordsToDivert[2]]);
 
     return (
         <>
@@ -95,40 +99,41 @@ export const Play3 = () => {
                                 <div className="game">
                                     <div className="borderPlay3">
                                         <br />
-                                        <div className="row">
-                                            <div className="wrong" onClick={() => { gotItWrong() }}>
-                                                <h3 className="text2">{wordsToDivert[0]?.JP}</h3>
-                                                <h5 className="white">'{wordsToDivert[0]?.romanji}'</h5>
+                                        <div className="container">
+                                            {/* Shuffle all options including right and wrong answers */}
+                                            {/* First two options */}
+                                            <div className="row">
+                                                {(shuffledOptions.slice(0, 2)).map((word, index) => (
+                                                    <div key={index} className="option" onClick={word === wordToPlay ? gotItRight : gotItWrong}>
+                                                        <h3 className="text2">{word.JP}</h3>
+                                                        <h5 className="white">'{word.romanji}'</h5>
+                                                    </div>
+                                                ))}
                                             </div>
-                                            <div className="right" onClick={() => { gotItRight() }}>
-                                                <h3 className="text2">{wordToPlay.JP}</h3>
-                                                <h5 className="white">'{wordToPlay.romanji}'</h5>
-                                            </div>
-                                        </div>
-                                        <br />
 
-                                        <img className="img text " src={wordToPlay && wordToPlay.image ? `../../src/assets/${wordToPlay.image.slice(2)}` : ''} alt={wordToPlay.EN} />
-
-                                        <div className="row">
-                                            <div className="wrong" onClick={() => { gotItWrong() }}>
-                                                <h3 className="text2">{wordsToDivert[1]?.JP}</h3>
-                                                <h5 className="white">'{wordsToDivert[1]?.romanji}'</h5>
-                                            </div>
-                                            <div className="wrong" onClick={() => { gotItWrong() }}>
-                                                <h3 className="text2">{wordsToDivert[2]?.JP}</h3>
-                                                <h5 className="white">'{wordsToDivert[2]?.romanji}'</h5>
+                                            {/* Image */}
+                                            <img className="img text" src={wordToPlay && wordToPlay.image ? `../../src/assets/${wordToPlay.image.slice(2)}` : ''} alt={wordToPlay.EN} />
+                                            {/* Last two options */}
+                                            <div className="row">
+                                                {(shuffledOptions.slice(2)).map((word, index) => (
+                                                    <div key={index} className="option" onClick={word === wordToPlay ? gotItRight : gotItWrong}>
+                                                        <h3 className="text2">{word.JP}</h3>
+                                                        <h5 className="white">'{word.romanji}'</h5>
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
-                                        <div className="layerUp">
-                                            {answer == 1 ? <div className="goodAnswer whiteTick cButtonGreen ">✓</div> : ""}
-                                            {answer == 2 ? <div className="badAnswer whiteTick cButtonRed ">❌</div> : ""}
-                                        </div>
-                                        <br />
                                     </div>
+                                    <div className="layerUp">
+                                        {answer === 1 ? <div className="goodAnswer whiteTick cButtonGreen ">✓</div> : ""}
+                                        {answer === 2 ? <div className="badAnswer whiteTick cButtonRed ">❌</div> : ""}
+                                    </div>
+                                    <br />
                                 </div>
                             </>
                         )}
                     </>
+
                 ) : (
                     <div className="playDesign">
                         <div className="circle"><span className="text">TAPS</span></div>
