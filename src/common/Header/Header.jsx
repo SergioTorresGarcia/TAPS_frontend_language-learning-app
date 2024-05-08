@@ -2,7 +2,6 @@ import { Navigator } from "../Navigator/Navigator";
 import "./Header.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, userData } from "../../app/slices/userSlice";
-import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export const Header = () => {
@@ -13,6 +12,7 @@ export const Header = () => {
   const dispatch = useDispatch();
 
   const location = useLocation();
+  const loc = location.pathname;
 
   const logOut = () => {
     dispatch(logout({ credentials: {} }));
@@ -23,20 +23,18 @@ export const Header = () => {
     <div className="headerDesign">
       <div>
         {rdxUserData.credentials?.token ? (
-
-          (location.pathname == '/profile/me' || location.pathname == '/rules' || location.pathname == '/progress')
-            ? (<div className="authMenu"><Navigator title={"⇠"} destination={"/"} /> </div>)
-            : (<div className="topMenu">
-              <div onClick={logOut}><Navigator title={"log out"} destination={"/"} /></div>
-
-            </div>)
-
+          (loc === '/' || loc === '/rules' || loc === '/progress')
+            ? (loc === '/'
+              ? <div onClick={logOut}><Navigator title={"log out"} destination={"/"} /></div>
+              : <Navigator title={"⇠"} destination={"/profile/me"} />)
+            : (<Navigator title={"⇠"} destination={"/"} />)
         ) : (
 
-          (location.pathname == '/login' || location.pathname == '/register')
-            ? <Navigator title={"⇠"} destination={"/"} />
-            : <Navigator title={"login"} destination={"/login"} />
-
+          loc === '/login' || loc === '/register' ? (
+            <Navigator title={"⇠"} destination={"/"} />
+          ) : (
+            <Navigator title={"login"} destination={"/login"} />
+          )
         )}
       </div>
     </div>

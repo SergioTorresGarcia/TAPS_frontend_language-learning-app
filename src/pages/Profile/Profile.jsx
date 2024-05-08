@@ -73,7 +73,7 @@ export const Profile = () => {
 
   //Syncronising the menu username when editing profile
   useEffect(() => {
-    rdxUserData.credentials.decoded.username = user.username
+    rdxUserData.credentials.decoded.username = user?.username
   }, [user]);
 
   const updateData = async () => {

@@ -1,0 +1,51 @@
+.adminDesign {
+
+    height: 70vh;
+    width: 100vw;
+
+    background-color: lightseagreen;
+    overflow-y: scroll;
+}
+
+.circle {
+    width: 10em;
+    height: 10em;
+    border: 0.5em dotted white;
+    border-radius: 50%;
+    background-color: lightseagreen;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text {
+    font-size: 200%;
+    color: black;
+}
+
+.text2 {
+    font-size: 150%;
+    color: black;
+}
+
+.white {
+    color: black;
+}
+
+
+.whiteTick {
+    color: white;
+    font-size: 200%;
+}
+
+.img {
+    width: 5em;
+}
+
+.border {
+    border: 0.1em solid white;
+    border-radius: 1em;
+    margin: 1em;
+    background-color: lightgreen;
+}

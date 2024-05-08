@@ -27,6 +27,10 @@
     background-color: lightgreen;
 }
 
+.cButtonRed {
+    background-color: lightcoral;
+}
+
 /* .cButtonGreen:hover {
     background-color: darkgreen;
 } */

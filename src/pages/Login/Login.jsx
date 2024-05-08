@@ -71,7 +71,7 @@ export const Login = () => {
 
       //Saving passport to RDX (with both, token and all the decoded info)
       dispatch(login({ credentials: passport }))
-      setMsg(`Hi ${decoded.username}, welcome to Taps`);
+      setMsg(`Hi ${decoded?.username}, welcome to Taps`);
       navigate('/');
     } catch (error) {
       setMsgError(error.message);
@@ -81,7 +81,7 @@ export const Login = () => {
   return (
     <>
       <div className="loginDesign">
-        <div className="error">Don't have an account yet? <span className="lime" onClick={() => { navigate('/register') }}>Sign up</span> <br /><br /> </div>
+        <div className="error">Don't have an account yet? <span className="lime" onClick={() => { navigate('/register') }}> Sign up</span> <br /><br /> </div>
         <CInput
           className={`inputDesign ${credentialsError.emailError !== "" ? "inputDesignError" : ""
             }`}

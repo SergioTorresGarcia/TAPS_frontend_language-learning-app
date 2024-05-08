@@ -1,3 +1,5 @@
+import { useLocation, useNavigate } from "react-router-dom";
+
 export const validame = (type, value) => {
   switch (type) {
     case "name":
