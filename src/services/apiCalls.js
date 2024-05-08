@@ -152,6 +152,34 @@ export const GetWordsFromLevel = async (token, level_id) => {
     throw error;
   }
 };
+
+
+export const GetWordsFromLevelToDivert = async (token, level_id) => {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  };
+
+  try {
+    const response = await fetch(`${root}words/level/diversion/${level_id}`, options);
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 //words/current
 export const GetWordToPlay = async (token) => {
   const options = {
@@ -174,7 +202,7 @@ export const GetWordToPlay = async (token) => {
     }
     console.log("data", data);
     console.log("response", response);
-    return data;
+    return data.data;
   } catch (error) {
     throw error;
   }
@@ -208,32 +236,7 @@ export const GetWordsLearnt = async (token) => {
 };
 
 //words/current-level
-export const GetWordsToDivert = async (token) => {
-  const options = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
-    }
-  };
 
-  try {
-    const response = await fetch(`${root}words/current-level`, options);
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch data');
-    }
-    const data = await response.json();
-    if (!data.success) {
-      throw new Error(data.message);
-    }
-    console.log("data", data);
-    console.log("response", response);
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};
 
 export const AddUserWord = async (token, wordId) => {
   const options = {

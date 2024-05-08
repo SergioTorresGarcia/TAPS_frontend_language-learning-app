@@ -1,124 +1,66 @@
 
 import "./Play4.css";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { AddUserWord, GetWords, GetWordsLearnt } from "../../services/apiCalls";
+import { AddUserWord, GetWordToPlay, GetWordsFromLevelToDivert } from "../../services/apiCalls";
 import { CButton } from "../../common/CButton/CButton";
 
 export const Play4 = () => {
     // Redux reading mode
     const rdxUserData = useSelector(userData);
-    // Redux writing mode
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
     const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
-    const [words, setWords] = useState([]); // State to store fetched ALL words
-    const [allConcepts, setAllConcepts] = useState([]); // State to store fetched ALL words
-    const [learntWords, setLearntWords] = useState([]);// State to store fetched LEARNT words
-    const [learntConcepts, setLearntConcepts] = useState([]);// State to store fetched LEARNT words
 
     const [wordToPlay, setWordToPlay] = useState({});
-    const [wordToDivert, setWordToDivert] = useState({});
+    const [wordsToDivert, setWordsToDivert] = useState({});
     const [loadedData1, setLoadedData1] = useState(false);
-    const [loadedData2, setLoadedData2] = useState(false);
-
     const [answer, setAnswer] = useState(0);
+
     useEffect(() => {
-        const getAllWords = async () => {
+        const getWordAtPlay = async () => {
             try {
-                const fetched = await GetWords(tokenStorage); // ALL WORDS FROM THE GAME
-                setWords(fetched.data);
+                const fetched = await GetWordToPlay(tokenStorage); // ALL WORDS FROM THE GAME
+                if (fetched) {
+                    setWordToPlay(fetched);
+                }
                 setLoadedData1(true);
             } catch (error) {
                 console.error('Failed to fetch all words:', error);
             }
         };
         if (!loadedData1) {
-            getAllWords();
+            getWordAtPlay();
         }
     }, [loadedData1]);
 
     useEffect(() => {
-        const fetchLearntWords = async () => { // ALL LEARNT WORDS
+        const getWordsToDivert = async () => {
             try {
-                const fetched = await GetWordsLearnt(tokenStorage);
+                const levelId = 1
+                const fetched = await GetWordsFromLevelToDivert(tokenStorage, levelId);
                 if (fetched && fetched.data) {
-                    setLearntWords(fetched.data);
-                } else {
-                    // Handle the case when fetched data is empty
-                    setLearntWords([]);
+                    setWordsToDivert(fetched.data);
                 }
-                setLoadedData2(true);
+                setLoadedData1(true);
             } catch (error) {
-                console.error('Failed to fetch learnt words:', error);
-                setLearntWords([]);
+                console.error('Failed to fetch words to divert:', error);
             }
         };
-        if (!loadedData2) {
-            fetchLearntWords();
+        if (!loadedData1) {
+            getWordsToDivert();
         }
-    }, [loadedData2]);
+    }, [loadedData1]);
 
-    useEffect(() => {
-        if (words.length > 0) {
-            const allConcepts = words.map(item => item.EN);
-            setAllConcepts(allConcepts);
-        }
-    }, [words]);
-
-    useEffect(() => {
-        if (learntWords?.length > 0) {
-            const learntConcepts = learntWords?.map(item => item.word.EN);
-            setLearntConcepts(learntConcepts);
-        }
-    }, [learntWords]);
-
-    useEffect(() => {
-        const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
-        const learntWord = learntWords[random(0, learntWords.length)]
-        setWordToDivert(learntWord);
-
-        if (allConcepts.length > 0 && (learntConcepts?.length ?? 0) > 0) {
-            const wordToPlay = words.find(word => !learntConcepts.includes(word.EN));
-            setWordToPlay(wordToPlay || words[0]); // If there are no learnt words -> use the first word from words
-        } else if (allConcepts.length > 0) {
-            // If there are no learnt concepts, set wordToPlay to the first word
-            setWordToPlay(words[0]);
-        }
-    }, [allConcepts, learntConcepts, words, learntWords]);
-
-    useEffect(() => {
-        const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
-        const learntWord = learntWords[random(0, learntWords.length)] || words[1]
-        setWordToDivert(learntWord);
-    }, [learntWords]);
-
-    const loc = location.pathname;
-
-    // const gotItRight = () => {
-    //     console.log('YEAH! THAT IS THE CORRECT ANSWER! :D');
-    //     setAnswer(1)
-    //     setTimeout(() => {
-    //         navigate('/play');
-    //         setAnswer(0)
-    //     }, 1500);
-
-    //     const newLearntWords = [...learntWords];
-    //     newLearntWords.push(wordToPlay);
-    //     setLearntWords(newLearntWords);
-    // }
+    const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
+    const oneToDivert = wordsToDivert[random(0, wordsToDivert.length)];
 
     const gotItRight = async () => {
-        console.log('YEAH! THAT IS THE CORRECT ANSWER! :D');
         setAnswer(1);
         try {
             // Add the learned word to the user_words table
-            const newLearntWords = [...learntWords];
-            newLearntWords.push(wordToPlay);
-
             await AddUserWord(rdxUserData?.credentials?.decoded?.userId, wordToPlay?.id);
         } catch (error) {
             console.error('Failed to add learned word:', error);
@@ -131,10 +73,9 @@ export const Play4 = () => {
     }
 
     const gotItWrong = () => {
-        console.log('NOPE... THAT IS NOT THE CORRECT ANSWER, SORRY :(');
         setAnswer(2)
         setTimeout(() => {
-            navigate('play1');
+            navigate('/play');
             setAnswer(0)
         }, 1500);
     }
@@ -144,7 +85,7 @@ export const Play4 = () => {
             <div className="playDesign">
                 {rdxUserData.credentials?.token ? (
                     <>
-                        {loadedData1 && loadedData2 && (
+                        {loadedData1 && (
                             <>
                                 <div className="game">
                                     <div className="borderPlay4">
@@ -152,17 +93,20 @@ export const Play4 = () => {
                                         <img className="img text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
                                         <br />
 
-                                        {/* corresponding word */}
-                                        <div className="right" onClick={() => { gotItRight() }}>
-                                            <h3 className="text2">{wordToPlay?.JP}</h3>
-                                            <h5 className="white">'{wordToPlay?.romanji}'</h5>
-                                        </div>
-
-                                        {/* diversion word */}
-                                        {/* <div className="wrong" onClick={() => { gotItWrong() }}>
-                                            <h3 className="text2">{wordToDivert?.JP || words[1].JP}</h3>
-                                            <h5 className="white">'{wordToDivert?.romanji || words[1].romanji}'</h5>
-                                        </div> */}
+                                        {
+                                            wordToPlay?.id % 3 == 0
+                                                ? // corresponding word
+                                                (< div className="right">
+                                                    <h3 className="text2">{wordToPlay?.JP}</h3>
+                                                    <h5 className="white">'{wordToPlay?.romanji}'</h5>
+                                                </div>)
+                                                :
+                                                // diversion word
+                                                (< div className="wrong">
+                                                    <h3 className="text2">{oneToDivert?.JP}</h3>
+                                                    <h5 className="white">'{oneToDivert?.romanji}'</h5>
+                                                </div>)
+                                        }
 
                                         <div className="layerUp4">
                                             {answer == 1 ? <div className="goodAnswer whiteTick cButtonGreen ">✓</div> : ""}
@@ -172,14 +116,14 @@ export const Play4 = () => {
                                     </div>
                                     <div className="rowBtns">
                                         <CButton
-                                            className={"cButtonRed cButtonDesign"}
+                                            className={"cButtonRed cButtonDesign cButtonDesign4"}
                                             title={<span className="whiteTick">x</span>}
-                                            functionEmit={() => gotItWrong()}
+                                            functionEmit={wordToPlay?.id % 3 != 0 ? () => gotItRight() : () => gotItWrong()}
                                         />
                                         <CButton
-                                            className={"cButtonGreen cButtonDesign"}
+                                            className={"cButtonGreen cButtonDesign cButtonDesign4"}
                                             title={<span className="whiteTick">✓</span>}
-                                            functionEmit={() => gotItRight()}
+                                            functionEmit={wordToPlay?.id % 3 == 0 ? () => gotItRight() : () => gotItWrong()}
                                         />
                                     </div>
                                 </div>
