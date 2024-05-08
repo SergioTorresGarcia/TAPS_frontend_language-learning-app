@@ -70,8 +70,8 @@
     z-index: 0;
 }
 
-.borderPlay2 {
-    height: 30em;
+.borderPlay4 {
+    height: 25em;
     border: 0.1em solid white;
     border-radius: 1em;
     margin: 1em;
@@ -88,7 +88,6 @@
 .right,
 .wrong {
     cursor: pointer;
-    position: relative;
 }
 
 
@@ -103,7 +102,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: -22em auto;
+    margin: -8em auto;
 
 
 }
@@ -120,12 +119,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: -12em auto;
+    margin: -8em auto;
 
 }
 
-.layerUp {
+.layerUp4 {
     position: relative;
     z-index: 1;
     transform: scale(200%);
+    margin: -10em auto;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }

@@ -66,6 +66,7 @@
 
 .borderConcept {
     border: 0.1em solid white;
+    height: 25em;
     border-radius: 1em;
     margin: 1em;
     background-color: lightcoral;

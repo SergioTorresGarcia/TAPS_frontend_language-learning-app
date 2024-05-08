@@ -63,14 +63,7 @@ export const Login = () => {
       }
 
       const fetched = await LoginUser(credentials);
-      // if (!fetched) {
-      //   setMsgError(error, "User not found");
-      //   return navigate("/");
-      // }
       const decoded = decodeToken(fetched.token);
-      console.log(1, decoded);
-      console.log(2, fetched);
-      console.log(3, fetched.token);
       const passport = {
         token: fetched.token,
         decoded: decoded,

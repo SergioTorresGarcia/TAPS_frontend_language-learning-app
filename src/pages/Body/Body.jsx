@@ -10,6 +10,7 @@ import { Play } from "../Play/Play";
 import { Admin } from "../Admin/Admin";
 import { Play2 } from "../Play2/Play2";
 import { Play3 } from "../Play3/Play3";
+import { Play4 } from "../Play4/Play4";
 
 export const Body = () => {
   return (
@@ -27,6 +28,7 @@ export const Body = () => {
       <Route path="/play" element={<Play />} />
       <Route path="/play2" element={<Play2 />} />
       <Route path="/play3" element={<Play3 />} />
+      <Route path="/play4" element={<Play4 />} />
     </Routes>
   );
 };

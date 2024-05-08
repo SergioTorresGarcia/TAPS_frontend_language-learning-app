@@ -1,12 +1,13 @@
 
-import "./Play3.css";
+import "./Play4.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { GetWords, GetWordsLearnt } from "../../services/apiCalls";
+import { AddUserWord, GetWords, GetWordsLearnt } from "../../services/apiCalls";
+import { CButton } from "../../common/CButton/CButton";
 
-export const Play3 = () => {
+export const Play4 = () => {
     // Redux reading mode
     const rdxUserData = useSelector(userData);
     // Redux writing mode
@@ -69,7 +70,7 @@ export const Play3 = () => {
     }, [words]);
 
     useEffect(() => {
-        if (learntWords.length > 0) {
+        if (learntWords?.length > 0) {
             const learntConcepts = learntWords?.map(item => item.word.EN);
             setLearntConcepts(learntConcepts);
         }
@@ -80,14 +81,14 @@ export const Play3 = () => {
         const learntWord = learntWords[random(0, learntWords.length)]
         setWordToDivert(learntWord);
 
-        if (allConcepts.length > 0 && (learntConcepts?.length > 0)) {
+        if (allConcepts.length > 0 && (learntConcepts?.length ?? 0) > 0) {
             const wordToPlay = words.find(word => !learntConcepts.includes(word.EN));
             setWordToPlay(wordToPlay || words[0]); // If there are no learnt words -> use the first word from words
         } else if (allConcepts.length > 0) {
             // If there are no learnt concepts, set wordToPlay to the first word
             setWordToPlay(words[0]);
         }
-    }, [allConcepts, learntConcepts, words]);
+    }, [allConcepts, learntConcepts, words, learntWords]);
 
     useEffect(() => {
         const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
@@ -96,34 +97,47 @@ export const Play3 = () => {
     }, [learntWords]);
 
     const loc = location.pathname;
+
+    // const gotItRight = () => {
+    //     console.log('YEAH! THAT IS THE CORRECT ANSWER! :D');
+    //     setAnswer(1)
+    //     setTimeout(() => {
+    //         navigate('/play');
+    //         setAnswer(0)
+    //     }, 1500);
+
+    //     const newLearntWords = [...learntWords];
+    //     newLearntWords.push(wordToPlay);
+    //     setLearntWords(newLearntWords);
+    // }
+
     const gotItRight = async () => {
         console.log('YEAH! THAT IS THE CORRECT ANSWER! :D');
         setAnswer(1);
         try {
             // Add the learned word to the user_words table
+            const newLearntWords = [...learntWords];
+            newLearntWords.push(wordToPlay);
+
             await AddUserWord(rdxUserData?.credentials?.decoded?.userId, wordToPlay?.id);
         } catch (error) {
             console.error('Failed to add learned word:', error);
         }
 
         setTimeout(() => {
-            navigate(loc.slice(0, -1) + (parseInt(loc.slice(-1)) + 1));
+            navigate('/play');
             setAnswer(0);
         }, 1500);
     }
 
     const gotItWrong = () => {
-        setAnswer(2)
         console.log('NOPE... THAT IS NOT THE CORRECT ANSWER, SORRY :(');
+        setAnswer(2)
         setTimeout(() => {
-            navigate(loc.slice(0, -1) + (parseInt(loc.slice(-1)) + 1));
+            navigate('play1');
             setAnswer(0)
         }, 1500);
     }
-
-    //     const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
-    //     const learntWord = learntWords[random(0, learntWords.length)]
-    //     console.log(4, "one of the learnt", learntWord?.word.JP);
 
     return (
         <>
@@ -133,37 +147,40 @@ export const Play3 = () => {
                         {loadedData1 && loadedData2 && (
                             <>
                                 <div className="game">
-                                    <div className="borderPlay3">
-                                        <br />
-                                        <div className="row">
-                                            <div className="wrong" onClick={() => { gotItWrong() }}>
-                                                <h3 className="text2">{wordToDivert?.JP || words[1].JP}</h3>
-                                                <h5 className="white">'{wordToDivert?.romanji || words[1].romanji}'</h5>
-                                            </div>
-                                            <div className="right" onClick={() => { gotItRight() }}>
-                                                <h3 className="text2">{wordToPlay.JP}</h3>
-                                                <h5 className="white">'{wordToPlay.romanji}'</h5>
-                                            </div>
-                                        </div>
+                                    <div className="borderPlay4">
+                                        <br /><br />
+                                        <img className="img text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
                                         <br />
 
-                                        <img className="img text " src={wordToPlay && wordToPlay.image ? `../../src/assets/${wordToPlay.image.slice(2)}` : ''} alt={wordToPlay.EN} />
-
-                                        <div className="row">
-                                            <div className="wrong" onClick={() => { gotItWrong() }}>
-                                                <h3 className="text2">{wordToDivert?.JP || words[2].JP}</h3>
-                                                <h5 className="white">'{wordToDivert?.romanji || words[2].romanji}'</h5>
-                                            </div>
-                                            <div className="wrong" onClick={() => { gotItWrong() }}>
-                                                <h3 className="text2">{wordToDivert?.JP || words[3].JP}</h3>
-                                                <h5 className="white">'{wordToDivert?.romanji || words[3].romanji}'</h5>
-                                            </div>
+                                        {/* corresponding word */}
+                                        <div className="right" onClick={() => { gotItRight() }}>
+                                            <h3 className="text2">{wordToPlay?.JP}</h3>
+                                            <h5 className="white">'{wordToPlay?.romanji}'</h5>
                                         </div>
-                                        <div className="layerUp">
+
+                                        {/* diversion word */}
+                                        {/* <div className="wrong" onClick={() => { gotItWrong() }}>
+                                            <h3 className="text2">{wordToDivert?.JP || words[1].JP}</h3>
+                                            <h5 className="white">'{wordToDivert?.romanji || words[1].romanji}'</h5>
+                                        </div> */}
+
+                                        <div className="layerUp4">
                                             {answer == 1 ? <div className="goodAnswer whiteTick cButtonGreen ">✓</div> : ""}
                                             {answer == 2 ? <div className="badAnswer whiteTick cButtonRed ">❌</div> : ""}
                                         </div>
                                         <br />
+                                    </div>
+                                    <div className="rowBtns">
+                                        <CButton
+                                            className={"cButtonRed cButtonDesign"}
+                                            title={<span className="whiteTick">x</span>}
+                                            functionEmit={() => gotItWrong()}
+                                        />
+                                        <CButton
+                                            className={"cButtonGreen cButtonDesign"}
+                                            title={<span className="whiteTick">✓</span>}
+                                            functionEmit={() => gotItRight()}
+                                        />
                                     </div>
                                 </div>
                             </>
@@ -178,4 +195,3 @@ export const Play3 = () => {
         </>
     );
 };
-

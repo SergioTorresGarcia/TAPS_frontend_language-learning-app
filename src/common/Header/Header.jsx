@@ -18,13 +18,13 @@ export const Header = () => {
     dispatch(logout({ credentials: {} }));
     navigate("/login");
   };
-  console.log(rdxUserData);
+
   return (
     <div className="headerDesign">
       <div>
         {rdxUserData.credentials?.token ? (
           <>
-            {loc === '/profile/me' || loc === '/words' || loc === '/play' || loc === '/play2' ? (
+            {loc === '/profile/me' || loc === '/words' || loc === '/play' || loc === '/play2' || loc === '/play3' || loc === '/play4' ? (
               <Navigator title={"⇠"} destination={"/"} />
             ) : null}
             {loc === '/rules' || loc === '/progress' ? (
