@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { GetWordToPlay, GetWordsFromLevelToDivert, SetUpWordAsLearnt } from "../../services/apiCalls";
-import { CButton } from "../../common/CButton/CButton";
+import { GetWordToPlay, GetWordsFromLevelToDivert } from "../../services/apiCalls";
 
 export const Play4 = () => {
     // Redux reading mode
@@ -17,6 +16,7 @@ export const Play4 = () => {
     const [wordToPlay, setWordToPlay] = useState({});
     const [wordsToDivert, setWordsToDivert] = useState({});
     const [loadedData1, setLoadedData1] = useState(false);
+    const [loadedData2, setLoadedData2] = useState(false);
     const [answer, setAnswer] = useState(0);
 
     useEffect(() => {
@@ -39,12 +39,20 @@ export const Play4 = () => {
     useEffect(() => {
         const getWordsToDivert = async () => {
             try {
-                const levelId = 1
+                const levelId = 1;
                 const fetched = await GetWordsFromLevelToDivert(tokenStorage, levelId);
                 if (fetched && fetched.data) {
-                    setWordsToDivert(fetched.data);
+                    const randomIndexes = new Set(); // Set to store unique random indexes
+                    const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
+
+                    while (randomIndexes.size < 3) {
+                        const randomIndex = random(0, fetched.data.length);
+                        randomIndexes.add(randomIndex);
+                    }
+                    const wordsToDivertArray = Array.from(randomIndexes).map(index => fetched.data[index]);
+                    setWordsToDivert(wordsToDivertArray);
+                    setLoadedData2(true);
                 }
-                setLoadedData1(true);
             } catch (error) {
                 console.error('Failed to fetch words to divert:', error);
             }
@@ -52,25 +60,21 @@ export const Play4 = () => {
         if (!loadedData1) {
             getWordsToDivert();
         }
-    }, [loadedData1]);
+    }, [loadedData2]);
 
-    const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
-    const oneToDivert = wordsToDivert[random(0, wordsToDivert.length)];
+    // Function to shuffle array elements
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
 
     const gotItRight = async () => {
         setAnswer(1);
-        try {
-            const userId = rdxUserData?.credentials?.decoded?.userId;
-            const wordId = wordToPlay?.id;
-            // Add the learned word to the user_words table
-            await SetUpWordAsLearnt(tokenStorage, wordId)
-            console.log("args", tokenStorage, wordId);
-        } catch (error) {
-            console.error('Failed to add learned word:', error);
-        }
-
         setTimeout(() => {
-            navigate('/play');
+            navigate('/play5');
             setAnswer(0);
         }, 1500);
     }
@@ -78,66 +82,75 @@ export const Play4 = () => {
     const gotItWrong = () => {
         setAnswer(2)
         setTimeout(() => {
-            navigate('/play');
+            navigate('/play5');
             setAnswer(0)
         }, 1500);
     }
+    const shuffledOptions = shuffleArray([wordToPlay, wordsToDivert[0], wordsToDivert[1], wordsToDivert[2]]);
 
-    // const userId = rdxUserData?.credentials?.decoded?.userId;
-    // const wordId = wordToPlay?.id;
-
-    // console.log("args", userId, wordId);
-    // SetUpWordAsLearnt(userId, wordId)
     return (
         <>
             <div className="playDesign">
                 {rdxUserData.credentials?.token ? (
                     <>
-                        {loadedData1 && (
+                        {loadedData1 && loadedData2 && (
                             <>
                                 <div className="game">
                                     <div className="borderPlay4">
-                                        <br /><br />
-                                        <img className="img text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
                                         <br />
+                                        <div className="container">
+                                            {/* Shuffle all options including right and wrong answers */}
+                                            {/* First two options */}
+                                            <div className="row">
+                                                {(shuffledOptions.slice(0, 2)).map((word, index) => (
+                                                    <div key={index} className="option" onClick={word === wordToPlay ? gotItRight : gotItWrong}>
+                                                        <img className="img4 text" src={word && word.image ? `../../src/assets/${word.image.slice(2)}` : ''} alt={word.EN} />
 
-                                        {
-                                            wordToPlay?.id % 3 == 0
-                                                ? // corresponding word
-                                                (< div className="right">
-                                                    <h3 className="text2">{wordToPlay?.JP}</h3>
-                                                    <h5 className="white">'{wordToPlay?.romanji}'</h5>
-                                                </div>)
-                                                :
-                                                // diversion word
-                                                (< div className="wrong">
-                                                    <h3 className="text2">{oneToDivert?.JP}</h3>
-                                                    <h5 className="white">'{oneToDivert?.romanji}'</h5>
-                                                </div>)
-                                        }
+                                                    </div>
+                                                ))}
+                                            </div>
 
-                                        <div className="layerUp4">
-                                            {answer == 1 ? <div className="goodAnswer whiteTick cButtonGreen ">✓</div> : ""}
-                                            {answer == 2 ? <div className="badAnswer whiteTick cButtonRed ">❌</div> : ""}
+
+                                            {/* Image */}
+                                            <br /><br />
+                                            <h3 className="text2">{wordToPlay.JP}</h3>
+                                            <h5 className="white">'{wordToPlay.romanji}'</h5>
+                                            <br /><br />
+
+                                            {/* Last two options */}
+                                            <div className="row">
+                                                {(shuffledOptions.slice(2)).map((word, index) => (
+                                                    <div key={index} className="option" onClick={word === wordToPlay ? gotItRight : gotItWrong}>
+                                                        <img className="img4 text" src={word && word.image ? `../../src/assets/${word.image.slice(2)}` : ''} alt={word.EN} />
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
-                                        <br />
                                     </div>
-                                    <div className="rowBtns">
-                                        <CButton
-                                            className={"cButtonRed cButtonDesign cButtonDesign4"}
-                                            title={<span className="whiteTick">x</span>}
-                                            functionEmit={wordToPlay?.id % 3 != 0 ? () => gotItRight() : () => gotItWrong()}
-                                        />
-                                        <CButton
-                                            className={"cButtonGreen cButtonDesign cButtonDesign4"}
-                                            title={<span className="whiteTick">✓</span>}
-                                            functionEmit={wordToPlay?.id % 3 == 0 ? () => gotItRight() : () => gotItWrong()}
-                                        />
-                                    </div>
+
+
+
+                                    {answer === 1 ?
+                                        <div className="layerUp">
+                                            <div className="answer">
+                                                <div className="goodAnswer whiteTick cButtonGreen ">✓</div>
+                                            </div>
+                                        </div> : ""}
+
+
+                                    {answer === 2 ?
+                                        <div className="layerUp">
+                                            <div className="answer">
+                                                <div className="badAnswer whiteTick cButtonRed ">❌</div>
+                                            </div>
+                                        </div> : ""}
+
+                                    <br />
                                 </div>
                             </>
                         )}
                     </>
+
                 ) : (
                     <div className="playDesign">
                         <div className="circle"><span className="text">TAPS</span></div>
@@ -147,3 +160,4 @@ export const Play4 = () => {
         </>
     );
 };
+

@@ -124,10 +124,24 @@ export const Play3 = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="layerUp">
-                                        {answer === 1 ? <div className="goodAnswer whiteTick cButtonGreen ">✓</div> : ""}
-                                        {answer === 2 ? <div className="badAnswer whiteTick cButtonRed ">❌</div> : ""}
-                                    </div>
+
+
+
+                                    {answer === 1 ?
+                                        <div className="layerUp">
+                                            <div className="answer">
+                                                <div className="goodAnswer whiteTick cButtonGreen ">✓</div>
+                                            </div>
+                                        </div> : ""}
+
+
+                                    {answer === 2 ?
+                                        <div className="layerUp">
+                                            <div className="answer">
+                                                <div className="badAnswer whiteTick cButtonRed ">❌</div>
+                                            </div>
+                                        </div> : ""}
+
                                     <br />
                                 </div>
                             </>

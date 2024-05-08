@@ -1,12 +1,13 @@
 
-import "./Play2.css";
+import "./Play5.css";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { GetWordToPlay, GetWordsFromLevelToDivert } from "../../services/apiCalls";
+import { GetWordToPlay, GetWordsFromLevelToDivert, SetUpWordAsLearnt } from "../../services/apiCalls";
+import { CButton } from "../../common/CButton/CButton";
 
-export const Play2 = () => {
+export const Play5 = () => {
     // Redux reading mode
     const rdxUserData = useSelector(userData);
 
@@ -58,8 +59,18 @@ export const Play2 = () => {
 
     const gotItRight = async () => {
         setAnswer(1);
+        try {
+            const userId = rdxUserData?.credentials?.decoded?.userId;
+            const wordId = wordToPlay?.id;
+            // Add the learned word to the user_words table
+            await SetUpWordAsLearnt(tokenStorage, wordId)
+            console.log("args", tokenStorage, wordId);
+        } catch (error) {
+            console.error('Failed to add learned word:', error);
+        }
+
         setTimeout(() => {
-            navigate('/play2a');
+            navigate('/play');
             setAnswer(0);
         }, 1500);
     }
@@ -67,7 +78,7 @@ export const Play2 = () => {
     const gotItWrong = () => {
         setAnswer(2)
         setTimeout(() => {
-            navigate('/play2a');
+            navigate('/play');
             setAnswer(0)
         }, 1500);
     }
@@ -80,34 +91,26 @@ export const Play2 = () => {
                         {loadedData1 && (
                             <>
                                 <div className="game">
-                                    <div className="borderPlay2">
-                                        <br />
-                                        {wordToPlay?.id % 2 == 0
-                                            ?
-                                            (<div className="right" onClick={() => { gotItRight() }}>
-                                                <h3 className="text2">{wordToPlay?.JP}</h3>
-                                                <h5 className="white">'{wordToPlay?.romanji}'</h5>
-                                            </div>)
-                                            : (<div className="wrong" onClick={() => { gotItWrong() }}>
-                                                <h3 className="text2">{oneToDivert?.JP}</h3>
-                                                <h5 className="white">'{oneToDivert?.romanji}'</h5>
-                                            </div>)
+                                    <div className="borderPlay5">
+                                        <br /><br />
+                                        <img className="img text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
+                                        <br /><br />
+
+                                        {
+                                            wordToPlay?.id % 3 == 0
+                                                ? // corresponding word
+                                                (< div className="right">
+                                                    <h3 className="text2">{wordToPlay?.JP}</h3>
+                                                    <h5 className="white">'{wordToPlay?.romanji}'</h5>
+                                                </div>)
+                                                :
+                                                // diversion word
+                                                (< div className="wrong">
+                                                    <h3 className="text2">{oneToDivert?.JP}</h3>
+                                                    <h5 className="white">'{oneToDivert?.romanji}'</h5>
+                                                </div>)
                                         }
 
-                                        <br />
-                                        <img className="img text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
-                                        <br />
-                                        {wordToPlay?.id % 2 != 0
-                                            ?
-                                            (<div className="right" onClick={() => { gotItRight() }}>
-                                                <h3 className="text2">{wordToPlay?.JP}</h3>
-                                                <h5 className="white">'{wordToPlay?.romanji}'</h5>
-                                            </div>)
-                                            : (<div className="wrong" onClick={() => { gotItWrong() }}>
-                                                <h3 className="text2">{oneToDivert?.JP}</h3>
-                                                <h5 className="white">'{oneToDivert?.romanji}'</h5>
-                                            </div>)
-                                        }
 
                                         {answer == 1 ? <div className="layerUp">
                                             <div className="goodAnswer whiteTick cButtonGreen ">✓</div>
@@ -117,6 +120,18 @@ export const Play2 = () => {
                                         </div> : ""}
 
                                         <br />
+                                    </div>
+                                    <div className="rowBtns">
+                                        <CButton
+                                            className={"cButtonRed cButtonDesign cButtonDesign4"}
+                                            title={<span className="whiteTick">x</span>}
+                                            functionEmit={wordToPlay?.id % 3 != 0 ? () => gotItRight() : () => gotItWrong()}
+                                        />
+                                        <CButton
+                                            className={"cButtonGreen cButtonDesign cButtonDesign4"}
+                                            title={<span className="whiteTick">✓</span>}
+                                            functionEmit={wordToPlay?.id % 3 == 0 ? () => gotItRight() : () => gotItWrong()}
+                                        />
                                     </div>
                                 </div>
                             </>

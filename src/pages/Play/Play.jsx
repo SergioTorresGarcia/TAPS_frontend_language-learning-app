@@ -15,7 +15,7 @@ export const Play = () => {
 
     const [wordToPlay, setWordToPlay] = useState({});
     const [loadedData1, setLoadedData1] = useState(false);
-
+    const [answer, setAnswer] = useState(0);
 
     useEffect(() => {
         const getWordAtPlay = async () => {
@@ -34,6 +34,26 @@ export const Play = () => {
         }
     }, [loadedData1]);
 
+    const playGame = () => {
+        setAnswer(1);
+        setTimeout(() => {
+            setAnswer(2);
+            setTimeout(() => {
+                setAnswer(3);
+                setTimeout(() => {
+                    setAnswer(4);
+                    setTimeout(() => {
+                        navigate("/play2")
+                        setAnswer(0);
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }, 1000);
+
+
+
+    }
+
 
     return (
         <>
@@ -50,13 +70,28 @@ export const Play = () => {
                                     <h4 className="text2">{wordToPlay.EN}</h4>
                                     <br />
                                 </div>
+
+                                {answer == 1 ? <div className="layerUp">
+                                    <div className="goodAnswer whiteTick cButtonGreen ">3</div>
+                                </div> : ""}
+                                {answer == 2 ? <div className="layerUp">
+                                    <div className="goodAnswer whiteTick cButtonGreen ">2</div>
+                                </div> : ""}
+                                {answer == 3 ? <div className="layerUp">
+                                    <div className="goodAnswer whiteTick cButtonGreen ">1</div>
+                                </div> : ""}
+                                {answer == 4 ? <div className="layerUp">
+                                    <div className="goodAnswer whiteTick cButtonGreen ">GO!</div>
+                                </div> : ""}
+
                                 <div className="rowBtns">
                                     <CButton
                                         className={"cButtonGreen cButtonDesign"}
-                                        title={<span className="whiteTick">✓</span>}
-                                        functionEmit={() => navigate("/play2")}
+                                        title={<span className="blacktext">PLAY</span>}
+                                        functionEmit={() => playGame()}
                                     />
                                 </div>
+
                             </div>
                         )}
                     </>

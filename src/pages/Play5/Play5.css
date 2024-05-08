@@ -63,22 +63,27 @@
     margin-bottom: 0.3em;
 }
 
-.img4 {
-    width: 3em;
+.img {
+    width: 5em;
 
     position: relative;
     z-index: 0;
 }
 
-.borderPlay4 {
-    height: 30em;
+.borderPlay5 {
+    height: 25em;
     border: 0.1em solid white;
     border-radius: 1em;
     margin: 1em;
-    background-color: lightpink;
+    background-color: tan;
 }
 
+.cButtonDesign4:hover {
 
+    cursor: pointer;
+    transition: 0.2s;
+    background-color: tan;
+}
 
 .right,
 .wrong {
@@ -91,8 +96,8 @@
     align-items: center;
 }
 
-
 .goodAnswer {
+    /* z-index: 500; */
     width: 3em;
     height: 3em;
     border: 0.1em solid white;
@@ -102,13 +107,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: -8em auto;
+
 
 }
 
 
-
 .badAnswer {
-
+    /* z-index: 500; */
     width: 3em;
     height: 3em;
     border: 0.1em solid white;
@@ -118,9 +124,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    margin: -8em auto;
 
 }
+
 
 .row {
     display: flex;
@@ -129,17 +136,9 @@
     align-items: center;
 }
 
-/* 
-.layerUp {
-
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
-    z-index: 999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* .layerUp {
+    position: relative;
+    z-index: 1;
+    transform: scale(200%);
+    margin: -10em auto;
 } */

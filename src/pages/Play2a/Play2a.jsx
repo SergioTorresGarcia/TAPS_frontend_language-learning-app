@@ -1,12 +1,12 @@
 
-import "./Play2.css";
+import "./Play2a.css";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { GetWordToPlay, GetWordsFromLevelToDivert } from "../../services/apiCalls";
 
-export const Play2 = () => {
+export const Play2a = () => {
     // Redux reading mode
     const rdxUserData = useSelector(userData);
 
@@ -59,7 +59,7 @@ export const Play2 = () => {
     const gotItRight = async () => {
         setAnswer(1);
         setTimeout(() => {
-            navigate('/play2a');
+            navigate('/play3');
             setAnswer(0);
         }, 1500);
     }
@@ -67,7 +67,7 @@ export const Play2 = () => {
     const gotItWrong = () => {
         setAnswer(2)
         setTimeout(() => {
-            navigate('/play2a');
+            navigate('/play3');
             setAnswer(0)
         }, 1500);
     }
@@ -80,32 +80,30 @@ export const Play2 = () => {
                         {loadedData1 && (
                             <>
                                 <div className="game">
-                                    <div className="borderPlay2">
+                                    <div className="borderPlay2a">
                                         <br />
-                                        {wordToPlay?.id % 2 == 0
+                                        {wordToPlay?.id % 3 == 0
                                             ?
                                             (<div className="right" onClick={() => { gotItRight() }}>
-                                                <h3 className="text2">{wordToPlay?.JP}</h3>
-                                                <h5 className="white">'{wordToPlay?.romanji}'</h5>
+                                                <img className="img2a text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
+
                                             </div>)
                                             : (<div className="wrong" onClick={() => { gotItWrong() }}>
-                                                <h3 className="text2">{oneToDivert?.JP}</h3>
-                                                <h5 className="white">'{oneToDivert?.romanji}'</h5>
+                                                <img className="img2a text " src={oneToDivert && oneToDivert?.image ? `../../src/assets/${oneToDivert?.image.slice(2)}` : ''} alt={oneToDivert?.EN} />
                                             </div>)
                                         }
 
                                         <br />
-                                        <img className="img text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
-                                        <br />
-                                        {wordToPlay?.id % 2 != 0
+                                        <h3 className="text2">{wordToPlay?.JP}</h3>
+                                        <h5 className="white">'{wordToPlay?.romanji}'</h5>
+                                        <br /><br />
+                                        {wordToPlay?.id % 3 != 0
                                             ?
                                             (<div className="right" onClick={() => { gotItRight() }}>
-                                                <h3 className="text2">{wordToPlay?.JP}</h3>
-                                                <h5 className="white">'{wordToPlay?.romanji}'</h5>
+                                                <img className="img2a text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
                                             </div>)
                                             : (<div className="wrong" onClick={() => { gotItWrong() }}>
-                                                <h3 className="text2">{oneToDivert?.JP}</h3>
-                                                <h5 className="white">'{oneToDivert?.romanji}'</h5>
+                                                <img className="img2a text " src={oneToDivert && oneToDivert?.image ? `../../src/assets/${oneToDivert?.image.slice(2)}` : ''} alt={oneToDivert?.EN} />
                                             </div>)
                                         }
 

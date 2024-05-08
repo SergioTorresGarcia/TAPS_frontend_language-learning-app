@@ -23,18 +23,11 @@ export const Header = () => {
     <div className="headerDesign">
       <div>
         {rdxUserData.credentials?.token ? (
-          <>
-            {loc === '/profile/me' || loc === '/words' || loc === '/play' || loc === '/play2' || loc === '/play3' || loc === '/play4' ? (
-              <Navigator title={"⇠"} destination={"/"} />
-            ) : null}
-            {loc === '/rules' || loc === '/progress' ? (
-              <Navigator title={"⇠"} destination={"/profile/me"} />
-            ) : null}
-            {loc === '/' ? (
-              <div onClick={logOut}><Navigator title={"log out"} destination={"/"} /></div>
-            ) : null}
-          </>
-
+          (loc === '/' || loc === '/rules' || loc === '/progress')
+            ? (loc === '/'
+              ? <div onClick={logOut}><Navigator title={"log out"} destination={"/"} /></div>
+              : <Navigator title={"⇠"} destination={"/profile/me"} />)
+            : (<Navigator title={"⇠"} destination={"/"} />)
         ) : (
 
           loc === '/login' || loc === '/register' ? (
