@@ -10,3 +10,13 @@
     align-items: center;
 
 }
+
+.boxWords {
+    width: auto;
+    height: 12em;
+    overflow-y: scroll;
+    border: 0.1em solid white;
+    border-radius: 0.5em;
+    color: white;
+    background-color: lightseagreen;
+}

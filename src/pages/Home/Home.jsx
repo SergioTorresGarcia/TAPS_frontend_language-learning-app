@@ -20,7 +20,7 @@ export const Home = () => {
 
         ) : (
 
-          <div className="homeDesign"><div className="circle"><span className="text">TAPS</span ></div></div>
+          <div className="homeDesign"><div className="circle2 box-shadow"><span className="whiteTick">TAPS</span ></div></div>
 
         )}
       </div>

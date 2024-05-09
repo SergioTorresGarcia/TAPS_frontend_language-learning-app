@@ -35,6 +35,7 @@ export const NewLevel = () => {
             getLevel();
         }
     }, [loadedData1]);
+
     useEffect(() => {
 
         const getLearntWords = async () => {
@@ -50,10 +51,6 @@ export const NewLevel = () => {
             getLearntWords();
         }
     }, [loadedData2]);
-    console.log(level);
-    console.log(words);
-    // console.log(level[0].id);
-    // console.log(level[0].name);
 
     const accomplishedLevel = words.length / 10
 
@@ -68,7 +65,7 @@ export const NewLevel = () => {
 
                                 <div className="border">
                                     <br />
-                                    <h2>{level[accomplishedLevel - 1]} accomplished</h2>
+                                    <h2><em><big>{level[accomplishedLevel - 1]}</big></em> accomplished</h2>
                                     <h1>Congrats!</h1>
                                     <h3>You've passed {accomplishedLevel} levels out of 5</h3>
 

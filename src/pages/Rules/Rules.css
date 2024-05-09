@@ -10,3 +10,38 @@
     align-items: center;
 
 }
+
+.cButtonDesign2 {
+
+    height: 1.5em;
+    width: 1.5em;
+
+    border-radius: 50%;
+    border: 0.1em solid white;
+    background-color: lightseagreen;
+
+    color: white;
+    font-weight: bold;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+}
+
+.showComments {
+    position: absolute;
+    background-color: rgba(11, 10, 10, 0.5);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(9px);
+    padding: 1em;
+    border-radius: .5em;
+    font-size: .8em;
+    color: antiquewhite;
+    margin-top: -44em;
+}
+
+.showComments:hover {
+    cursor: pointer;
+    background-color: rgba(11, 10, 10, 0.5);
+}

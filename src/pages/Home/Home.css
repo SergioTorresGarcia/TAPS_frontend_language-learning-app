@@ -12,10 +12,10 @@
 
 }
 
-.circle {
+.circle2 {
     width: 10em;
     height: 10em;
-    border: 0.5em dotted white;
+    /* border: 0.5em dotted white; */
     border-radius: 50%;
     background-color: lightseagreen;
     color: white;
@@ -24,7 +24,7 @@
     justify-content: center;
 }
 
-.text {
+.text2 {
     font-size: 200%;
     color: white;
 }
@@ -33,4 +33,8 @@
     width: 5em;
     height: 5em;
     color: white;
+}
+
+.box-shadow {
+    box-shadow: 0 0 2em 2em rgba(255, 255, 255, 0.5);
 }

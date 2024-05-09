@@ -18,7 +18,6 @@ export const Play3 = () => {
     const [loadedData1, setLoadedData1] = useState(false);
     const [loadedData2, setLoadedData2] = useState(false);
     const [answer, setAnswer] = useState(0);
-    const [shuffledAnswers, setShuffledAnswers] = useState([]);
 
     useEffect(() => {
         const getWordsToDivert = async () => {
@@ -49,7 +48,7 @@ export const Play3 = () => {
         if (!loadedData1) {
             getWordsToDivert();
         }
-    }, [loadedData2]);
+    }, [loadedData1]);
 
     // Function to shuffle array elements
     function shuffleArray(array) {
@@ -101,6 +100,7 @@ export const Play3 = () => {
 
                                             {/* Image */}
                                             <img className="img text" src={wordToPlay && wordToPlay.image ? `../../src/assets/${wordToPlay.image.slice(2)}` : ''} alt={wordToPlay.EN} />
+
                                             {/* Last two options */}
                                             <div className="row">
                                                 {(shuffledOptions.slice(2)).map((word, index) => (

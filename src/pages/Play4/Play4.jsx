@@ -19,6 +19,7 @@ export const Play4 = () => {
     const [loadedData2, setLoadedData2] = useState(false);
     const [answer, setAnswer] = useState(0);
 
+
     useEffect(() => {
         const getWordAtPlay = async () => {
             try {
@@ -108,7 +109,10 @@ export const Play4 = () => {
                                             <div className="row">
                                                 {(shuffledOptions.slice(0, 2)).map((word, index) => (
                                                     <div key={index} className="option" onClick={word === wordToPlay ? gotItRight : gotItWrong}>
+
                                                         <img className="img4 text" src={word && word.image ? `../../src/assets/${word.image.slice(2)}` : ''} alt={word.EN} />
+
+
 
                                                     </div>
                                                 ))}
@@ -117,9 +121,12 @@ export const Play4 = () => {
 
                                             {/* Image */}
                                             <br /><br />
-                                            <h3 className="text2">{wordToPlay.JP}</h3>
-                                            <h5 className="white">'{wordToPlay.romanji}'</h5>
+                                            <div>
+                                                <h3 className="text2">{wordToPlay.JP}</h3>
+                                                <h5 className="white">'{wordToPlay.romanji}'</h5>
+                                            </div>
                                             <br /><br />
+
 
                                             {/* Last two options */}
                                             <div className="row">
