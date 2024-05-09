@@ -39,17 +39,22 @@ export const Play4 = () => {
     useEffect(() => {
         const getWordsToDivert = async () => {
             try {
-                const levelId = 1;
-                const fetched = await GetWordsFromLevelToDivert(tokenStorage, levelId);
-                if (fetched && fetched.data) {
+                const fetched1 = await GetWordToPlay(tokenStorage); // ALL WORDS FROM THE GAME
+                if (fetched1) {
+                    setWordToPlay(fetched1);
+                }
+                setLoadedData1(true);
+
+                const fetched2 = await GetWordsFromLevelToDivert(tokenStorage, fetched1?.levelId || 1);
+                if (fetched2 && fetched2.data) {
                     const randomIndexes = new Set(); // Set to store unique random indexes
                     const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
                     while (randomIndexes.size < 3) {
-                        const randomIndex = random(0, fetched.data.length);
+                        const randomIndex = random(0, fetched2.data.length);
                         randomIndexes.add(randomIndex);
                     }
-                    const wordsToDivertArray = Array.from(randomIndexes).map(index => fetched.data[index]);
+                    const wordsToDivertArray = Array.from(randomIndexes).map(index => fetched2.data[index]);
                     setWordsToDivert(wordsToDivertArray);
                     setLoadedData2(true);
                 }
@@ -61,7 +66,6 @@ export const Play4 = () => {
             getWordsToDivert();
         }
     }, [loadedData2]);
-
     // Function to shuffle array elements
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {

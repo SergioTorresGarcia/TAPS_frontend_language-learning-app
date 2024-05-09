@@ -20,29 +20,16 @@ export const Play5 = () => {
     const [answer, setAnswer] = useState(0);
 
     useEffect(() => {
-        const getWordAtPlay = async () => {
-            try {
-                const fetched = await GetWordToPlay(tokenStorage); // ALL WORDS FROM THE GAME
-                if (fetched) {
-                    setWordToPlay(fetched);
-                }
-                setLoadedData1(true);
-            } catch (error) {
-                console.error('Failed to fetch all words:', error);
-            }
-        };
-        if (!loadedData1) {
-            getWordAtPlay();
-        }
-    }, [loadedData1]);
-
-    useEffect(() => {
         const getWordsToDivert = async () => {
             try {
-                const levelId = 1
-                const fetched = await GetWordsFromLevelToDivert(tokenStorage, levelId);
-                if (fetched && fetched.data) {
-                    setWordsToDivert(fetched.data);
+                const fetched1 = await GetWordToPlay(tokenStorage); // ALL WORDS FROM THE GAME
+                if (fetched1) {
+                    setWordToPlay(fetched1);
+                }
+                setLoadedData1(true);
+                const fetched2 = await GetWordsFromLevelToDivert(tokenStorage, fetched1?.levelId || 1);
+                if (fetched2 && fetched2.data) {
+                    setWordsToDivert(fetched2.data);
                 }
                 setLoadedData1(true);
             } catch (error) {
@@ -53,9 +40,12 @@ export const Play5 = () => {
             getWordsToDivert();
         }
     }, [loadedData1]);
+    console.log(wordToPlay);
+    console.log(wordsToDivert);
 
     const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
     const oneToDivert = wordsToDivert[random(0, wordsToDivert.length)];
+
 
     const gotItRight = async () => {
         setAnswer(1);
@@ -94,7 +84,7 @@ export const Play5 = () => {
                                     <div className="borderPlay5">
                                         <br /><br />
                                         <img className="img text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
-                                        <br /><br />
+                                        <br />
 
                                         {
                                             wordToPlay?.id % 3 == 0
