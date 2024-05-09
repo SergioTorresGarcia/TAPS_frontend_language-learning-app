@@ -10,7 +10,7 @@ export const Footer = () => {
     const rdxUserData = useSelector(userData)
     //useLocation to control menu display
     const location = useLocation();
-
+    console.log(rdxUserData);
     return (
         <div className="footerDesign">
             {rdxUserData.credentials?.token ? (

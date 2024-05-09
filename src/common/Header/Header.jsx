@@ -15,7 +15,12 @@ export const Header = () => {
   const loc = location.pathname;
 
   const logOut = () => {
-    dispatch(logout({ credentials: {} }));
+    dispatch(logout({
+      credentials: {
+        email: "",
+        password: "",
+      }
+    }));
     navigate("/login");
   };
 

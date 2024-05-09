@@ -73,6 +73,7 @@
 .borderPlay4 {
     height: 30em;
     border: 0.1em solid white;
+    box-shadow: 0 0 0.5em 0.5em rgba(255, 255, 255, 0.5);
     border-radius: 1em;
     margin: 1em;
     background-color: lightpink;
