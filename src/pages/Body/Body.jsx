@@ -13,6 +13,7 @@ import { Play3 } from "../Play3/Play3";
 import { Play4 } from "../Play4/Play4";
 import { Play2a } from "../Play2a/Play2a";
 import { Play5 } from "../Play5/Play5";
+import { NewLevel } from "../NewLevel/NewLevel";
 
 export const Body = () => {
   return (
@@ -33,6 +34,7 @@ export const Body = () => {
       <Route path="/play3" element={<Play3 />} />
       <Route path="/play4" element={<Play4 />} />
       <Route path="/play5" element={<Play5 />} />
+      <Route path="/play/congrats" element={<NewLevel />} />
     </Routes>
   );
 };

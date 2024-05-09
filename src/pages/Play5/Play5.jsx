@@ -59,10 +59,15 @@ export const Play5 = () => {
             console.error('Failed to add learned word:', error);
         }
 
-        setTimeout(() => {
-            navigate('/play');
-            setAnswer(0);
-        }, 1500);
+        if (wordToPlay.id % 10 === 0) {
+            navigate('/play/congrats');
+        } else {
+            setTimeout(() => {
+                navigate('/play');
+                setAnswer(0);
+            }, 1500);
+        }
+
     }
 
     const gotItWrong = () => {

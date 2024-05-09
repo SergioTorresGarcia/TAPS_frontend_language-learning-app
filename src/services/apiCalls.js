@@ -101,6 +101,32 @@ export const UpdateProfile = async (token, data) => {
 
 
 // GAME
+// All levels
+export const GetLevels = async (token) => {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  };
+
+  try {
+    const response = await fetch(`${root}levels`, options);
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // All words
 export const GetWords = async (token) => {
   const options = {
