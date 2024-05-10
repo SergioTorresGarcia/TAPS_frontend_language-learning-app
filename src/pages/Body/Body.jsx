@@ -14,6 +14,11 @@ import { Play4 } from "../Play4/Play4";
 import { Play2a } from "../Play2a/Play2a";
 import { Play5 } from "../Play5/Play5";
 import { NewLevel } from "../NewLevel/NewLevel";
+import { AddNewWord } from "../AddNewWord/AddNewWord";
+import { AddNewLevel } from "../AddNewLevel/AddNewLevel";
+
+
+
 
 export const Body = () => {
   return (
@@ -28,6 +33,8 @@ export const Body = () => {
       <Route path="/progress" element={<Progress />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/admin/words" element={<Word />} />
+      <Route path="/admin/words/new" element={<AddNewWord />} />
+      <Route path="/admin/levels/new" element={<AddNewLevel />} />
       <Route path="/play" element={<Play />} />
       <Route path="/play2" element={<Play2 />} />
       <Route path="/play2a" element={<Play2a />} />

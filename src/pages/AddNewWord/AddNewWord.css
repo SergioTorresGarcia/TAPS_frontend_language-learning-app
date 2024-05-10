@@ -1,8 +1,8 @@
-.wordDesign {
+.newDataDesign {
 
-    height: 80vh;
+    height: 70vh;
     width: 100vw;
-    margin-top: -10vh;
+
     background-color: lightseagreen;
     overflow-y: scroll;
 }
@@ -43,34 +43,16 @@
     width: 5em;
 }
 
-.borderAdmin {
+.border {
     border: 0.1em solid white;
     border-radius: 1em;
     margin: 1em;
     background-color: lightgreen;
+}
+
+.addWord {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th,
-td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-.radioBtn {
-    position: fixed;
-    margin: 0 0 1em 10em;
+    justify-content: center;
 }

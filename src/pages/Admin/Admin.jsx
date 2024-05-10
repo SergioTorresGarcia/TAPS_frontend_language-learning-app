@@ -5,35 +5,116 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { GetWords } from "../../services/apiCalls";
+import { AddLevel, AddWord, GetWords } from "../../services/apiCalls";
+import { CButton } from "../../common/CButton/CButton";
+import { CInput } from "../../common/CInput/CInput";
+import { validame } from "../../utils/functions";
 
 
 export const Admin = () => {
     // Redux reading mode
     const rdxUserData = useSelector(userData);
     // Redux writing mode
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    // const dispatch = useDispatch();
+    // const navigate = useNavigate();
 
     const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
-    const [words, setWords] = useState([]); // State to store fetched words
+    const [words, setWords] = useState([]);
+    const [word, setWord] = useState({
+        EN: "",
+        JP: "",
+        romanji: "",
+        image: "",
+    });
+    const [wordError, setWordError] = useState({
+        ENError: "",
+        JPError: "",
+        romanjiError: "",
+        imageError: "",
+    });
+    const [level, setLevel] = useState({
+        name: "",
+    })
+    const [levelError, setLevelError] = useState({
+        nameError: "",
+    })
     const [loadedData, setLoadedData] = useState(false);
+    const [loadedLevel, setLoadedLevel] = useState(false);
+    const [loadedWord, setLoadedWord] = useState(false);
 
-    useEffect(() => {
-        const getAllWords = async () => {
-            try {
-                const fetched = await GetWords(tokenStorage);
-                setWords(fetched.data);
-                setLoadedData(true);
-            } catch (error) {
-                console.log(error);
-            }
-        };
 
-        if (!loadedData) {
-            getAllWords();
-        }
-    }, [loadedData]); // Call getAllWords only when loadedData changes
+    const inputHandlerLevel = (e) => {
+        //binding...
+        setLevel((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
+    };
+    const inputHandlerWord = (e) => {
+        //binding...
+        setWord((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
+    const checkErrorLevel = (e) => {
+        const error = validame(e.target.name, e.target.value);
+
+        setLevelError((prevState) => ({
+            ...prevState,
+            [e.target.name + "Error"]: error,
+        }));
+    };
+    const checkErrorWord = (e) => {
+        const error = validame(e.target.name, e.target.value);
+
+        setLevelError((prevState) => ({
+            ...prevState,
+            [e.target.name + "Error"]: error,
+        }));
+    };
+
+    // useEffect(() => {
+    //     const getAllWords = async () => {
+    //         try {
+    //             const fetched = await GetWords(tokenStorage);
+    //             setWords(fetched.data);
+    //             setLoadedData(true);
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     };
+
+    //     if (!loadedData) {
+    //         getAllWords();
+    //     }
+    // }, [loadedData]); // Call getAllWords only when loadedData changes
+
+
+    // const createLevel = async () => {
+    //     await AddLevel(tokenStorage);
+    // }
+
+
+
+    // const createNewWord = async () => {
+    //     try {
+    //         for (let element in word) {
+    //             if (word[element] === "") {
+    //                 throw new Error("All fields are required");
+    //             }
+    //         }
+
+    //         await AddWord(tokenStorage, word);
+    //         console.log("New word created in DB");
+    //         // navigate('/admin');
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
+
+
 
     return (
         <>
@@ -43,6 +124,7 @@ export const Admin = () => {
                 {rdxUserData.credentials?.token ? (
                     <>
 
+                        {/* 
                         BOTON CON ROLES
                         BOTON CREAR ROLE
                         BOTON CAMBIAR ROLE (hacer admin)
@@ -53,34 +135,19 @@ export const Admin = () => {
                         BOTON CREAR NIVEL
 
                         BOTON CON PALABRAS CARDS
-                        BOTON CON PALABRAS TABLA
+                        BOTON CON PALABRAS TABLA */}
 
 
 
 
-                        {/* {loadedData && (
-                            <div>
-                                {Object.entries(words).map(([key, value]) => (
 
-                                    <div className="border" key={key}>
-                                        <br />
-                                        <img className="img text" src={`../../src/assets/${value.image.slice(2)}`} alt="" />
-                                        <h3 className="text2">{value.JP}</h3>
-                                        <h5 className="white">'{value.romanji}'</h5>
-                                        <h4 className="text2">{value.EN}</h4>
-
-                                        <div className="text2">[ Level: {value.levelId} | Challenge: {value.challengeId} ]</div>
-                                        <br />
-                                    </div>
-                                ))}
-                            </div>
-                        )} */}
 
                     </>
                 ) : (
-                    <div className="wordDesign">
-                        <div className="circle"><span className="text">TAPS</span></div>
-                    </div>
+                    <div></div>
+                    //     <div className="wordDesign">
+                    //         <div className="circle"><span className="text">TAPS</span></div>
+                    //     </div>
                 )}
             </div >
         </>

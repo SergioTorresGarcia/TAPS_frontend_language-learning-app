@@ -23,10 +23,13 @@ export const Footer = () => {
                                     : <div></div>}
 
                                 {location.pathname === '/admin/words' ?
-                                    <Navigator title={"+ NEW"} destination={"/admin/words/new"} />
+                                    <>
+                                        <Navigator title={"+WORD"} destination={"/admin/words/new"} />
+                                        <Navigator title={"+LEVEL"} destination={"/admin/levels/new"} />
+                                    </>
                                     : <Navigator title={"WORDS"} destination={"/admin/words"} />}
 
-                                {location.pathname !== '/' ?
+                                {(location.pathname !== '/' && location.pathname !== '/admin/words') ?
                                     <Navigator title={"HOME"} destination={"/"} />
                                     : null}
                             </>

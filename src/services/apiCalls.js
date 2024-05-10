@@ -86,7 +86,6 @@ export const UpdateProfile = async (token, data) => {
 
   try {
     const response = await fetch(`${root}users/me`, options);
-
     const data = await response.json();
 
     if (!data.success) {
@@ -115,6 +114,31 @@ export const GetLevels = async (token) => {
     const response = await fetch(`${root}levels`, options);
 
     if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const AddLevel = async (token, dataLevel) => {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(dataLevel)
+  };
+
+  try {
+    const response = await fetch(`${root}levels/new`, options);
+
+    if (!response) {
       throw new Error('Failed to fetch data');
     }
     const data = await response.json();
@@ -174,6 +198,32 @@ export const GetOneWord = async (token) => {
       throw new Error(data.message);
     }
     return data.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const AddWord = async (token, data) => {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  };
+
+  try {
+    const response = await fetch(`${root}words/new`, options);
+    console.log(response);
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    console.log(data);
+    return data;
   } catch (error) {
     throw error;
   }

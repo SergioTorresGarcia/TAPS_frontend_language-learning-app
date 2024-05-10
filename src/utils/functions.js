@@ -7,7 +7,11 @@ export const validame = (type, value) => {
     case "nombre":
     case "surname":
     case "cognom":
-      if (value.length < 3) {
+    case "EN":
+    case "JP":
+    case "romanji":
+    case "image":
+      if (value.length < 2) {
         return "Username must be at least 3 characters long.";
       }
 

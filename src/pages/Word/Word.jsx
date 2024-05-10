@@ -39,32 +39,33 @@ export const Word = () => {
     return (
         <>
             <div className="wordDesign">
+                <div className="radioBtn">
+                    <label>
+                        <input
+                            type="radio"
+                            value="table"
+                            checked={radio === 'table'}
+                            onChange={() => setRadio('table')}
+                        />
+                        Table View
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            value="list"
+                            checked={radio === 'list'}
+                            onChange={() => setRadio('list')}
+                        />
+                        List View
+                    </label>
+                </div>
                 {rdxUserData.credentials?.token ? (
                     <>
                         {loadedData && (
                             <div>
                                 <>
                                     <br />
-                                    <div>
-                                        <label>
-                                            <input
-                                                type="radio"
-                                                value="table"
-                                                checked={radio === 'table'}
-                                                onChange={() => setRadio('table')}
-                                            />
-                                            Table View
-                                        </label>
-                                        <label>
-                                            <input
-                                                type="radio"
-                                                value="list"
-                                                checked={radio === 'list'}
-                                                onChange={() => setRadio('list')}
-                                            />
-                                            List View
-                                        </label>
-                                    </div>
+
                                     <br />
                                     {radio == 'list'
                                         ? (Object.entries(words).map(([key, value]) => (
