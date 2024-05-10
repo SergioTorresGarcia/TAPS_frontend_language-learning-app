@@ -16,7 +16,7 @@ export const Admin = () => {
     const rdxUserData = useSelector(userData);
     // Redux writing mode
     // const dispatch = useDispatch();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
     const [words, setWords] = useState([]);
@@ -123,7 +123,30 @@ export const Admin = () => {
 
                 {rdxUserData.credentials?.token ? (
                     <>
-
+                        <div className="row">
+                            <CButton
+                                className={"cButtonDesign cButtonRed"}
+                                title={"ROLES"}
+                                functionEmit={() => { navigate("/admin/roles") }}
+                            />
+                            <CButton
+                                className={"cButtonDesign cButtonRed"}
+                                title={"USERS"}
+                                functionEmit={() => { navigate("/admin/users") }}
+                            />
+                        </div>
+                        <div className="row">
+                            <CButton
+                                className={"cButtonDesign cButtonRed"}
+                                title={"LEVELS"}
+                                functionEmit={() => { navigate("/admin/levels") }}
+                            />
+                            <CButton
+                                className={"cButtonDesign cButtonRed"}
+                                title={"WORDS"}
+                                functionEmit={() => { navigate("/admin/words") }}
+                            />
+                        </div>
                         {/* 
                         BOTON CON ROLES
                         BOTON CREAR ROLE
@@ -144,10 +167,9 @@ export const Admin = () => {
 
                     </>
                 ) : (
-                    <div></div>
-                    //     <div className="wordDesign">
-                    //         <div className="circle"><span className="text">TAPS</span></div>
-                    //     </div>
+                    <div className="wordDesign">
+                        <div className="circle"><span className="text">TAPS</span></div>
+                    </div>
                 )}
             </div >
         </>

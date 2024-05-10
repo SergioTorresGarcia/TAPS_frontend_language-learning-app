@@ -125,7 +125,7 @@ export const AddNewWord = () => {
                             />
                             <CButton
                                 className={"cButtonGreen cButtonDesign"}
-                                title={<span className="blacktext">Add New Word</span>}
+                                title={<span className="blacktext">New <br />Word</span>}
                                 functionEmit={createNewWord}
                             />
                             <div className="error">{wordError.nameError}</div>

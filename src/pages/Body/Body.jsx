@@ -16,6 +16,7 @@ import { Play5 } from "../Play5/Play5";
 import { NewLevel } from "../NewLevel/NewLevel";
 import { AddNewWord } from "../AddNewWord/AddNewWord";
 import { AddNewLevel } from "../AddNewLevel/AddNewLevel";
+import { ProfileDelete } from "../ProfileDelete/ProfileDelete";
 
 
 
@@ -23,18 +24,26 @@ import { AddNewLevel } from "../AddNewLevel/AddNewLevel";
 export const Body = () => {
   return (
     <Routes>
-      {/* Aquí iran cada una de las rutas a las VISTAS */}
       <Route path="*" element={<Navigate to={"/"} replace />} />
       <Route path="/" element={<Home />} />
+
+      {/* AUTH */}
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+
+      {/* USER */}
       <Route path="/profile/me" element={<Profile />} />
+      <Route path="/delete-profile" element={<ProfileDelete />} />
       <Route path="/rules" element={<Rules />} />
       <Route path="/progress" element={<Progress />} />
+
+      {/* ADMIN */}
       <Route path="/admin" element={<Admin />} />
       <Route path="/admin/words" element={<Word />} />
       <Route path="/admin/words/new" element={<AddNewWord />} />
       <Route path="/admin/levels/new" element={<AddNewLevel />} />
+
+      {/* GAME */}
       <Route path="/play" element={<Play />} />
       <Route path="/play2" element={<Play2 />} />
       <Route path="/play2a" element={<Play2a />} />
