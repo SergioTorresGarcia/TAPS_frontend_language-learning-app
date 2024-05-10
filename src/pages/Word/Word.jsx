@@ -38,15 +38,7 @@ export const Word = () => {
     }, [loadedData]); // Call getAllWords only when loadedData changes
 
 
-    const updateWord = () => {
-        try {
-            UpdateWord(tokenStorage, id);
-            console.log("Word updated");
-            navigate('/admin');
-        } catch (error) {
-            console.log(error);
-        }
-    };
+
 
     const deleteWord = async (tokenStorage, id) => {
         try {
@@ -133,7 +125,7 @@ export const Word = () => {
                                                                 </div>
                                                                 <div className="fixed">
                                                                     <td className="h">
-                                                                        <FaEdit className="icon" onClick={updateWord} /><br />
+                                                                        <FaEdit className="icon" onClick={() => navigate('/admin/words/update')} /><br />
                                                                         <FaTrash className="icon" onClick={() => deleteWord(tokenStorage, value.id)} />
                                                                     </td>
                                                                 </div>

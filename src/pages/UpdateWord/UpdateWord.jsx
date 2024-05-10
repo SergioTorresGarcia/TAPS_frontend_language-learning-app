@@ -1,26 +1,29 @@
 
-import "./AddNewWord.css";
+import "./UpdateWord.css";
 
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { AddWord } from "../../services/apiCalls";
 import { CButton } from "../../common/CButton/CButton";
 import { CInput } from "../../common/CInput/CInput";
 import { validame } from "../../utils/functions";
+import { GetWordById, UpdateAWord } from "../../services/apiCalls";
 
 
-export const AddNewWord = () => {
+export const UpdateWord = (id) => {
     // Redux reading mode
     const rdxUserData = useSelector(userData);
     const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
     const navigate = useNavigate();
+    const [loadedData, setLoadedData] = useState(false);
+
     const [word, setWord] = useState({
         EN: "",
         JP: "",
         romanji: "",
         image: "",
+        levelId: ""
     });
     const [wordError, setWordError] = useState({
         ENError: "",
@@ -48,21 +51,74 @@ export const AddNewWord = () => {
     };
 
 
-    const createNewWord = () => {
-        try {
-            for (let element in word) {
-                if (word[element] === "") {
-                    throw new Error("All fields are required");
-                }
-            }
+    useEffect(() => {
+        const getWordToUpdate = async (id) => {
+            try {
+                const fetched = await GetWordById(tokenStorage, id);
+                console.log(fetched);
 
-            AddWord(tokenStorage, word);
-            console.log("New word created in DB");
-            navigate('/admin');
+                setWord({
+                    EN: fetched.data.EN,
+                    JP: fetched.data.JP,
+                    romanji: fetched.data.romanji,
+                    image: fetched.data.image,
+                    levelId: fetched.data.levelId
+                })
+                setLoadedData(true);
+
+                // setWrite("disabled")
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        if (!loadedData) {
+            getWordToUpdate();
+        }
+    }, [word]);
+
+    const updateWord = async (id) => {
+        const wordData = {
+            EN: word.EN,
+            JP: word.JP,
+            romanji: word.romanji,
+            image: word.image,
+            levelId: word.levelId
+        };
+        try {
+
+            const updatedWord = await UpdateAWord(tokenStorage, id, wordData);
+
+
+            setWord(updatedWord)
+            setWrite("disabled")
         } catch (error) {
             console.log(error);
         }
     };
+
+    // const updateWord = async (id, updatedData) => {
+    //     try {
+    //         const updatedWord = await UpdateAWord(tokenStorage, id, updatedData);
+    //         console.log(updatedWord);
+
+    //         // setWord({
+    //         //     EN: fetched.EN,
+    //         //     JP: fetched.word.JP,
+    //         //     romanji: fetched.data.romanji,
+    //         //     image: fetched.data.word.image,
+    //         //     levelId: fetched.data.word.levelId
+    //         // })
+    //         setWord(prevWords =>
+    //             prevWords.map(word =>
+    //                 word.id === id ? updatedWord : word
+    //             ))
+
+    //         setWrite("disabled")
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
+
 
 
     return (
@@ -76,6 +132,7 @@ export const AddNewWord = () => {
                                 type={"text"}
                                 placeholder={"english word"}
                                 name={"EN"}
+                                // disabled={write}
                                 value={word.EN || ""}
                                 onChangeFunction={(e) => inputHandlerWord(e)}
                                 onBlurFunction={(e) => checkErrorWord(e)}
@@ -112,13 +169,14 @@ export const AddNewWord = () => {
                                 type={"number"}
                                 placeholder={"level id"}
                                 name={"level_id"}
-                                value={word.level_id || ""}
+                                value={word.levelId || ""}
                                 onChangeFunction={(e) => inputHandlerWord(e)}
                             />
+
                             <CButton
                                 className={"cButtonGreen cButtonDesign"}
-                                title={<span className="blacktext">New <br />Word</span>}
-                                functionEmit={createNewWord}
+                                title={<span className="blacktext">Edit</span>}
+                                functionEmit={() => updateWord(word.id)}
                             />
                             <div className="error">{wordError.nameError}</div>
                         </div>

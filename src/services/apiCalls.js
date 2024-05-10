@@ -206,6 +206,29 @@ export const GetOneWord = async (token) => {
     throw error;
   }
 };
+// the very first word
+export const GetWordById = async (token, id) => {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  };
+  try {
+    const response = await fetch(`${root}words/${id}`, options);
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    return data.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const AddWord = async (token, data) => {
   const options = {
@@ -231,29 +254,29 @@ export const AddWord = async (token, data) => {
   }
 };
 
-// export const AddWord = async (token, data) => {
-//   const options = {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Authorization": `Bearer ${token}`
-//     },
-//     body: JSON.stringify(data)
-//   };
-//   try {
-//     const response = await fetch(`${root}words/new`, options);
-//     if (!response.ok) {
-//       throw new Error('Failed to fetch data');
-//     }
-//     const data = await response.json();
-//     if (!data.success) {
-//       throw new Error(data.message);
-//     }
-//     return data;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
+export const UpdateAWord = async (token, id, data) => {
+  const options = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  };
+  try {
+    const response = await fetch(`${root}words/${id}`, options);
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
 // export const DeleteWord = (id) => { console.log("id", id); }
 
 export const DeleteWord = async (token, id) => {
@@ -264,7 +287,6 @@ export const DeleteWord = async (token, id) => {
       "Authorization": `Bearer ${token}`
     }
   };
-  console.log(id);
   try {
     const response = await fetch(`${root}words/${id}`, options);
     if (!response.ok) {
