@@ -67,7 +67,7 @@ export const NewLevel = () => {
                                     <br />
                                     <h2><em><big>{level[accomplishedLevel - 1]}</big></em> accomplished</h2>
                                     <h1>Congrats!</h1>
-                                    <h3>You've passed {accomplishedLevel} levels out of 5</h3>
+                                    <h3>You've passed level {accomplishedLevel} out of 5</h3>
 
                                     <div className="cButtonDesign">
                                         <h2 onClick={() => { navigate('/play') }}>⇨</h2>

@@ -43,9 +43,29 @@
     width: 5em;
 }
 
-.border {
+.borderAdmin {
     border: 0.1em solid white;
     border-radius: 1em;
     margin: 1em;
     background-color: lightgreen;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
 }

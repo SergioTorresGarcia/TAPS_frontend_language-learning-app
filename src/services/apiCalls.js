@@ -153,6 +153,32 @@ export const GetWords = async (token) => {
   }
 };
 
+// the very first word
+export const GetOneWord = async (token) => {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  };
+
+  try {
+    const response = await fetch(`${root}words/first`, options);
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    return data.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // 10 words from level
 export const GetWordsFromLevel = async (token, level_id) => {
   const options = {
@@ -217,18 +243,28 @@ export const GetWordToPlay = async (token) => {
   };
 
   try {
-    const response = await fetch(`${root}words/current`, options);
+    // const response1 = await fetch(`${root}words`, options);
+    // if (!response1.ok) {
+    //   throw new Error('Failed to fetch data');
+    // }
+    // const data1 = await response1.json();
+    // const wordZero = data1.data[0]
+    // console.log(wordZero);
 
+    const response = await fetch(`${root}words/current`, options);
+    console.log(`${root}words/current`);
     if (!response.ok) {
-      throw new Error('Failed to fetch data');
+      const data = await fetch(`${root}words`, options);
+      console.log(data);
+      return data
     }
     const data = await response.json();
     if (!data.success) {
       throw new Error(data.message);
     }
-    console.log("data", data);
-    console.log("response", response);
-    return data.data;
+    console.log(data);
+    console.log(data.data);
+    return data.data || wordZero;
   } catch (error) {
     throw error;
   }

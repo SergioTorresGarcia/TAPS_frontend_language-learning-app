@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { GetWordToPlay } from "../../services/apiCalls";
+import { GetOneWord, GetWordToPlay } from "../../services/apiCalls";
 import { CButton } from "../../common/CButton/CButton";
 
 export const Play = () => {
@@ -13,18 +13,37 @@ export const Play = () => {
     const navigate = useNavigate();
     const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
 
-    const [wordToPlay, setWordToPlay] = useState({});
+    const [wordToPlay, setWordToPlay] = useState();
+    const [word, setWord] = useState();
+    const [loadedData, setLoadedData] = useState(false);
     const [loadedData1, setLoadedData1] = useState(false);
     const [answer, setAnswer] = useState(0);
 
     useEffect(() => {
+        const getFirstWord = async () => {
+            try {
+                const fetched = await GetOneWord(tokenStorage);
+                setWord(fetched);
+                setLoadedData(true);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        if (!loadedData) {
+            getFirstWord();
+        }
+    }, [loadedData]);
+
+    useEffect(() => {
         const getWordAtPlay = async () => {
             try {
-                const fetched = await GetWordToPlay(tokenStorage); // ALL WORDS FROM THE GAME
-                if (fetched) {
-                    setWordToPlay(fetched);
-                }
+                const fetched = await GetWordToPlay(tokenStorage);
+
+                setWordToPlay(fetched)
                 setLoadedData1(true);
+                console.log("palabra cero", fetched.data);
+
             } catch (error) {
                 console.error('Failed to fetch all words:', error);
             }
@@ -33,6 +52,10 @@ export const Play = () => {
             getWordAtPlay();
         }
     }, [loadedData1]);
+
+    console.log(wordToPlay);
+    console.log(word);
+
 
     const playGame = () => {
         setAnswer(1);
@@ -49,9 +72,6 @@ export const Play = () => {
                 }, 1000);
             }, 1000);
         }, 1000);
-
-
-
     }
 
 
@@ -60,14 +80,15 @@ export const Play = () => {
             <div className="playDesign">
                 {rdxUserData.credentials?.token ? (
                     <>
-                        {loadedData1 && (
+                        {(loadedData || loadedData1) && (
                             <div className="game">
                                 <div className="borderConcept">
+
                                     <br />
-                                    <img className="img text" src={wordToPlay && wordToPlay.image ? `../../src/assets/${wordToPlay.image.slice(2)}` : ''} alt="" />
-                                    <h3 className="text2">{wordToPlay.JP}</h3>
-                                    <h5 className="white">'{wordToPlay.romanji}'</h5>
-                                    <h4 className="text2">{wordToPlay.EN}</h4>
+                                    <img className="img text" src={!wordToPlay ? `../../src/assets/${word.image.slice(2)}` : `../../src/assets/${wordToPlay.image.slice(2)}`} alt="" />
+                                    <h3 className="text2">{!wordToPlay ? word.JP : wordToPlay.JP}</h3>
+                                    <h5 className="white">'{!wordToPlay ? word.romanji : wordToPlay.romanji}'</h5>
+                                    <h4 className="text2">{!wordToPlay ? word.EN : wordToPlay.EN}</h4>
                                     <br />
                                 </div>
 

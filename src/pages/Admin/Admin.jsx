@@ -16,33 +16,49 @@ export const Admin = () => {
     const navigate = useNavigate();
 
     const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
-    // const [words, setWords] = useState([]); // State to store fetched words
-    // const [loadedData, setLoadedData] = useState(false);
+    const [words, setWords] = useState([]); // State to store fetched words
+    const [loadedData, setLoadedData] = useState(false);
 
-    // useEffect(() => {
-    //     const getAllWords = async () => {
-    //         try {
-    //             const fetched = await GetWords(tokenStorage);
-    //             setWords(fetched.data);
-    //             setLoadedData(true);
-    //         } catch (error) {
-    //             console.log(error);
-    //         }
-    //     };
+    useEffect(() => {
+        const getAllWords = async () => {
+            try {
+                const fetched = await GetWords(tokenStorage);
+                setWords(fetched.data);
+                setLoadedData(true);
+            } catch (error) {
+                console.log(error);
+            }
+        };
 
-    //     if (!loadedData) {
-    //         getAllWords();
-    //     }
-    // }, [loadedData]); // Call getAllWords only when loadedData changes
+        if (!loadedData) {
+            getAllWords();
+        }
+    }, [loadedData]); // Call getAllWords only when loadedData changes
 
     return (
         <>
             <div className="adminDesign">
 
-                ADMIN PAGE: <br /> NOTHING TO SHOW YET
-                {/* {rdxUserData.credentials?.token ? (
+
+                {rdxUserData.credentials?.token ? (
                     <>
-                        {loadedData && (
+
+                        BOTON CON ROLES
+                        BOTON CREAR ROLE
+                        BOTON CAMBIAR ROLE (hacer admin)
+
+                        BOTON CON USUARIOS (poder borrar)
+
+                        BOTON CON NIVELES (poder editar/borrar)
+                        BOTON CREAR NIVEL
+
+                        BOTON CON PALABRAS CARDS
+                        BOTON CON PALABRAS TABLA
+
+
+
+
+                        {/* {loadedData && (
                             <div>
                                 {Object.entries(words).map(([key, value]) => (
 
@@ -58,14 +74,14 @@ export const Admin = () => {
                                     </div>
                                 ))}
                             </div>
-                        )}
+                        )} */}
 
                     </>
                 ) : (
                     <div className="wordDesign">
                         <div className="circle"><span className="text">TAPS</span></div>
                     </div>
-                )} */}
+                )}
             </div >
         </>
     );
