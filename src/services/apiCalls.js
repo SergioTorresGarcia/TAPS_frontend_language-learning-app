@@ -482,7 +482,8 @@ export const GetWordToPlay = async (token) => {
     if (!data.success) {
       throw new Error(data.message);
     }
-
+    console.log(111, response);
+    console.log(222, data);
     return data.data;
   } catch (error) {
     throw error;
@@ -509,7 +510,7 @@ export const GetWordsLearnt = async (token) => {
     if (!data.success) {
       throw new Error(data.message);
     }
-    return data;
+    return data.data;
   } catch (error) {
     throw error;
   }

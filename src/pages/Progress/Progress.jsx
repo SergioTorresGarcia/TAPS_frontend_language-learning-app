@@ -30,8 +30,9 @@ export const Progress = () => {
         const getLevel = async () => {
             try {
                 const fetched = await GetLevels(tokenStorage);
-                console.log(fetched);
-                setLevels(fetched.data.map(item => item.name));
+                setLevels(fetched.data);
+
+                // .map(item => item.name)
                 setLoadedData1(true);
             } catch (error) {
                 console.error('Failed to fetch levels:', error);
@@ -41,13 +42,13 @@ export const Progress = () => {
             getLevel();
         }
     }, [loadedData1]);
-
+    console.log(levels);
     useEffect(() => {
 
         const getLearntWords = async () => {
             try {
                 const fetched = await GetWordsLearnt(tokenStorage);
-                setWords(fetched.data);
+                setWords(fetched);
                 setLoadedData2(true);
             } catch (error) {
                 console.error('Failed to fetch learnt words:', error);
@@ -58,8 +59,10 @@ export const Progress = () => {
         }
     }, [loadedData2]);
 
-    const accomplishedLevel = words.length / 10
-
+    const accomplishedLevel = (words.length / 10)
+    console.log(levels);
+    console.log(words);
+    console.log(accomplishedLevel);
 
     return (
         <>
@@ -67,37 +70,83 @@ export const Progress = () => {
                 {loadedData1 && loadedData2 && (
                     <div className="box">
                         <div className="border" onClick={() => showComments()}>
-                            {isShowComments && (
-                                <div className="showComments" onClick={() => showComments()}>
-                                    All your STATS in one page!
-                                </div>
-                            )}
-
-                            {/* <span className="cButtonDesign2">1</span> */}
-                            <h4>Accomplished levels ({accomplishedLevel} out of 5): </h4>
-
-                            <div>
-                                {levels.slice(0, accomplishedLevel).map((item, index) => (
-                                    <li key={index}>{item}</li>
-                                ))}
+                            <div className="boxWords2">
+                                {/* Render levels */}
+                                {(() => {
+                                    let message;
+                                    switch (true) {
+                                        case words.length < 10:
+                                            message = <h4>You are learning <br /><em><big>{levels[0].name}</big></em><br /> japanese</h4>;
+                                            break;
+                                        case words.length < 20:
+                                            message = <h4>You've accomplished <br /><em><big>{levels[0].name}</big></em><br /> and are at {levels[1].name}</h4>;
+                                            break;
+                                        case words.length < 30:
+                                            message = <h4>You've accomplished <br /><em><big>{levels[1].name}</big></em><br /> and are at {levels[2].name}</h4>;
+                                            break;
+                                        case words.length < 40:
+                                            message = <h4>You've accomplished <br /><em><big>{levels[2].name}</big></em><br /> and are at {levels[3].name}</h4>;
+                                            break;
+                                        default:
+                                            message = <h4>You've accomplished <br /><em><big>{levels[3].name}</big></em><br /> and are at the last {levels[4].name}</h4>;
+                                            break;
+                                    }
+                                    return message;
+                                })()}
                             </div>
-
-                            {/* <span className="cButtonDesign2">2</span> */}
+                            <br />
                             <h4>List of the <big>{words.length}</big> words you've learnt so far:</h4>
-                            <div className="boxWords">
-
+                            <div className="boxWords2">
+                                {/* Render words */}
                                 {words.map((item, index) => (
-                                    // Assuming item is an object with properties JP and romanji
                                     <p key={index}>{item.word.JP} - {item.word.EN} - {item.word.romanji}</p>
                                 ))}
                             </div>
                             <p>⇕ scroll ⇕</p>
-
                         </div>
                     </div>
                 )}
             </div>
         </>
     );
+
+    // return (
+    //     <>
+    //         <div className="rulesDesign">
+    //             {/* {loadedData1 && loadedData2 && ( */}
+    //             <div className="box">
+    //                 <div className="border" onClick={() => showComments()}>
+    //                     {isShowComments && (
+    //                         <div className="showComments" onClick={() => showComments()}>
+    //                             All your STATS in one page!
+    //                         </div>
+    //                     )}
+
+    //                     {/* <span className="cButtonDesign2">1</span> */}
+    //                     {/* <h4>Accomplished levels ({accomplishedLevel} out of 5): </h4> */}
+    //                     {/* .slice(0, accomplishedLevel) */}
+    //                     <div>
+    //                         {levels && levels.map((item, index) => (
+    //                             <p key={index}>{item}</p>
+    //                         ))}
+    //                     </div>
+
+    //                     {/* <span className="cButtonDesign2">2</span> */}
+    //                     <h4>List of the <big>{words.length}</big> words you've learnt so far:</h4>
+    //                     <div className="boxWords">
+
+    //                         {/* {words.map((item, index) => (
+    //                             // Assuming item is an object with properties JP and romanji
+    //                             <p key={index}>{item.word.JP} - {item.word.EN} - {item.word.romanji}</p>
+    //                         ))} */}
+    //                     </div>
+    //                     <p>⇕ scroll ⇕</p>
+
+    //                 </div>
+    //             </div>
+    //             {/* )} */}
+    //         </div>
+    //     </>
+    // );
 
 };

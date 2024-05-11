@@ -11,8 +11,8 @@
 
 }
 
-.boxWords {
-    width: auto;
+.boxWords2 {
+    width: 80vw;
     height: 12em;
     overflow-y: scroll;
     border: 0.1em solid white;
