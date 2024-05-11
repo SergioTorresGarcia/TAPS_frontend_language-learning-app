@@ -1,5 +1,4 @@
 
-import { useNavigate } from "react-router-dom";
 import { GetLevels, GetWordsLearnt } from "../../services/apiCalls";
 import "./Progress.css";
 import { useEffect, useState } from "react";
@@ -11,9 +10,6 @@ export const Progress = () => {
     // Redux reading mode
     const rdxUserData = useSelector(userData);
     // Redux writing mode
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
     const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
     const [isShowComments, setIsShowComments] = useState(false)
     const [levels, setLevels] = useState(false)
@@ -24,8 +20,6 @@ export const Progress = () => {
     const showComments = () => {
         setIsShowComments(!isShowComments)
     }
-
-
     useEffect(() => {
         const getLevel = async () => {
             try {
@@ -60,9 +54,6 @@ export const Progress = () => {
     }, [loadedData2]);
 
     const accomplishedLevel = (words.length / 10)
-    console.log(levels);
-    console.log(words);
-    console.log(accomplishedLevel);
 
     return (
         <>

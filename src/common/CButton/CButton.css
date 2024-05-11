@@ -1,5 +1,4 @@
 .cButtonDesign {
-
     height: 5em;
     width: 5em;
 
@@ -15,11 +14,9 @@
     justify-content: center;
     align-items: center;
     margin: 1em;
-
 }
 
 .cButtonDesign:hover {
-
     cursor: pointer;
     transition: 0.2s;
     background-color: lightgreen;
@@ -32,7 +29,3 @@
 .cButtonRed {
     background-color: lightcoral;
 }
-
-/* .cButtonGreen:hover {
-    background-color: darkgreen;
-} */

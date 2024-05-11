@@ -20,19 +20,16 @@ export const Footer = () => {
                             <>
                                 {loc !== '/admin' ?
                                     <Navigator title={"ADMIN"} destination={"/admin"} />
-                                    : <div></div>}
-
+                                    : null}
                                 {loc === '/admin/words' ?
-                                    <>
-                                        <Navigator title={"+WORD"} destination={"/admin/words/new"} />
-                                    </>
+                                    <Navigator title={"+WORD"} destination={"/admin/words/new"} />
                                     : null}
                             </>
                         )}
                     </div>
                     <div>
                         {(loc === '/')
-                            ? <Navigator title={rdxUserData.credentials?.decoded?.username} destination={"/profile/me"} />
+                            ? <Navigator title={rdxUserData?.credentials?.decoded?.username} destination={"/profile/me"} />
                             : ((loc !== '/admin') ? null : <Navigator title={"HOME"} destination={"/"} />)}
                     </div>
                 </>

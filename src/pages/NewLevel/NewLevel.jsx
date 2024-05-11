@@ -7,7 +7,6 @@ import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { GetLevels, GetWordsLearnt } from "../../services/apiCalls";
 
-
 export const NewLevel = () => {
     // Redux reading mode
     const rdxUserData = useSelector(userData);
@@ -25,8 +24,10 @@ export const NewLevel = () => {
         const getLevel = async () => {
             try {
                 const fetched = await GetLevels(tokenStorage);
-                setLevel(fetched.data.map(item => item.name));
-                setLoadedData1(true);
+                if (Array.isArray(fetched.data) && fetched.data.length > 0) {
+                    setLevel(fetched.data.map(item => item.name));
+                    setLoadedData1(true);
+                }
             } catch (error) {
                 console.error('Failed to fetch levels:', error);
             }
@@ -37,12 +38,13 @@ export const NewLevel = () => {
     }, [loadedData1]);
 
     useEffect(() => {
-
         const getLearntWords = async () => {
             try {
                 const fetched = await GetWordsLearnt(tokenStorage);
-                setWords(fetched.data.map(item => item.word));
-                setLoadedData2(true);
+                if (Array.isArray(fetched) && fetched.length > 0) {
+                    setWords(fetched.map(item => item.name));
+                    setLoadedData2(true);
+                }
             } catch (error) {
                 console.error('Failed to fetch learnt words:', error);
             }
@@ -52,8 +54,7 @@ export const NewLevel = () => {
         }
     }, [loadedData2]);
 
-    const accomplishedLevel = words.length / 10
-
+    const accomplishedLevel = (words.length + 1) / 10
 
     return (
         <>
@@ -62,10 +63,9 @@ export const NewLevel = () => {
                     <>
                         {loadedData1 && loadedData2 && (
                             <div className="box">
-
                                 <div className="border">
                                     <br />
-                                    <h2><em><big>{level[accomplishedLevel - 1]}</big></em> accomplished</h2>
+                                    <h2><em><big>{level[accomplishedLevel - 1]}</big></em><br /> accomplished</h2>
                                     <h1>Congrats!</h1>
                                     <h3>You've passed level {accomplishedLevel} out of 5</h3>
 
@@ -76,7 +76,6 @@ export const NewLevel = () => {
 
                             </div>
                         )}
-
                     </>
                 ) : (
                     <div className="wordDesign">

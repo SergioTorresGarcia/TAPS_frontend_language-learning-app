@@ -279,7 +279,7 @@ export const GetWords = async (token) => {
     }
   };
   try {
-    const response = await fetch(`${root}admin/words`, options);
+    const response = await fetch(`${root}words`, options);
     if (!response.ok) {
       throw new Error('Failed to fetch data');
     }
@@ -287,6 +287,7 @@ export const GetWords = async (token) => {
     if (!data.success) {
       throw new Error(data.message);
     }
+    console.log(data);
     return data;
   } catch (error) {
     throw error;
