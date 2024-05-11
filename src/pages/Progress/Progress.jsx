@@ -14,6 +14,7 @@ export const Progress = () => {
     const [isShowComments, setIsShowComments] = useState(false)
     const [levels, setLevels] = useState(false)
     const [words, setWords] = useState(false)
+    const [message, setMessage] = useState(false)
     const [loadedData1, setLoadedData1] = useState(false)
     const [loadedData2, setLoadedData2] = useState(false)
 
@@ -24,7 +25,7 @@ export const Progress = () => {
         const getLevel = async () => {
             try {
                 const fetched = await GetLevels(tokenStorage);
-                setLevels(fetched.data);
+                setLevels(fetched);
 
                 // .map(item => item.name)
                 setLoadedData1(true);
@@ -36,7 +37,8 @@ export const Progress = () => {
             getLevel();
         }
     }, [loadedData1]);
-    console.log(levels);
+    console.log("levels", levels);
+
     useEffect(() => {
 
         const getLearntWords = async () => {
@@ -53,50 +55,67 @@ export const Progress = () => {
         }
     }, [loadedData2]);
 
-    const accomplishedLevel = (words.length / 10)
+
+    // useEffect(() => {
+    //     switch (true) {
+    //         case words.length < 10:
+    //             setMessage(<h4>You are learning <br /><em><big>{levels[0].name}</big></em><br /> japanese</h4>)
+    //             break;
+    //         case words.length < 20:
+    //             setMessage(<h4>You've accomplished <br /><em><big>{levels[0].name}</big></em><br /> and are at {levels[1].name}</h4>)
+    //             break;
+    //         case words.length < 30:
+    //             setMessage(<h4>You've accomplished <br /><em><big>{levels[1].name}</big></em><br /> and are at {levels[2].name}</h4>)
+    //             break;
+    //         case words.length < 40:
+    //             setMessage(<h4>You've accomplished <br /><em><big>{levels[2].name}</big></em><br /> and are at {levels[3].name}</h4>)
+    //             break;
+    //         default:
+    //             setMessage(<h4>You've accomplished <br /><em><big>{levels[3].name}</big></em><br /> and are at the last {levels[4].name}</h4>)
+    //             break;
+    //     }
+    //     return message;
+    // }, []);
+
 
     return (
         <>
             <div className="rulesDesign">
-                {loadedData1 && loadedData2 && (
-                    <div className="box">
-                        <div className="border" onClick={() => showComments()}>
-                            <div className="boxWords2">
-                                {/* Render levels */}
-                                {(() => {
-                                    let message;
-                                    switch (true) {
-                                        case words.length < 10:
-                                            message = <h4>You are learning <br /><em><big>{levels[0].name}</big></em><br /> japanese</h4>;
-                                            break;
-                                        case words.length < 20:
-                                            message = <h4>You've accomplished <br /><em><big>{levels[0].name}</big></em><br /> and are at {levels[1].name}</h4>;
-                                            break;
-                                        case words.length < 30:
-                                            message = <h4>You've accomplished <br /><em><big>{levels[1].name}</big></em><br /> and are at {levels[2].name}</h4>;
-                                            break;
-                                        case words.length < 40:
-                                            message = <h4>You've accomplished <br /><em><big>{levels[2].name}</big></em><br /> and are at {levels[3].name}</h4>;
-                                            break;
-                                        default:
-                                            message = <h4>You've accomplished <br /><em><big>{levels[3].name}</big></em><br /> and are at the last {levels[4].name}</h4>;
-                                            break;
-                                    }
-                                    return message;
-                                })()}
+                {loadedData1 && loadedData2 &&
+                    (
+                        <div className="box">
+                            <div className="border" onClick={() => showComments()}>
+                                <div className="boxWords2">
+                                    <h4>Playing:</h4>
+                                    {0 <= words.length && words.length < 10
+                                        ? <h2>{levels[0].name}</h2>
+                                        : (null)}
+                                    {10 <= words.length && words.length < 20
+                                        ? <h2>{levels[1].name}</h2>
+                                        : null}
+                                    {20 <= words.length && words.length < 30
+                                        ? <h2>{levels[2].name}</h2>
+                                        : null}
+                                    {30 <= words.length && words.length < 40
+                                        ? <h2>{levels[3].name}</h2>
+                                        : null}
+                                    {40 <= words.length && words.length < 50
+                                        ? <h2>{levels[4].name}</h2>
+                                        : null}
+                                </div>
+
+                                <br />
+                                <h4>List of the <big>{words.length}</big> words you've learnt so far:</h4>
+                                <div className="boxWords2">
+                                    {/* Render words */}
+                                    {words.map((item, index) => (
+                                        <p key={index}>{item.word.JP} - {item.word.EN} - {item.word.romanji}</p>
+                                    ))}
+                                </div>
+                                <p>⇕ scroll ⇕</p>
                             </div>
-                            <br />
-                            <h4>List of the <big>{words.length}</big> words you've learnt so far:</h4>
-                            <div className="boxWords2">
-                                {/* Render words */}
-                                {words.map((item, index) => (
-                                    <p key={index}>{item.word.JP} - {item.word.EN} - {item.word.romanji}</p>
-                                ))}
-                            </div>
-                            <p>⇕ scroll ⇕</p>
                         </div>
-                    </div>
-                )}
+                    )}
             </div>
         </>
     );

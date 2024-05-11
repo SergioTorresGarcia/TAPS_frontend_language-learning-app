@@ -5,47 +5,10 @@ This is the FINAL PROJECT of the Full Stack Development Bootcamp with <a href="h
 
 ## Idea overview
 
-This is a language learning program (mobile first) designed to help users learn and practice Japanese vocabulary in an enjoyable and engaging way. The program provides various types of word quizzes, pictogram and word recognition, and progress tracking to enhance the learning experience. It gives instant feedback on your progress.
+This is a language learning program (mobile first) designed to help users learn and practice Japanese vocabulary in an enjoyable and engaging way. 
+The program provides various types of word quizzes, pictogram and word recognition, and progress tracking to enhance the learning experience. It gives instant feedback on your progress.
 
-
-## How the game works
-
-#### Stay Motivated
-Easily form a language learning habit with the game-based features and enjoyable challenges with perfect level and pace for you.
-
-#### Effective and Fun Learning Games
-With Taps, learning becomes playtime. Engaging games, review modes, and interactive challenges transform language acquisition into a joyful experience.
-
-#### Memorable Illustrations
-Boost your memory retention with our captivating visuals and vibrant and soothing colors. Each word is accompanied by an eye-catching image, forging strong associations between the word and its meaning. Say hello to seamless language recall!
-
-
-<div align="center">
-    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-    <img src= "https://img.shields.io/badge/javascipt-EFD81D?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
-    <img src= "https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
-    <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-    <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
-    <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge" alt="Express.js"/>
-    <img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
-    <img src="https://img.shields.io/badge/DOCKER-2020BF?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
-</div>
-
-
-## General features
-
-- Word Quizzes: Users can take quizzes to test their knowledge of vocabulary words.
-- Flashcards: Flashcards are available to help users memorize vocabulary.
-- Progress Tracking: The program tracks user progress to monitor learning achievements.
-- Admin Panel: Administrators can manage users, words and levels in the program.
-
-## MINI-GAMES:
-- Learning: the word and symbol appear (tap to continue).
-- Compare 2 words (only one matches the symbol).
-- Compare 2 symbols (only one matches the word).
-- Compare 4 words (only one matches the symbol).
-- Compare 4 symbols (only one matches the words).
-- Display word AND symbol (is it true or false?).
+<hr/>
 
 <details>
   <summary>Table of Contents</summary>
@@ -61,88 +24,180 @@ Boost your memory retention with our captivating visuals and vibrant and soothin
   </ol>
 </details>
 
+<hr/>
+
+## How the game works
+
+#### Stay Motivated
+Easily form a language learning habit with the game-based features and enjoyable challenges with perfect level and pace for you.
+
+#### Effective and Fun Learning Games
+With Taps, learning becomes playtime. Engaging games, review modes, and interactive challenges transform language acquisition into a joyful experience.
+
+#### Memorable Illustrations
+Boost your memory retention with our captivating visuals and vibrant and soothing colors. Each word is accompanied by an eye-catching image, forging strong associations between the word and its meaning. Say hello to seamless language recall!
+
+<hr/>
 
 
+<div align="center">
+    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+    <img src= "https://img.shields.io/badge/javascipt-EFD81D?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
+    <img src= "https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+    <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
+    <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge" alt="Express.js"/>
+    <img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
+    <img src="https://img.shields.io/badge/DOCKER-2020BF?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+</div>
 
-## Challenge
-- Create Endpoints (registration, login, CRUD):
-- Migrations & Seeders for all tables.
-- All non-public endpoints with corresponding middlewares.
+<hr/>
+
+## General features
+
+- Word Quizzes: Users can take quizzes to test their knowledge of vocabulary words.
+- Flashcards: Flashcards are available to help users memorize vocabulary.
+- Progress Tracking: The program tracks user progress to monitor learning achievements.
+- Admin Panel: Administrators can manage users, words and levels in the program.
+
+<hr/>
+
+## Mini-games:
+- Learning: the word and symbol appear (tap to continue).
+- Compare 2 words (only one matches the symbol).
+- Compare 2 symbols (only one matches the word).
+- Compare 4 words (only one matches the symbol).
+- Compare 4 symbols (only one matches the words).
+- Display word AND symbol (is it true or false?).
+
+<hr/>
+
+## Challenge - MVP
+- Use of REDUX
+- Complex project structure: Hooks, Components, Services
+- Modularized CSS (separated files)
+- SPA (use of react-router-dom)
+- Register / Login / Editable Profile views
+- Views tha consum all endpoints from backend (at least 2 full CRUDs)
 
 
-## Database diagram
+## Database diagram (MySQL)
 
-![Reverse engineered diagram of the DB](./img/project4_DIAGRAM.png)
+![Reverse engineered diagram of the DB](src/assets/DIAGRAM-FINAL-PROJECT-5-tables.png)
 
 ## Instalation (local)
-1.  Clone this repository: `$ git clone https://github.com/SergioTorresGarcia/TAPS_frontend_language-learning-app.git`
-2.  Install dependencies: run ` $ npm i ` in terminal
-3.  Connect repository with database 
+1.  Clone this repository: 
+`$ git clone https://github.com/SergioTorresGarcia/TAPS_frontend_language-learning-app.git`
+2. Navigate to the project directory `$ cd project-name`
+3.  Install dependencies: run ` $ npm i ` in terminal
+
+⚠️ MAKE SURE THAT BACKEND & DATABASE ARE RUNNING AS WELL ⚠️
+<!-- 3.  Connect repository with database 
 Set up environment variables: create a .env file in the root directory (sample provided).
 4.  Run migrations:  ` $ npm run migrations `
 5.  Run seeders:  ` $ npm run seed `
-6.  Start server:  ` $ npm run dev `
+6.  Start server:  ` $ npm run dev ` -->
+
+Once both back and front-end are running, run ` $ npm run dev ` in terminal and access the application (http://localhost:5173/)
+
+This is a mobile first app, so for a better experience, select mobile view in your browser's  developer console:
+
+> Option + ⌘ + J (on macOS)
+
+> Shift + CTRL + J (on Windows/Linux)
+
+To explore the app:
+
+1. Register/login yourself and start playing.
+
+2. Sign in as 'user' and play for a while. Remember to check out the rules of the game, your progress, and try deleting your profiles if you wish:
+```bash
+{
+    "email": "user@mail.com",
+    "password": "Aa123456"
+}
+```
+
+3. Signing in as 'admin' you'd have access to extra functionalities in the admin panel:
+- Roles CRUD
+- Users CRUD
+- Levels CRUD
+- Words CRUD
+```bash
+{
+    "email": "admin@mail.com",
+    "password": "Aa123456"
+}
+```
 
 
-Installation
+## PAGES
 
-Clone the repository: git clone <repository-url>
-Install dependencies:
-bash
-Copy code
-cd language-learning-program npm install
-Set up environment variables:
-Create a .env file in the root directory.
-Add environment variables for database connection, JWT secret, etc.
-Start the backend server:
-sql
-Copy code
-npm start
-Start the frontend:
-bash
-Copy code
-cd client npm start
-Usage
+- from LANDING `to LOGIN`
 
-Access the application at http://localhost:3000.
-Sign up or log in to start using the program.
-Explore different features such as word quizzes and flashcards.
-Admins can access the admin panel to manage words and levels.
+- from LOGIN `to REGISTER`
 
+- from REGISTER `to  LOGIN`
 
-## Endpoints
+- from PROFILE check:   
+    > RULES (if you need)
+    > PROGRESS (if you want)
+    > EDIT PROFILE (if you must)
+    > DELETE PROFILE (if you dare!)
+
+- from HOME:       
+    > GAME
+    > PROFILE
+    > LOG OUT (it would save the last played word)
+
+- from GAME:
+    > PLAY > PLAY2 ... PLAY5 > PLAY ...
+    > CONGRATS view (after 10 words learnt)
+
+- from HOME (as Admin):
+    > GAME
+    > PROFILE
+    > LOG OUT
+    > ADMIN
+
+- from ADMIN PANEL:
+    > ROLES Create / Read / Delete
+    > USERS Read
+    > LEVELS
+    > WORDS Create / Read / Delete
+
 
 <details>
 <summary>AUTH routes</summary>
 
 -   REGISTER new user
     
-        POST https://proyecto4-buscador-dev-jzta.1.ie-1.fl0.io/api/auth/register
+        POST http://localhost:4500/auth/register
 
     body:
     
     ``` js
         {
-            "first_name": "Sergio",
-            "last_name": "Sergio",
+            "username": "Sergio",
             "email": "sergio@sergio.com",
-            "password": "111111"
+            "password": "Aa123456"
         }
     ```
 
 -   LOGIN user
 
-        POST https://proyecto4-buscador-dev-jzta.1.ie-1.fl0.io/api/auth/login
+        POST http://localhost:4500/auth/login
         
     body:
 
     ``` js
         {
-            "email": "super@super.com",
-            "password": "123456"
+            "email": "sergio@sergio.com",
+            "password": "Aa123456"
         }
     ```
 </details>
+
 <details>
 <summary>USERS routes</summary>
 

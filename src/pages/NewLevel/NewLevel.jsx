@@ -7,6 +7,7 @@ import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { GetLevels, GetWordsLearnt } from "../../services/apiCalls";
 
+
 export const NewLevel = () => {
     // Redux reading mode
     const rdxUserData = useSelector(userData);

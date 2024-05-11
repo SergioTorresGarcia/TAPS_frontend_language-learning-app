@@ -8,7 +8,7 @@ import { AddLevel, GetLevels } from "../../services/apiCalls";
 import { CButton } from "../../common/CButton/CButton";
 import { CInput } from "../../common/CInput/CInput";
 import { validame } from "../../utils/functions";
-import { FaTrash, FaEdit } from 'react-icons/fa'; // Import icons
+import { FaTrash } from 'react-icons/fa'; // Import icons
 
 export const AddNewLevel = () => {
     const rdxUserData = useSelector(userData);
@@ -43,7 +43,7 @@ export const AddNewLevel = () => {
         const getLevel = async () => {
             try {
                 const fetched = await GetLevels(tokenStorage);
-                setLevels(fetched.data);
+                setLevels(fetched);
                 setLoadedData(true);
             } catch (error) {
                 console.error('Failed to fetch levels:', error);
@@ -54,9 +54,9 @@ export const AddNewLevel = () => {
         }
     }, [loadedData]);
 
-    const createNewLevel = () => {
+    const createNewLevel = async () => {
         try {
-            AddLevel(tokenStorage, level);
+            await AddLevel(tokenStorage, level);
             navigate('/admin');
         } catch (error) {
             console.log(error);
@@ -65,24 +65,21 @@ export const AddNewLevel = () => {
 
     return (
         <div className="newDataDesign">
-            {rdxUserData.credentials?.token ? (
+            {rdxUserData?.credentials?.token ? (
                 <div className="">
                     <h4 className="">LEVELS:</h4>
-                    <div className="boxLevels">
-                        {Object.entries(levels).map(([key, value]) => (
-                            <p key={key}>
-                                {/* <FaEdit className="icon" onClick={() => editLevel(tokenStorage, value.id)} /> */}
-                                &nbsp;&nbsp;
-                                <FaTrash className="icon" onClick={() => deleteLevel(tokenStorage, value.id)} />
-                                &nbsp;&nbsp;&nbsp;
-                                {value}
-                            </p>
-                        ))}
-
-
-                    </div>
-
-
+                    {loadedData &&
+                        (<div className="boxLevels">
+                            {levels.map((level) => (
+                                <p key={level.id}>
+                                    {/* <FaEdit className="icon" onClick={() => editLevel(tokenStorage, value.id)} /> */}
+                                    &nbsp;&nbsp;
+                                    <FaTrash className="icon" onClick={() => deleteLevel(tokenStorage, level.id)} />
+                                    &nbsp;&nbsp;&nbsp;
+                                    {level.name}
+                                </p>
+                            ))}
+                        </div>)}
                     <br />
                     <div className="addLevel">
                         <CInput
