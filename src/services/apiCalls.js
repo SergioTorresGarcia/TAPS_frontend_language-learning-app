@@ -65,6 +65,29 @@ export const GetProfile = async (token) => {
   }
 };
 
+export const GetUsers = async (token) => {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  };
+  try {
+    const response = await fetch(`${root}users`, options);
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const UpdateProfile = async (token, data) => {
   const options = {
     method: "PUT",

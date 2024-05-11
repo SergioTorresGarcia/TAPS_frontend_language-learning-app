@@ -27,11 +27,11 @@ export const Footer = () => {
                                         <Navigator title={"+WORD"} destination={"/admin/words/new"} />
                                     </>
                                     : null}
-                                {location.pathname === '/admin/levels' ?
+                                {/* {location.pathname === '/admin/levels' ?
                                     <>
                                         <Navigator title={"+LEVEL"} destination={"/admin/levels/new"} />
                                     </>
-                                    : null}
+                                    : null} */}
                                 {/* {location.pathname === '/admin/users' ?
                                     <>
                                         <Navigator title={"+USER"} destination={"/admin/users"} />

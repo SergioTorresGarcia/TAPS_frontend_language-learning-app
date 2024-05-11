@@ -62,10 +62,14 @@
     height: 12em;
     margin-left: 1em;
     margin-right: 1em;
-
+    padding-left: 1em;
     overflow-y: scroll;
     border: 0.1em solid white;
     border-radius: 0.5em;
     color: black;
     background-color: lightgreen;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }

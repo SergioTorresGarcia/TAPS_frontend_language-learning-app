@@ -9,6 +9,7 @@ import { AddLevel, GetLevels } from "../../services/apiCalls";
 import { CButton } from "../../common/CButton/CButton";
 import { CInput } from "../../common/CInput/CInput";
 import { validame } from "../../utils/functions";
+import { FaTrash, FaEdit } from 'react-icons/fa'; // Import icons
 
 
 export const AddNewLevel = () => {
@@ -64,7 +65,7 @@ export const AddNewLevel = () => {
         try {
             AddLevel(tokenStorage, level);
             console.log("New level created in DB");
-            navigate('/admin/words');
+            navigate('/admin');
         } catch (error) {
             console.log(error);
         }
@@ -77,10 +78,16 @@ export const AddNewLevel = () => {
                 {rdxUserData.credentials?.token ? (
                     <>
                         <div className="">
-                            <h4>LEVELS:</h4>
+                            <h4 className="">LEVELS:</h4>
                             <div className="boxLevels">
                                 {levels.map((item, index) => (
-                                    <p key={index}>{item}</p>
+                                    <p key={index}>
+                                        <FaEdit className="icon" onClick={() => editLevel(tokenStorage, item.id)} />
+                                        &nbsp;&nbsp;
+                                        <FaTrash className="icon" onClick={() => deleteLevel(tokenStorage, item.id)} />
+                                        &nbsp;&nbsp;&nbsp;
+                                        {item}
+                                    </p>
                                 ))}
                             </div>
 

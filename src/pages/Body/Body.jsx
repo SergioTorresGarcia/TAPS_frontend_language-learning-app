@@ -18,6 +18,8 @@ import { AddNewWord } from "../AddNewWord/AddNewWord";
 import { AddNewLevel } from "../AddNewLevel/AddNewLevel";
 import { ProfileDelete } from "../ProfileDelete/ProfileDelete";
 import { UpdateWord } from "../UpdateWord/UpdateWord";
+import { User } from "../User/User";
+
 
 
 
@@ -43,7 +45,9 @@ export const Body = () => {
       <Route path="/admin/words" element={<Word />} />
       <Route path="/admin/words/new" element={<AddNewWord />} />
       <Route path="/admin/words/update" element={<UpdateWord />} />
-      <Route path="/admin/levels/new" element={<AddNewLevel />} />
+      <Route path="/admin/levels" element={<AddNewLevel />} />
+
+      <Route path="/admin/users" element={<User />} />
 
       {/* GAME */}
       <Route path="/play" element={<Play />} />

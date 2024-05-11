@@ -120,8 +120,8 @@ export const Word = () => {
                                                                     <td className="c">{value.JP}</td>
                                                                     <td className="d">{value.romanji}</td>
                                                                     <td className="e">{value.image}</td>
-                                                                    <td className="f">{dayjs(value.createdAt).format("ddd DD-MM-YYYY")}</td>
-                                                                    <td className="g">{dayjs(value.updatedAt).format("ddd DD-MM-YYYY")}</td>
+                                                                    <td className="f">{dayjs(value.createdAt).format("DD-MM-YYYY")}</td>
+                                                                    <td className="g">{dayjs(value.updatedAt).format("DD-MM-YYYY")}</td>
                                                                 </div>
                                                                 <div className="fixed">
                                                                     <td className="h">
