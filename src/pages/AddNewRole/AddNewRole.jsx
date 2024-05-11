@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { AddLevel, AddRole, DeleteRole, GetLevels, GetRoles } from "../../services/apiCalls";
+import { AddLevel, AddRole, DeleteRole, GetLevels, GetRoles, UpdateRole } from "../../services/apiCalls";
 import { CButton } from "../../common/CButton/CButton";
 import { CInput } from "../../common/CInput/CInput";
 import { validame } from "../../utils/functions";
@@ -87,7 +87,6 @@ export const AddNewRole = () => {
 
 
 
-
     return (
         <>
             <div className="roleDesign">
@@ -98,13 +97,25 @@ export const AddNewRole = () => {
                                 <h4 className="">ROLES:</h4>
                                 <div className="boxRoles">
                                     {Object.entries(roles).map(([key, value]) => (
-                                        <p className="" key={key}>
-                                            <FaEdit className="icon" onClick={() => editRole(tokenStorage, value.id)} />
-                                            &nbsp;&nbsp;
-                                            <FaTrash className="icon" onClick={() => deleteRole(tokenStorage, value.id)} />
-                                            &nbsp;&nbsp;&nbsp;
-                                            {value.name}
-                                        </p>)
+                                        <div className="window" key={key}>
+
+                                            {/* <FaEdit className="icon" onClick={() => editRole(tokenStorage, value.id)} /> */}
+
+                                            <span>id: {value.id}&nbsp;</span>
+
+                                            <CInput
+                                                className={`inputDesign ${roleError.nameError !== "" ? "inputDesignError" : ""}`}
+                                                type={"text"}
+                                                placeholder={"Role name"}
+                                                name={"name"}
+                                                value={value.name || ""}
+                                                onChangeFunction={(e) => inputHandlerRole(e)}
+                                                onBlurFunction={(e) => checkErrorRole(e)}
+                                            />
+                                            <span>&nbsp;&nbsp;</span>
+                                            {value.name != 'admin' ?
+                                                <FaTrash className="icon" onClick={() => deleteRole(tokenStorage, value.id)} /> : null}
+                                        </div>)
                                     )}
                                 </div>
 

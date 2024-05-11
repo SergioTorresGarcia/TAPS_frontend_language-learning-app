@@ -229,6 +229,28 @@ export const AddRole = async (token, dataRole) => {
   }
 };
 
+export const UpdateRole = async (token, data) => {
+  const options = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  };
+  try {
+    const response = await fetch(`${root}roles/${id}`, options);
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    console.log("data", data);
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const DeleteRole = async (token, id) => {
   const options = {
     method: "DELETE",
