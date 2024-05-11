@@ -282,7 +282,7 @@ export const GetWords = async (token) => {
     }
   };
   try {
-    const response = await fetch(`${root}words`, options);
+    const response = await fetch(`${root}admin/words`, options);
     if (!response.ok) {
       throw new Error('Failed to fetch data');
     }
@@ -476,13 +476,13 @@ export const GetWordToPlay = async (token) => {
   try {
     const response = await fetch(`${root}words/current`, options);
     if (!response.ok) {
-      const data = await fetch(`${root}words`, options);
-      return data
+      throw new Error(response.message);
     }
     const data = await response.json();
     if (!data.success) {
       throw new Error(data.message);
     }
+
     return data.data;
   } catch (error) {
     throw error;

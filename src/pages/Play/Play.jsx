@@ -39,11 +39,8 @@ export const Play = () => {
         const getWordAtPlay = async () => {
             try {
                 const fetched = await GetWordToPlay(tokenStorage);
-
                 setWordToPlay(fetched)
                 setLoadedData1(true);
-                console.log("palabra cero", fetched.data);
-
             } catch (error) {
                 console.error('Failed to fetch all words:', error);
             }
@@ -52,10 +49,6 @@ export const Play = () => {
             getWordAtPlay();
         }
     }, [loadedData1]);
-
-    console.log(wordToPlay);
-    console.log(word);
-
 
     const playGame = () => {
         setAnswer(1);
@@ -80,15 +73,15 @@ export const Play = () => {
             <div className="playDesign">
                 {rdxUserData.credentials?.token ? (
                     <>
-                        {(loadedData || loadedData1) && (
+                        {(loadedData && loadedData1) && (
                             <div className="game">
                                 <div className="borderConcept">
 
                                     <br />
-                                    <img className="img text" src={!wordToPlay ? `../../src/assets/${word.image.slice(2)}` : `../../src/assets/${wordToPlay.image.slice(2)}`} alt="" />
-                                    <h3 className="text2">{!wordToPlay ? word.JP : wordToPlay.JP}</h3>
-                                    <h5 className="white">'{!wordToPlay ? word.romanji : wordToPlay.romanji}'</h5>
-                                    <h4 className="text2">{!wordToPlay ? word.EN : wordToPlay.EN}</h4>
+                                    <img className="img text" src={!wordToPlay ? `../../src/assets/${word.image.slice(2)}` : `../../src/assets/${wordToPlay?.image.slice(2)}`} alt="" />
+                                    <h3 className="text2">{!wordToPlay ? word.JP : wordToPlay?.JP}</h3>
+                                    <h5 className="white">'{!wordToPlay ? word.romanji : wordToPlay?.romanji}'</h5>
+                                    <h4 className="text2">{!wordToPlay ? word.EN : wordToPlay?.EN}</h4>
                                     <br />
                                 </div>
 
