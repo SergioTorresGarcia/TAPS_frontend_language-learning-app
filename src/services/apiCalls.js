@@ -181,6 +181,74 @@ export const AddLevel = async (token, dataLevel) => {
   }
 };
 
+// All roles
+export const GetRoles = async (token) => {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  };
+  try {
+    const response = await fetch(`${root}roles`, options);
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const AddRole = async (token, dataRole) => {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(dataRole)
+  };
+  try {
+    const response = await fetch(`${root}roles`, options);
+    if (!response) {
+      throw new Error('Failed to fetch data');
+    }
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const DeleteRole = async (token, id) => {
+  const options = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  };
+  try {
+    const response = await fetch(`${root}roles/${id}`, options);
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
 
 // All words
 export const GetWords = async (token) => {
