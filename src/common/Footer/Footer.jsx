@@ -25,20 +25,31 @@ export const Footer = () => {
                                 {location.pathname === '/admin/words' ?
                                     <>
                                         <Navigator title={"+WORD"} destination={"/admin/words/new"} />
+                                    </>
+                                    : null}
+                                {/* {location.pathname === '/admin/levels' ?
+                                    <>
                                         <Navigator title={"+LEVEL"} destination={"/admin/levels/new"} />
                                     </>
-                                    : <Navigator title={"WORDS"} destination={"/admin/words"} />}
-
-                                {(location.pathname !== '/' && location.pathname !== '/admin/words') ?
-                                    <Navigator title={"HOME"} destination={"/"} />
+                                    : null} */}
+                                {/* {location.pathname === '/admin/users' ?
+                                    <>
+                                        <Navigator title={"+USER"} destination={"/admin/users"} />
+                                    </>
                                     : null}
+                                {location.pathname === '/admin/roles' ?
+                                    <>
+                                        <Navigator title={"+ROLE"} destination={"/admin/roles"} />
+                                    </>
+                                    : null} */}
+
                             </>
                         )}
                     </div>
                     <div>
                         {(location.pathname === '/')
                             ? <Navigator title={rdxUserData.credentials?.decoded?.username} destination={"/profile/me"} />
-                            : <div></div>}
+                            : ((location.pathname !== '/admin') ? null : <Navigator title={"HOME"} destination={"/"} />)}
                     </div>
                 </>
             ) : (

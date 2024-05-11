@@ -9,6 +9,7 @@ import { AddLevel, GetLevels } from "../../services/apiCalls";
 import { CButton } from "../../common/CButton/CButton";
 import { CInput } from "../../common/CInput/CInput";
 import { validame } from "../../utils/functions";
+import { FaTrash, FaEdit } from 'react-icons/fa'; // Import icons
 
 
 export const AddNewLevel = () => {
@@ -16,11 +17,11 @@ export const AddNewLevel = () => {
     const rdxUserData = useSelector(userData);
     const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
     const [loadedData, setLoadedData] = useState(false)
-
+    const navigate = useNavigate();
     const [level, setLevel] = useState({
         name: "",
     })
-    const [levels, setLevels] = useState()
+    const [levels, setLevels] = useState([])
     const [levelError, setLevelError] = useState({
         nameError: "",
     })
@@ -59,16 +60,17 @@ export const AddNewLevel = () => {
         }
     }, [loadedData]);
 
+
     const createNewLevel = () => {
         try {
             AddLevel(tokenStorage, level);
             console.log("New level created in DB");
-            setLoadedData(true);
             navigate('/admin');
         } catch (error) {
             console.log(error);
         }
-    }
+    };
+
 
     return (
         <>
@@ -76,14 +78,20 @@ export const AddNewLevel = () => {
                 {rdxUserData.credentials?.token ? (
                     <>
                         <div className="">
-                            <h3>LEVELS:</h3>
+                            <h4 className="">LEVELS:</h4>
                             <div className="boxLevels">
                                 {levels.map((item, index) => (
-                                    <p key={index}>{item}</p>
+                                    <p key={index}>
+                                        <FaEdit className="icon" onClick={() => editLevel(tokenStorage, item.id)} />
+                                        &nbsp;&nbsp;
+                                        <FaTrash className="icon" onClick={() => deleteLevel(tokenStorage, item.id)} />
+                                        &nbsp;&nbsp;&nbsp;
+                                        {item}
+                                    </p>
                                 ))}
                             </div>
 
-                            <br />
+
                             <br />
                             <div className="addLevel">
                                 <CInput
@@ -97,7 +105,7 @@ export const AddNewLevel = () => {
                                 />
                                 <CButton
                                     className={"cButtonGreen cButtonDesign"}
-                                    title={<span className="blacktext">Add New Level</span>}
+                                    title={<span className="blacktext">New <br />Level</span>}
                                     functionEmit={createNewLevel}
                                 />
                             </div>

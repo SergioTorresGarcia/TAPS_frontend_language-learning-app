@@ -1,4 +1,4 @@
-.newDataDesign {
+.roleDesign {
 
     height: 70vh;
     width: 100vw;
@@ -50,20 +50,22 @@
     background-color: lightgreen;
 }
 
-.addLevel {
+.addRole {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.boxLevels {
+.boxRoles {
     width: auto;
     height: 12em;
     margin-left: 1em;
     margin-right: 1em;
-    padding-left: 1em;
+    padding: 1em;
+
     overflow-y: scroll;
+
     border: 0.1em solid white;
     border-radius: 0.5em;
     color: black;
@@ -71,5 +73,5 @@
 
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
 }

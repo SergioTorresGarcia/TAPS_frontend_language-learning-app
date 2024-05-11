@@ -63,6 +63,7 @@ export const Login = () => {
       }
 
       const fetched = await LoginUser(credentials);
+
       const decoded = decodeToken(fetched.token);
       const passport = {
         token: fetched.token,

@@ -50,10 +50,12 @@ export const Profile = () => {
     }
   }, [tokenStorage]);
 
+
   useEffect(() => {
     const getUserProfile = async () => {
       try {
         const fetched = await GetProfile(tokenStorage);
+
         setLoadedData(true);
 
         setUser({
@@ -92,6 +94,7 @@ export const Profile = () => {
     }
   }
 
+
   return (
     <>
       <div className="profileDesign">
@@ -114,6 +117,7 @@ export const Profile = () => {
               />
               <br /><br />
               <div className="leftText">◹ Your data:</div>
+              <br />
             </div>
             <CInput
               className={`inputDesign ${userError.usernameError !== "" ? "inputDesignError" : ""
@@ -143,6 +147,12 @@ export const Profile = () => {
               functionEmit={write === "" ? updateData : () => setWrite("")}
             />
             <div className="error">{userError.usernameError}</div>
+
+            <CButton
+              className={"leftText"}
+              title={"◹ Delete profile?"}
+              functionEmit={() => navigate("/delete-profile")}
+            />
           </div>
         )}
       </div>
