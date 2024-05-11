@@ -9,7 +9,6 @@ import { GetWordToPlay, GetWordsFromLevelToDivert } from "../../services/apiCall
 export const Play2 = () => {
     // Redux reading mode
     const rdxUserData = useSelector(userData);
-
     const navigate = useNavigate();
     const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
 
@@ -71,61 +70,53 @@ export const Play2 = () => {
     }
 
     return (
-        <>
-            <div className="playDesign">
-                {rdxUserData.credentials?.token ? (
-                    <>
-                        {loadedData1 && (
-                            <>
-                                <div className="game">
-                                    <div className="borderPlay2">
-                                        <br />
-                                        {wordToPlay?.id % 2 == 0
-                                            ?
-                                            (<div className="right" onClick={() => { gotItRight() }}>
-                                                <h3 className="text2">{wordToPlay?.JP}</h3>
-                                                <h5 className="white">'{wordToPlay?.romanji}'</h5>
-                                            </div>)
-                                            : (<div className="wrong" onClick={() => { gotItWrong() }}>
-                                                <h3 className="text2">{oneToDivert?.JP}</h3>
-                                                <h5 className="white">'{oneToDivert?.romanji}'</h5>
-                                            </div>)
-                                        }
+        <div className="playDesign">
+            {rdxUserData.credentials?.token ? (
+                <>
+                    {loadedData1 && (
+                        <div className="game">
+                            <div className="borderPlay2">
+                                <br />
+                                {wordToPlay?.id % 2 == 0
+                                    ? (<div className="right" onClick={() => { gotItRight() }}>
+                                        <h3 className="text2">{wordToPlay?.JP}</h3>
+                                        <h5 className="white">'{wordToPlay?.romanji}'</h5>
+                                    </div>)
+                                    : (<div className="wrong" onClick={() => { gotItWrong() }}>
+                                        <h3 className="text2">{oneToDivert?.JP}</h3>
+                                        <h5 className="white">'{oneToDivert?.romanji}'</h5>
+                                    </div>)
+                                }
+                                <br />
+                                <img className="img text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
+                                <br />
+                                {wordToPlay?.id % 2 != 0 ?
+                                    (<div className="right" onClick={() => { gotItRight() }}>
+                                        <h3 className="text2">{wordToPlay?.JP}</h3>
+                                        <h5 className="white">'{wordToPlay?.romanji}'</h5>
+                                    </div>)
+                                    : (<div className="wrong" onClick={() => { gotItWrong() }}>
+                                        <h3 className="text2">{oneToDivert?.JP}</h3>
+                                        <h5 className="white">'{oneToDivert?.romanji}'</h5>
+                                    </div>)
+                                }
+                                {answer == 1 ? <div className="layerUp">
+                                    <div className="goodAnswer whiteTick cButtonGreen ">✓</div>
+                                </div> : ""}
+                                {answer == 2 ? <div className="layerUp">
+                                    <div className="badAnswer whiteTick cButtonRed ">❌</div>
+                                </div> : ""}
 
-                                        <br />
-                                        <img className="img text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
-                                        <br />
-                                        {wordToPlay?.id % 2 != 0
-                                            ?
-                                            (<div className="right" onClick={() => { gotItRight() }}>
-                                                <h3 className="text2">{wordToPlay?.JP}</h3>
-                                                <h5 className="white">'{wordToPlay?.romanji}'</h5>
-                                            </div>)
-                                            : (<div className="wrong" onClick={() => { gotItWrong() }}>
-                                                <h3 className="text2">{oneToDivert?.JP}</h3>
-                                                <h5 className="white">'{oneToDivert?.romanji}'</h5>
-                                            </div>)
-                                        }
-
-                                        {answer == 1 ? <div className="layerUp">
-                                            <div className="goodAnswer whiteTick cButtonGreen ">✓</div>
-                                        </div> : ""}
-                                        {answer == 2 ? <div className="layerUp">
-                                            <div className="badAnswer whiteTick cButtonRed ">❌</div>
-                                        </div> : ""}
-
-                                        <br />
-                                    </div>
-                                </div>
-                            </>
-                        )}
-                    </>
-                ) : (
-                    <div className="playDesign">
-                        <div className="circle"><span className="text">TAPS</span></div>
-                    </div>
-                )}
-            </div >
-        </>
+                                <br />
+                            </div>
+                        </div>
+                    )}
+                </>
+            ) : (
+                <div className="playDesign">
+                    <div className="circle"><span className="text">TAPS</span></div>
+                </div>
+            )}
+        </div>
     );
 };

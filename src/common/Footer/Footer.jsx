@@ -10,7 +10,7 @@ export const Footer = () => {
     const rdxUserData = useSelector(userData)
     //useLocation to control menu display
     const location = useLocation();
-    console.log(rdxUserData);
+    const loc = location.pathname;
     return (
         <div className="footerDesign">
             {rdxUserData.credentials?.token ? (
@@ -18,38 +18,22 @@ export const Footer = () => {
                     <div className="footMenu">
                         {rdxUserData.credentials.decoded.roleName === "admin" && (
                             <>
-                                {location.pathname !== '/admin' ?
+                                {loc !== '/admin' ?
                                     <Navigator title={"ADMIN"} destination={"/admin"} />
                                     : <div></div>}
 
-                                {location.pathname === '/admin/words' ?
+                                {loc === '/admin/words' ?
                                     <>
                                         <Navigator title={"+WORD"} destination={"/admin/words/new"} />
                                     </>
                                     : null}
-                                {/* {location.pathname === '/admin/levels' ?
-                                    <>
-                                        <Navigator title={"+LEVEL"} destination={"/admin/levels/new"} />
-                                    </>
-                                    : null} */}
-                                {/* {location.pathname === '/admin/users' ?
-                                    <>
-                                        <Navigator title={"+USER"} destination={"/admin/users"} />
-                                    </>
-                                    : null}
-                                {location.pathname === '/admin/roles' ?
-                                    <>
-                                        <Navigator title={"+ROLE"} destination={"/admin/roles"} />
-                                    </>
-                                    : null} */}
-
                             </>
                         )}
                     </div>
                     <div>
-                        {(location.pathname === '/')
+                        {(loc === '/')
                             ? <Navigator title={rdxUserData.credentials?.decoded?.username} destination={"/profile/me"} />
-                            : ((location.pathname !== '/admin') ? null : <Navigator title={"HOME"} destination={"/"} />)}
+                            : ((loc !== '/admin') ? null : <Navigator title={"HOME"} destination={"/"} />)}
                     </div>
                 </>
             ) : (

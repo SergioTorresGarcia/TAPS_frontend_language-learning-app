@@ -105,7 +105,6 @@ export const Play = () => {
                                         functionEmit={() => playGame()}
                                     />
                                 </div>
-
                             </div>
                         )}
                     </>

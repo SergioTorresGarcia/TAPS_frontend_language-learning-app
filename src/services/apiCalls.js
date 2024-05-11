@@ -1,5 +1,6 @@
 const root = "http://localhost:4500/";
 
+//AUTH
 export const RegisterUser = async (user) => {
   const options = {
     method: "POST",
@@ -21,7 +22,6 @@ export const RegisterUser = async (user) => {
 };
 
 export const LoginUser = async (credenciales) => {
-  console.log(credenciales);
   const options = {
     method: "POST",
     headers: {
@@ -44,6 +44,7 @@ export const LoginUser = async (credenciales) => {
   }
 };
 
+//USER/PROFILE
 export const GetProfile = async (token) => {
   const options = {
     method: "GET",
@@ -110,7 +111,6 @@ export const UpdateProfile = async (token, data) => {
   }
 };
 
-
 export const DeleteProfile = async (token) => {
   const options = {
     method: "DELETE",
@@ -132,8 +132,7 @@ export const DeleteProfile = async (token) => {
 };
 
 
-// GAME
-// All levels
+// LEVEL
 export const GetLevels = async (token) => {
   const options = {
     method: "GET",
@@ -181,7 +180,7 @@ export const AddLevel = async (token, dataLevel) => {
   }
 };
 
-// All roles
+// ROLE
 export const GetRoles = async (token) => {
   const options = {
     method: "GET",
@@ -244,7 +243,6 @@ export const UpdateRole = async (token, data) => {
     if (!data.success) {
       throw new Error(data.message);
     }
-    console.log("data", data);
     return data;
   } catch (error) {
     return error;
@@ -271,8 +269,7 @@ export const DeleteRole = async (token, id) => {
   }
 };
 
-
-// All words
+// WORD
 export const GetWords = async (token) => {
   const options = {
     method: "GET",
@@ -319,7 +316,7 @@ export const GetOneWord = async (token) => {
     throw error;
   }
 };
-// the very first word
+
 export const GetWordById = async (token, id) => {
   const options = {
     method: "GET",
@@ -390,7 +387,6 @@ export const UpdateAWord = async (token, id, data) => {
     throw error;
   }
 };
-// export const DeleteWord = (id) => { console.log("id", id); }
 
 export const DeleteWord = async (token, id) => {
   const options = {
@@ -439,7 +435,6 @@ export const GetWordsFromLevel = async (token, level_id) => {
   }
 };
 
-
 export const GetWordsFromLevelToDivert = async (token, level_id) => {
   const options = {
     method: "GET",
@@ -463,7 +458,6 @@ export const GetWordsFromLevelToDivert = async (token, level_id) => {
   }
 };
 
-
 //words/current
 export const GetWordToPlay = async (token) => {
   const options = {
@@ -482,8 +476,6 @@ export const GetWordToPlay = async (token) => {
     if (!data.success) {
       throw new Error(data.message);
     }
-    console.log(111, response);
-    console.log(222, data);
     return data.data;
   } catch (error) {
     throw error;

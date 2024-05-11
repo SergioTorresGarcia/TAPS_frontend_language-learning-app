@@ -72,59 +72,50 @@ export const Play2a = () => {
     }
 
     return (
-        <>
-            <div className="playDesign">
-                {rdxUserData.credentials?.token ? (
-                    <>
-                        {loadedData1 && (
-                            <>
-                                <div className="game">
-                                    <div className="borderPlay2a">
-                                        <br />
-                                        {wordToPlay?.id % 3 == 0
-                                            ?
-                                            (<div className="right" onClick={() => { gotItRight() }}>
-                                                <img className="img2a text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
+        <div className="playDesign">
+            {rdxUserData.credentials?.token ? (
+                <>
+                    {loadedData1 && (
+                        <div className="borderPlay2a">
+                            <div className="game ">
+                                <br />
+                                {wordToPlay?.id % 3 == 0 ?
+                                    (<div className="right" onClick={() => { gotItRight() }}>
+                                        <img className="img2a text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
+                                    </div>)
+                                    : (<div className="wrong" onClick={() => { gotItWrong() }}>
+                                        <img className="img2a text " src={oneToDivert && oneToDivert?.image ? `../../src/assets/${oneToDivert?.image.slice(2)}` : ''} alt={oneToDivert?.EN} />
+                                    </div>)
+                                }
+                                <br />
+                                <h3 className="text2">{wordToPlay?.JP}</h3>
+                                <h5 className="white">'{wordToPlay?.romanji}'</h5>
+                                <br /><br />
+                                {wordToPlay?.id % 3 != 0 ?
+                                    (<div className="right" onClick={() => { gotItRight() }}>
+                                        <img className="img2a text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
+                                    </div>)
+                                    : (<div className="wrong" onClick={() => { gotItWrong() }}>
+                                        <img className="img2a text " src={oneToDivert && oneToDivert?.image ? `../../src/assets/${oneToDivert?.image.slice(2)}` : ''} alt={oneToDivert?.EN} />
+                                    </div>)
+                                }
 
-                                            </div>)
-                                            : (<div className="wrong" onClick={() => { gotItWrong() }}>
-                                                <img className="img2a text " src={oneToDivert && oneToDivert?.image ? `../../src/assets/${oneToDivert?.image.slice(2)}` : ''} alt={oneToDivert?.EN} />
-                                            </div>)
-                                        }
-
-                                        <br />
-                                        <h3 className="text2">{wordToPlay?.JP}</h3>
-                                        <h5 className="white">'{wordToPlay?.romanji}'</h5>
-                                        <br /><br />
-                                        {wordToPlay?.id % 3 != 0
-                                            ?
-                                            (<div className="right" onClick={() => { gotItRight() }}>
-                                                <img className="img2a text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
-                                            </div>)
-                                            : (<div className="wrong" onClick={() => { gotItWrong() }}>
-                                                <img className="img2a text " src={oneToDivert && oneToDivert?.image ? `../../src/assets/${oneToDivert?.image.slice(2)}` : ''} alt={oneToDivert?.EN} />
-                                            </div>)
-                                        }
-
-                                        {answer == 1 ? <div className="layerUp">
-                                            <div className="goodAnswer whiteTick cButtonGreen ">✓</div>
-                                        </div> : ""}
-                                        {answer == 2 ? <div className="layerUp">
-                                            <div className="badAnswer whiteTick cButtonRed ">❌</div>
-                                        </div> : ""}
-
-                                        <br />
-                                    </div>
-                                </div>
-                            </>
-                        )}
-                    </>
-                ) : (
-                    <div className="playDesign">
-                        <div className="circle"><span className="text">TAPS</span></div>
-                    </div>
-                )}
-            </div >
-        </>
+                                {answer == 1 ? <div className="layerUp">
+                                    <div className="goodAnswer whiteTick cButtonGreen ">✓</div>
+                                </div> : ""}
+                                {answer == 2 ? <div className="layerUp">
+                                    <div className="badAnswer whiteTick cButtonRed ">❌</div>
+                                </div> : ""}
+                                <br />
+                            </div>
+                        </div>
+                    )}
+                </>
+            ) : (
+                <div className="playDesign">
+                    <div className="circle"><span className="text">TAPS</span></div>
+                </div>
+            )}
+        </div >
     );
 };

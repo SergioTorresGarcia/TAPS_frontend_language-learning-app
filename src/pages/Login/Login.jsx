@@ -71,7 +71,9 @@ export const Login = () => {
       };
 
       //Saving passport to RDX (with both, token and all the decoded info)
+
       dispatch(login({ credentials: passport }))
+
       setMsg(`Hi ${decoded?.username}, welcome to Taps`);
       navigate('/');
     } catch (error) {

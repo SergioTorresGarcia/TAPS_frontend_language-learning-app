@@ -7,9 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { GetWordToPlay, GetWordsFromLevelToDivert } from "../../services/apiCalls";
 
 export const Play4 = () => {
-    // Redux reading mode
     const rdxUserData = useSelector(userData);
-
     const navigate = useNavigate();
     const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
 
@@ -18,7 +16,6 @@ export const Play4 = () => {
     const [loadedData1, setLoadedData1] = useState(false);
     const [loadedData2, setLoadedData2] = useState(false);
     const [answer, setAnswer] = useState(0);
-
 
     useEffect(() => {
         const getWordAtPlay = async () => {
@@ -94,81 +91,63 @@ export const Play4 = () => {
     const shuffledOptions = shuffleArray([wordToPlay, wordsToDivert[0], wordsToDivert[1], wordsToDivert[2]]);
 
     return (
-        <>
-            <div className="playDesign">
-                {rdxUserData.credentials?.token ? (
-                    <>
-                        {loadedData1 && loadedData2 && (
-                            <>
-                                <div className="game">
-                                    <div className="borderPlay4">
-                                        <br />
-                                        <div className="container">
-                                            {/* Shuffle all options including right and wrong answers */}
-                                            {/* First two options */}
-                                            <div className="row">
-                                                {(shuffledOptions.slice(0, 2)).map((word, index) => (
-                                                    <div key={index} className="option" onClick={word === wordToPlay ? gotItRight : gotItWrong}>
-
-                                                        <img className="img4 text" src={word && word.image ? `../../src/assets/${word.image.slice(2)}` : ''} alt={word.EN} />
-
-
-
-                                                    </div>
-                                                ))}
+        <div className="playDesign">
+            {rdxUserData.credentials?.token ? (
+                <>
+                    {loadedData1 && loadedData2 && (
+                        <div className="game">
+                            <div className="borderPlay4">
+                                <br />
+                                <div className="container">
+                                    {/* Shuffle all options including right and wrong answers */}
+                                    {/* First two options */}
+                                    <div className="row">
+                                        {(shuffledOptions.slice(0, 2)).map((word, index) => (
+                                            <div key={index} className="option" onClick={word === wordToPlay ? gotItRight : gotItWrong}>
+                                                <img className="img4 text" src={word && word.image ? `../../src/assets/${word.image.slice(2)}` : ''} alt={word.EN} />
                                             </div>
-
-
-                                            {/* Image */}
-                                            <br /><br />
-                                            <div>
-                                                <h3 className="text2">{wordToPlay.JP}</h3>
-                                                <h5 className="white">'{wordToPlay.romanji}'</h5>
-                                            </div>
-                                            <br /><br />
-
-
-                                            {/* Last two options */}
-                                            <div className="row">
-                                                {(shuffledOptions.slice(2)).map((word, index) => (
-                                                    <div key={index} className="option" onClick={word === wordToPlay ? gotItRight : gotItWrong}>
-                                                        <img className="img4 text" src={word && word.image ? `../../src/assets/${word.image.slice(2)}` : ''} alt={word.EN} />
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
+                                        ))}
                                     </div>
-
-
-
-                                    {answer === 1 ?
-                                        <div className="layerUp">
-                                            <div className="answer">
-                                                <div className="goodAnswer whiteTick cButtonGreen ">✓</div>
+                                    {/* Image */}
+                                    <br /><br />
+                                    <div>
+                                        <h3 className="text2">{wordToPlay.JP}</h3>
+                                        <h5 className="white">'{wordToPlay.romanji}'</h5>
+                                    </div>
+                                    <br /><br />
+                                    {/* Last two options */}
+                                    <div className="row">
+                                        {(shuffledOptions.slice(2)).map((word, index) => (
+                                            <div key={index} className="option" onClick={word === wordToPlay ? gotItRight : gotItWrong}>
+                                                <img className="img4 text" src={word && word.image ? `../../src/assets/${word.image.slice(2)}` : ''} alt={word.EN} />
                                             </div>
-                                        </div> : ""}
-
-
-                                    {answer === 2 ?
-                                        <div className="layerUp">
-                                            <div className="answer">
-                                                <div className="badAnswer whiteTick cButtonRed ">❌</div>
-                                            </div>
-                                        </div> : ""}
-
-                                    <br />
+                                        ))}
+                                    </div>
                                 </div>
-                            </>
-                        )}
-                    </>
+                            </div>
+                            {answer === 1 ?
+                                <div className="layerUp">
+                                    <div className="answer">
+                                        <div className="goodAnswer whiteTick cButtonGreen ">✓</div>
+                                    </div>
+                                </div> : ""}
+                            {answer === 2 ?
+                                <div className="layerUp">
+                                    <div className="answer">
+                                        <div className="badAnswer whiteTick cButtonRed ">❌</div>
+                                    </div>
+                                </div> : ""}
+                            <br />
+                        </div>
+                    )}
+                </>
 
-                ) : (
-                    <div className="playDesign">
-                        <div className="circle"><span className="text">TAPS</span></div>
-                    </div>
-                )}
-            </div >
-        </>
+            ) : (
+                <div className="playDesign">
+                    <div className="circle"><span className="text">TAPS</span></div>
+                </div>
+            )}
+        </div >
     );
 };
 
