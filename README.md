@@ -23,7 +23,7 @@ With Taps, learning becomes playtime. Engaging games, review modes, and interact
 #### Memorable Illustrations
 Boost your memory retention with our captivating visuals and vibrant and soothing colors. Each word is accompanied by an eye-catching image, forging strong associations between the word and its meaning. Say hello to seamless language recall!
   </div>
-  <div style="flex: 40%; padding: 0 auto; margin: 0 auto;">
+  <div style="flex: 35%; padding: 0 auto; margin: 0 auto;">
     <img src="/src/assets/video/demoGame.gif" alt="Game Demo" />
   </div>
 </div>
@@ -61,7 +61,7 @@ Boost your memory retention with our captivating visuals and vibrant and soothin
 <hr/>
 
 <div style="display: flex;">
-  <div style="flex: 40%; padding: 0 10px;">
+  <div style="flex: 35%; padding: 0 10px;">
 <img src="/src/assets/video/demoProfile.gif" alt="Profile Demo" />
 </div>
   <div style="flex: 60%; padding: 0 10px;">
@@ -202,66 +202,66 @@ To explore the app:
 <div float="left">
   <p>GAME SCREENS</p>
   <p>
-  <img src="/src/assets/imgReadme/09-word.png" width="19%" />
-  <img src="/src/assets/imgReadme/11-game1.png" width="19%" />
-  <img src="/src/assets/imgReadme/13-game3.png" width="19%" />
-  <img src="/src/assets/imgReadme/14-game4.png" width="19%" />
-  <img src="/src/assets/imgReadme/15-game5.png" width="19%" />
+  <img src="/public/imgReadme/09-word.png" width="19%" />
+  <img src="/public/imgReadme/11-game1.png" width="19%" />
+  <img src="/public/imgReadme/13-game3.png" width="19%" />
+  <img src="/public/imgReadme/14-game4.png" width="19%" />
+  <img src="/public/imgReadme/15-game5.png" width="19%" />
   </p>
   <p>
-  <img src="/src/assets/imgReadme/10-countdown.png" width="24%" />
-  <img src="/src/assets/imgReadme/16-right-answer.png" width="24%" />
-  <img src="/src/assets/imgReadme/17-wrong-answer.png" width="24%" />
-  <img src="/src/assets/imgReadme/18-end-of-level-screen.png" width="24%" />
+  <img src="/public/imgReadme/10-countdown.png" width="24%" />
+  <img src="/public/imgReadme/16-right-answer.png" width="24%" />
+  <img src="/public/imgReadme/17-wrong-answer.png" width="24%" />
+  <img src="/public/imgReadme/18-end-of-level-screen.png" width="24%" />
   </p>
 
 <details>
 <summary>LANDING / REGISTER / LOGIN / HOME</summary>
 <p>
-  <img src="/src/assets/imgReadme/01-landing.png" width="24%" />
-  <img src="/src/assets/imgReadme/02-register.png" width="24%" />
-  <img src="/src/assets/imgReadme/19-login-as-admin.png" width="24%" />
-  <img src="/src/assets/imgReadme/04-home-as-user.png" width="24%" />
+  <img src="/public/imgReadme/01-landing.png" width="24%" />
+  <img src="/public/imgReadme/02-register.png" width="24%" />
+  <img src="/public/imgReadme/19-login-as-admin.png" width="24%" />
+  <img src="/public/imgReadme/04-home-as-user.png" width="24%" />
   </p>
   </details>
 
   <details>
   <summary>PROFILE / RULES / PROGRESS / DELETE PROFILE</summary>
   <p>
-  <img src="/src/assets/imgReadme/05-profile.png" width="24%" />
-  <img src="/src/assets/imgReadme/06-rules-of-the-game.png" width="24%" />
-  <img src="/src/assets/imgReadme/07-progress.png" width="24%" />
-  <img src="/src/assets/imgReadme/08-delete-profile.png" width="24%" />
+  <img src="/public/imgReadme/05-profile.png" width="24%" />
+  <img src="/public/imgReadme/06-rules-of-the-game.png" width="24%" />
+  <img src="/public/imgReadme/07-progress.png" width="24%" />
+  <img src="/public/imgReadme/08-delete-profile.png" width="24%" />
   </p>
   </details>
 
   <details>
   <summary>ADMIN PANEL / ROLES / USERS / LEVELS / WORDS</summary>
   <p>
-  <img src="/src/assets/imgReadme/21-admin-panel.png" width="24%" />
-  <img src="/src/assets/imgReadme/22-admin-roles.png" width="24%" />
-  <img src="/src/assets/imgReadme/23-admin-users.png" width="50%" />
+  <img src="/public/imgReadme/21-admin-panel.png" width="24%" />
+  <img src="/public/imgReadme/22-admin-roles.png" width="24%" />
+  <img src="/public/imgReadme/23-admin-users.png" width="50%" />
   </p>
   <p>
-  <img src="/src/assets/imgReadme/24-admin-levels.png" width="24%" />
-  <img src="/src/assets/imgReadme/25-admin-words-table.png" width="24%" />
-  <img src="/src/assets/imgReadme/26-admin-words-preview-cards.png" width="24%" />
-  <img src="/src/assets/imgReadme/27-admin-new-word.png" width="24%" />
+  <img src="/public/imgReadme/24-admin-levels.png" width="24%" />
+  <img src="/public/imgReadme/25-admin-words-table.png" width="24%" />
+  <img src="/public/imgReadme/26-admin-words-preview-cards.png" width="24%" />
+  <img src="/public/imgReadme/27-admin-new-word.png" width="24%" />
   </p>
 </details>
 
   <p>VIEWS ON THE COMPUTER SCREEN</p>
   <p>
-  <img src="/src/assets/imgReadme2/01.png" width="24%" />
-  <img src="/src/assets/imgReadme2/02.png" width="24%" />
-  <img src="/src/assets/imgReadme2/03.png" width="24%" />
-  <img src="/src/assets/imgReadme2/04.png" width="24%" />
+  <img src="/public/imgReadme2/01.png" width="24%" />
+  <img src="/public/imgReadme2/02.png" width="24%" />
+  <img src="/public/imgReadme2/03.png" width="24%" />
+  <img src="/public/imgReadme2/04.png" width="24%" />
   </p>
   <p>
-  <img src="/src/assets/imgReadme2/05.png" width="24%" />
-  <img src="/src/assets/imgReadme2/06.png" width="24%" />
-  <img src="/src/assets/imgReadme2/07.png" width="24%" />
-  <img src="/src/assets/imgReadme2/08.png" width="24%" />
+  <img src="/public/imgReadme2/05.png" width="24%" />
+  <img src="/public/imgReadme2/06.png" width="24%" />
+  <img src="/public/imgReadme2/07.png" width="24%" />
+  <img src="/public/imgReadme2/08.png" width="24%" />
   </p>
 </div>
 
