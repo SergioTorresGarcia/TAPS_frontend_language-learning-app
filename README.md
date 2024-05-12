@@ -47,10 +47,6 @@ Boost your memory retention with our captivating visuals and vibrant and soothin
 <hr/>
 
 
-
-<hr/>
-
-
 <div align="center">
     <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
     <img src= "https://img.shields.io/badge/javascipt-EFD81D?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
@@ -64,6 +60,12 @@ Boost your memory retention with our captivating visuals and vibrant and soothin
 
 <hr/>
 
+<div style="display: flex;">
+  <div style="flex: 40%; padding: 0 10px;">
+<img src="/src/assets/video/demoProfile.gif" alt="Profile Demo" />
+</div>
+  <div style="flex: 60%; padding: 0 10px;">
+
 ## General features
 
 - Word Quizzes: Users can take quizzes to test their knowledge of vocabulary words.
@@ -71,7 +73,6 @@ Boost your memory retention with our captivating visuals and vibrant and soothin
 - Progress Tracking: The program tracks user progress to monitor learning achievements.
 - Admin Panel: Administrators can manage users, words and levels in the program.
 
-<hr/>
 
 ## Mini-games:
 - Learning: the word and symbol appear (tap to continue).
@@ -81,9 +82,8 @@ Boost your memory retention with our captivating visuals and vibrant and soothin
 - Compare 4 symbols (only one matches the words).
 - Display word AND symbol (is it true or false?).
 
-<hr/>
 
-## Challenge - MVP
+## Project MVP (just for the Front-end part)
 - Use of REDUX
 - Complex project structure: Hooks, Components, Services
 - Modularized CSS (separated files)
@@ -91,10 +91,20 @@ Boost your memory retention with our captivating visuals and vibrant and soothin
 - Register / Login / Editable Profile views
 - Views tha consum all endpoints from backend (at least 2 full CRUDs)
 
+</div>
+
+
+</div>
+
+<hr/>
+
+
+
 
 ## Database diagram (MySQL)
-
+<div align="center">
 ![Reverse engineered diagram of the DB](src/assets/DIAGRAM-FINAL-PROJECT-5-tables.png)
+</div>
 
 ## Instalation (local)
 1.  Clone this repository: 
@@ -116,6 +126,7 @@ This is a mobile first app, so for a better experience, select mobile view in yo
 > Option + ⌘ + J (on macOS)
 
 > Shift + CTRL + J (on Windows/Linux)
+
 
 To explore the app:
 
