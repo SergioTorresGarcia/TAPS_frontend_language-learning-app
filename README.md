@@ -133,38 +133,42 @@ To explore the app:
 
 ## PAGES
 
-- from LANDING `to LOGIN`
+- from LANDING:                         http://localhost:5173/
+    > LOGIN                             http://localhost:5173/login
+        > REGISTER (Create user)        http://localhost:5173/register
 
-- from LOGIN `to REGISTER`
+- from PROFILE check:
+    > RULES (if you need)               http://localhost:5173/rules
+    > PROGRESS (if you want)            http://localhost:5173/progress
+    > EDIT PROFILE (if you must)        http://localhost:5173/profile/me
+    > DELETE PROFILE (if you dare!)     http://localhost:5173/delete-profile
 
-- from REGISTER `to  LOGIN`
-
-- from PROFILE check:   
-    > RULES (if you need)
-    > PROGRESS (if you want)
-    > EDIT PROFILE (if you must)
-    > DELETE PROFILE (if you dare!)
-
-- from HOME:       
-    > GAME
-    > PROFILE
-    > LOG OUT (it would save the last played word)
+- from HOME:                            http://localhost:5173/
+    > GAME                              http://localhost:5173/play
+    > PROFILE                           http://localhost:5173/profile/me
+    > LOG OUT (it'd save position in the game)
 
 - from GAME:
-    > PLAY > PLAY2 ... PLAY5 > PLAY ...
+    > PLAY > PLAY2 ... PLAY5 > PLAY ... (loop)  http://localhost:5173/play
+                                                http://localhost:5173/play2
+                                                http://localhost:5173/play2a
+                                                http://localhost:5173/play3
+                                                http://localhost:5173/play4
+                                                http://localhost:5173/play5
     > CONGRATS view (after 10 words learnt)
 
 - from HOME (as Admin):
     > GAME
     > PROFILE
     > LOG OUT
-    > ADMIN
+    > ADMIN                             http://localhost:5173/admin
 
 - from ADMIN PANEL:
-    > ROLES Create / Read / Delete
-    > USERS Read
-    > LEVELS
-    > WORDS Create / Read / Delete
+    > ROLES Create / Read / Delete      http://localhost:5173/admin/roles
+    > USERS Read                        http://localhost:5173/admin/users
+    > LEVELS Create / Read / Delete     http://localhost:5173/admin/levels
+    > WORDS Read / Delete               http://localhost:5173/admin/words
+        > NEW WORD Create               http://localhost:5173/admin/words/new
 
 
 <details>

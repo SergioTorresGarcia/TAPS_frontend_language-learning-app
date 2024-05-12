@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { AddLevel, GetLevels } from "../../services/apiCalls";
+import { AddLevel, DeleteLevel, GetLevels } from "../../services/apiCalls";
 import { CButton } from "../../common/CButton/CButton";
 import { CInput } from "../../common/CInput/CInput";
 import { validame } from "../../utils/functions";
@@ -60,6 +60,19 @@ export const AddNewLevel = () => {
             navigate('/admin');
         } catch (error) {
             console.log(error);
+        }
+    };
+
+    const deleteLevel = async (tokenStorage, id) => {
+        try {
+            await DeleteLevel(tokenStorage, id);
+            const updatedLevels = levels.filter(level => level.id !== id);
+
+            setLevels(updatedLevels);
+            console.log("Level deleted in DB");
+
+        } catch (error) {
+            throw new Error('Failed to delete level: ', error.message);
         }
     };
 

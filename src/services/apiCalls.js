@@ -180,6 +180,27 @@ export const AddLevel = async (token, dataLevel) => {
   }
 };
 
+export const DeleteLevel = async (token, id) => {
+  const options = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  };
+  try {
+    const response = await fetch(`${root}levels/${id}`, options);
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+
 // ROLE
 export const GetRoles = async (token) => {
   const options = {

@@ -16,7 +16,7 @@ export const NewLevel = () => {
     const navigate = useNavigate();
 
     const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
-    const [level, setLevel] = useState([]);
+    const [levels, setLevels] = useState([]);
     const [words, setWords] = useState([]);
     const [loadedData1, setLoadedData1] = useState(false);
     const [loadedData2, setLoadedData2] = useState(false);
@@ -25,8 +25,8 @@ export const NewLevel = () => {
         const getLevel = async () => {
             try {
                 const fetched = await GetLevels(tokenStorage);
-                if (Array.isArray(fetched.data) && fetched.data.length > 0) {
-                    setLevel(fetched.data.map(item => item.name));
+                if (Array.isArray(fetched) && fetched.length > 0) {
+                    setLevels(fetched);
                     setLoadedData1(true);
                 }
             } catch (error) {
@@ -37,13 +37,15 @@ export const NewLevel = () => {
             getLevel();
         }
     }, [loadedData1]);
+    console.log(levels);
+    console.log(levels[0]);
 
     useEffect(() => {
         const getLearntWords = async () => {
             try {
                 const fetched = await GetWordsLearnt(tokenStorage);
                 if (Array.isArray(fetched) && fetched.length > 0) {
-                    setWords(fetched.map(item => item.name));
+                    setWords(fetched);
                     setLoadedData2(true);
                 }
             } catch (error) {
@@ -54,8 +56,9 @@ export const NewLevel = () => {
             getLearntWords();
         }
     }, [loadedData2]);
-
+    console.log(words);
     const accomplishedLevel = (words.length + 1) / 10
+    console.log(accomplishedLevel);
 
     return (
         <>
@@ -66,7 +69,7 @@ export const NewLevel = () => {
                             <div className="box">
                                 <div className="border">
                                     <br />
-                                    <h2><em><big>{level[accomplishedLevel - 1]}</big></em><br /> accomplished</h2>
+                                    <h2><em><big>{levels[accomplishedLevel - 1].name}</big></em><br /> accomplished</h2>
                                     <h1>Congrats!</h1>
                                     <h3>You've passed level {accomplishedLevel} out of 5</h3>
 
