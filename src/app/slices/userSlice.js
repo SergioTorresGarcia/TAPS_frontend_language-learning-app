@@ -17,12 +17,14 @@ export const userSlice = createSlice({
                 ...state,
                 ...action.payload
             }
+        },
+        updateUsername: (state, action) => {
+            state.credentials.decoded.username = action.payload;
         }
     }
-
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, updateUsername } = userSlice.actions;
 
 export const userData = (state) => state.user;
 

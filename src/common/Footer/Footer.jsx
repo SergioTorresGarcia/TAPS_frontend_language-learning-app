@@ -6,11 +6,14 @@ import { userData } from "../../app/slices/userSlice"
 import { useLocation } from "react-router-dom";
 
 export const Footer = () => {
-    //Redux reading mode
-    const rdxUserData = useSelector(userData)
-    //useLocation to control menu display
+    // Redux reading mode
+    const rdxUserData = useSelector(userData);
+    // Extract username from Redux store state
+    const username = rdxUserData.credentials?.decoded?.username;
+    // useLocation to control menu display
     const location = useLocation();
     const loc = location.pathname;
+
     return (
         <div className="footerDesign">
             {rdxUserData.credentials?.token ? (
@@ -29,7 +32,7 @@ export const Footer = () => {
                     </div>
                     <div>
                         {(loc === '/')
-                            ? <Navigator title={rdxUserData?.credentials?.decoded?.username} destination={"/profile/me"} />
+                            ? <Navigator title={username} destination={"/profile/me"} />
                             : ((loc !== '/admin') ? null : <Navigator title={"HOME"} destination={"/"} />)}
                     </div>
                 </>

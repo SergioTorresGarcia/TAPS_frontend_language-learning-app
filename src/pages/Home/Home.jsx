@@ -35,8 +35,8 @@ export const Home = () => {
               <span className="whiteTick">TAPS</span>
             </div>}
             {showGif && <div>
+              <p className="whiteText" onClick={() => setShowGif(false)}></p>
               <img src="/src/assets/video/demoGame.gif" alt="GAME DEMO" className="overDemo" />
-              <p className="whiteText" onClick={() => setShowGif(false)}>SKIP DEMO</p>
             </div>}
           </div>
 

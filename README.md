@@ -60,7 +60,7 @@ Boost your memory retention with our captivating visuals and vibrant and soothin
 
 <hr/>
 
-<div style="display: flex;">
+<div style="display: flex;" align="center">
   <div style="flex: 35%; padding: 0 10px;">
 <img src="/src/assets/video/demoProfile.gif" alt="Profile Demo" />
 </div>
@@ -91,18 +91,14 @@ Boost your memory retention with our captivating visuals and vibrant and soothin
 - Register / Login / Editable Profile views
 - Views tha consum all endpoints from backend (at least 2 full CRUDs)
 
-</div>
-
-
+    </div>
 </div>
 
 <hr/>
 
-
-
-
 ## Database diagram (MySQL)
 <div align="center">
+
 ![Reverse engineered diagram of the DB](src/assets/DIAGRAM-FINAL-PROJECT-5-tables.png)
 </div>
 
@@ -113,6 +109,7 @@ Boost your memory retention with our captivating visuals and vibrant and soothin
 3.  Install dependencies: run ` $ npm i ` in terminal
 
 ⚠️ MAKE SURE THAT BACKEND & DATABASE ARE RUNNING AS WELL ⚠️
+
 <!-- 3.  Connect repository with database 
 Set up environment variables: create a .env file in the root directory (sample provided).
 4.  Run migrations:  ` $ npm run migrations `
@@ -133,6 +130,7 @@ To explore the app:
 1. Register/login yourself and start playing.
 
 2. Sign in as 'user' and play for a while. Remember to check out the rules of the game, your progress, and try deleting your profiles if you wish:
+
 ```bash
 {
     "email": "user@mail.com",
@@ -145,6 +143,7 @@ To explore the app:
 - Users CRUD
 - Levels CRUD
 - Words CRUD
+
 ```bash
 {
     "email": "admin@mail.com",
