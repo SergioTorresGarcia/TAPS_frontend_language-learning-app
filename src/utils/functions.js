@@ -1,11 +1,18 @@
+import { useLocation, useNavigate } from "react-router-dom";
+
 export const validame = (type, value) => {
   switch (type) {
     case "name":
+    case "username":
     case "nombre":
     case "surname":
     case "cognom":
-      if (value.length < 3) {
-        return "Por favor, el nombre debe de tener mínimo tres caracteres.";
+    case "EN":
+    case "JP":
+    case "romanji":
+    case "image":
+      if (value.length < 2) {
+        return "Username must be at least 3 characters long.";
       }
 
       return "";
@@ -17,7 +24,7 @@ export const validame = (type, value) => {
       const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
       if (!emailRegex.test(value)) {
-        return "Por favor, el formato del email debe de ser correcto.";
+        return "Invalid email format.";
       }
 
       return "";
@@ -26,11 +33,11 @@ export const validame = (type, value) => {
     case "contraseña":
       const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,14}$/;
       if (!passwordRegex.test(value)) {
-        return "El password debe tener 8 caracteres, simbolo y mayúscula";
+        return "Password must have at least 8 characteres (incl. number, small & big letters)";
       }
 
       return "";
     default:
-      console.log("whattttttttttt???");
+      console.log("it is all good");
   }
 };

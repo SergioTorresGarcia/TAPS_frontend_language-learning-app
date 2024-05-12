@@ -1,0 +1,172 @@
+.wordDesign {
+
+    height: 70vh;
+    width: 100vw;
+    /* margin-top: -10vh; */
+    background-color: lightseagreen;
+    overflow-y: scroll;
+}
+
+.circle {
+    width: 10em;
+    height: 10em;
+    border: 0.5em dotted white;
+    border-radius: 50%;
+    background-color: lightseagreen;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text {
+    font-size: 200%;
+    color: black;
+}
+
+.text2 {
+    font-size: 150%;
+    color: black;
+}
+
+.white {
+    color: black;
+}
+
+
+.whiteTick {
+    color: white;
+    font-size: 200%;
+}
+
+.img {
+    width: 5em;
+}
+
+.borderAdmin {
+    border: 0.1em solid white;
+    border-radius: 1em;
+    margin: 0 2em 1em 2em;
+    background-color: lightgreen;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.outTable {
+    overflow-x: auto;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+}
+
+
+.moving {
+    overflow-x: auto;
+    width: auto;
+}
+
+.fixed {
+    color: white;
+    font-size: larger;
+    font-weight: bold;
+    width: 10em;
+    overflow-x: fixed;
+
+}
+
+.fixedHead {
+    position: sticky;
+    overflow-x: fixed;
+
+}
+
+.bodyTable {
+    overflow-x: fixed;
+
+}
+
+.radioBtn {
+    position: fixed;
+    margin: -4em 0 1em 10em;
+}
+
+
+
+.rowTable {
+    height: auto;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rowTable2 {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+thead {
+    height: auto;
+}
+
+.bg {
+    background-color: lightgreen;
+}
+
+.a {
+    width: 5em;
+}
+
+.b {
+    width: 10em;
+}
+
+.c {
+    width: 15em;
+}
+
+.d {
+    width: 20em;
+}
+
+.e {
+    width: 20em;
+}
+
+.f {
+    width: 15em;
+}
+
+.g {
+    width: 15em;
+}
+
+.h {
+    border-left: .1em solid white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+
+
+    justify-content: flex-end;
+
+}

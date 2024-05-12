@@ -1,25 +1,27 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+// Profile.jsx
+import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import { GetProfile, UpdateProfile } from "../../services/apiCalls";
 import { CInput } from "../../common/CInput/CInput";
-import dayjs from "dayjs";
-import { Header } from "../../common/Header/Header";
 import { CButton } from "../../common/CButton/CButton";
-import { Footer } from "../../common/Footer/Footer";
+import { validame } from "../../utils/functions";
+import { useDispatch, useSelector } from "react-redux";
+import { userData } from "../../app/slices/userSlice";
+import { updateUsername } from "../../redux/actions";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const Profile = () => {
-  const datosUser = JSON.parse(localStorage.getItem("passport"));
+  const rdxUserData = useSelector(userData);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const location = useLocation();
   const [write, setWrite] = useState("disabled");
-  const [tokenStorage, setTokenStorage] = useState(datosUser?.token);
+  const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
   const [loadedData, setLoadedData] = useState(false);
   const [user, setUser] = useState({
     username: "",
     email: "",
   });
-
   const [userError, setUserError] = useState({
     usernameError: "",
     emailError: "",
@@ -29,6 +31,15 @@ export const Profile = () => {
     setUser((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
+    }));
+  };
+
+  const checkError = (e) => {
+    const error = validame(e.target.name, e.target.value);
+
+    setUserError((prevState) => ({
+      ...prevState,
+      [e.target.name + "Error"]: error,
     }));
   };
 
@@ -42,14 +53,11 @@ export const Profile = () => {
     const getUserProfile = async () => {
       try {
         const fetched = await GetProfile(tokenStorage);
-
         setLoadedData(true);
-
         setUser({
           username: fetched.data.username,
           email: fetched.data.email,
         });
-
       } catch (error) {
         console.log(error);
       }
@@ -58,35 +66,34 @@ export const Profile = () => {
     if (!loadedData) {
       getUserProfile();
     }
-  }, [user]);
+  }, [tokenStorage, loadedData]);
 
   const updateData = async () => {
-
     try {
-      const fetched = await UpdateProfile(tokenStorage, user)
-
+      const fetched = await UpdateProfile(tokenStorage, user);
       setUser({
         username: fetched.data.username,
-        email: fetched.data.email
-      })
-
-      setWrite("disabled")
+        email: fetched.data.email,
+      });
+      setWrite("disabled");
+      dispatch(updateUsername(fetched.data.username));
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <>
-      <Header />
       <div className="profileDesign">
         {!loadedData ? (
           <div>CARGANDO</div>
         ) : (
-          <div>
+          <div className="vertical">
+            <div className="leftText">
+              {/* Left Text */}
+            </div>
             <CInput
-              className={`inputDesign ${userError.usernameError !== "" ? "inputDesignError" : ""
-                }`}
+              className={`inputDesign ${userError.usernameError !== "" ? "inputDesignError" : ""}`}
               type={"text"}
               placeholder={""}
               name={"username"}
@@ -96,8 +103,7 @@ export const Profile = () => {
               onBlurFunction={(e) => checkError(e)}
             />
             <CInput
-              className={`inputDesign ${userError.emailError !== "" ? "inputDesignError" : ""
-                }`}
+              className={`inputDesign ${userError.emailError !== "" ? "inputDesignError" : ""}`}
               type={"email"}
               placeholder={""}
               name={"email"}
@@ -108,13 +114,14 @@ export const Profile = () => {
             />
             <CButton
               className={write === "" ? "cButtonGreen cButtonDesign" : "cButtonDesign"}
-              title={write === "" ? "Confirm" : "Edit"}
+              title={write === "" ? <span className="whiteTick">✓</span> : "Edit"}
               functionEmit={write === "" ? updateData : () => setWrite("")}
             />
+            <div className="error">{userError.usernameError}</div>
+            {/* Delete Profile Button */}
           </div>
         )}
       </div>
-      <Footer />
     </>
   );
 };

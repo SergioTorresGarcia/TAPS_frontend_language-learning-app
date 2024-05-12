@@ -12,18 +12,39 @@
 
 }
 
-.circle {
+.circle2 {
     width: 10em;
     height: 10em;
-    border: 0.5em dotted white;
+    /* border: 0.5em dotted white; */
     border-radius: 50%;
     background-color: lightseagreen;
     color: white;
+    box-shadow: 0 0 2em 2em rgba(255, 255, 255, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.text {
+.text2 {
     font-size: 200%;
+    color: white;
+}
+
+.logo {
+    width: 15em;
+    height: 15em;
+    border-radius: 50%;
+    color: white;
+    box-shadow: 0 0 2em 2em rgba(255, 255, 255, 0.5);
+}
+
+.overDemo {
+    z-index: 900;
+    width: 75%;
+    transform: rotate(10deg);
+}
+
+.whiteText {
+    color: white;
+    cursor: pointer;
 }
