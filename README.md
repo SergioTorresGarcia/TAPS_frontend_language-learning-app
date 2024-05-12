@@ -132,52 +132,124 @@ To explore the app:
 
 
 ## PAGES
+<details>
+<summary>URLs</summary>
 
-- from LANDING:                         http://localhost:5173/
-    > LOGIN                             http://localhost:5173/login
-        > REGISTER (Create user)        http://localhost:5173/register
+- from LANDING: http://localhost:5173/
+    > LOGIN http://localhost:5173/login
+    
+    > REGISTER (Create user) http://localhost:5173/register
 
 - from PROFILE check:
-    > RULES (if you need)               http://localhost:5173/rules
-    > PROGRESS (if you want)            http://localhost:5173/progress
-    > EDIT PROFILE (if you must)        http://localhost:5173/profile/me
-    > DELETE PROFILE (if you dare!)     http://localhost:5173/delete-profile
+    > RULES (if you need) http://localhost:5173/rules
+    > PROGRESS (if you want) http://localhost:5173/progress
+    > EDIT PROFILE (if you must) http://localhost:5173/profile/me
+    > DELETE PROFILE (if you dare!) http://localhost:5173/delete-profile
 
-- from HOME:                            http://localhost:5173/
-    > GAME                              http://localhost:5173/play
-    > PROFILE                           http://localhost:5173/profile/me
+- from HOME:
+    > GAME http://localhost:5173/play
+    > PROFILE http://localhost:5173/profile/me
     > LOG OUT (it'd save position in the game)
 
-- from GAME:
-    > PLAY > PLAY2 ... PLAY5 > PLAY ... (loop)  http://localhost:5173/play
-                                                http://localhost:5173/play2
-                                                http://localhost:5173/play2a
-                                                http://localhost:5173/play3
-                                                http://localhost:5173/play4
-                                                http://localhost:5173/play5
-    > CONGRATS view (after 10 words learnt)
+- from GAME (loop):
+    > PLAY http://localhost:5173/play
+    > PLAY2 http://localhost:5173/play2
+    > PLAY2a http://localhost:5173/play2a
+    > PLAY3 http://localhost:5173/play3
+    > PLAY4 http://localhost:5173/play4
+    > PLAY5 http://localhost:5173/play5
+
+    > CONGRATS view (after 10 words learnt) http://localhost:5173/play/congrats
 
 - from HOME (as Admin):
-    > GAME
-    > PROFILE
-    > LOG OUT
-    > ADMIN                             http://localhost:5173/admin
+    > GAME / PROFILE / LOG OUT
+
+    > ADMIN http://localhost:5173/admin
 
 - from ADMIN PANEL:
-    > ROLES Create / Read / Delete      http://localhost:5173/admin/roles
-    > USERS Read                        http://localhost:5173/admin/users
-    > LEVELS Create / Read / Delete     http://localhost:5173/admin/levels
-    > WORDS Read / Delete               http://localhost:5173/admin/words
-        > NEW WORD Create               http://localhost:5173/admin/words/new
+    > ROLES Create / Read / Delete http://localhost:5173/admin/roles
+    > USERS Read http://localhost:5173/admin/users
+    > LEVELS Create / Read / Delete http://localhost:5173/admin/levels
+    > WORDS Read / Delete http://localhost:5173/admin/words
+    
+    > NEW WORD Create http://localhost:5173/admin/words/new
+</details>
 
+
+## APP VIEWS (mobile first)
+<div float="left">
+  <p>GAME SCREENS</p>
+  <p>
+  <img src="/src/assets/imgReadme/09-word.png" width="19%" />
+  <img src="/src/assets/imgReadme/11-game1.png" width="19%" />
+  <img src="/src/assets/imgReadme/13-game3.png" width="19%" />
+  <img src="/src/assets/imgReadme/14-game4.png" width="19%" />
+  <img src="/src/assets/imgReadme/15-game5.png" width="19%" />
+  </p>
+  <p>
+  <img src="/src/assets/imgReadme/10-countdown.png" width="24%" />
+  <img src="/src/assets/imgReadme/16-right-answer.png" width="24%" />
+  <img src="/src/assets/imgReadme/17-wrong-answer.png" width="24%" />
+  <img src="/src/assets/imgReadme/18-end-of-level-screen.png" width="24%" />
+  </p>
 
 <details>
+<summary>LANDING / REGISTER / LOGIN / HOME</summary>
+<p>
+  <img src="/src/assets/imgReadme/01-landing.png" width="24%" />
+  <img src="/src/assets/imgReadme/02-register.png" width="24%" />
+  <img src="/src/assets/imgReadme/19-login-as-admin.png" width="24%" />
+  <img src="/src/assets/imgReadme/04-home-as-user.png" width="24%" />
+  </p>
+  </details>
+
+  <details>
+  <summary>PROFILE / RULES / PROGRESS / DELETE PROFILE</summary>
+  <p>
+  <img src="/src/assets/imgReadme/05-profile.png" width="24%" />
+  <img src="/src/assets/imgReadme/06-rules-of-the-game.png" width="24%" />
+  <img src="/src/assets/imgReadme/07-progress.png" width="24%" />
+  <img src="/src/assets/imgReadme/08-delete-profile.png" width="24%" />
+  </p>
+  </details>
+
+  <details>
+  <summary>ADMIN PANEL / ROLES / USERS / LEVELS / WORDS</summary>
+  <p>
+  <img src="/src/assets/imgReadme/21-admin-panel.png" width="24%" />
+  <img src="/src/assets/imgReadme/22-admin-roles.png" width="24%" />
+  <img src="/src/assets/imgReadme/23-admin-users.png" width="50%" />
+  </p>
+  <p>
+  <img src="/src/assets/imgReadme/24-admin-levels.png" width="24%" />
+  <img src="/src/assets/imgReadme/25-admin-words-table.png" width="24%" />
+  <img src="/src/assets/imgReadme/26-admin-words-preview-cards.png" width="24%" />
+  <img src="/src/assets/imgReadme/27-admin-new-word.png" width="24%" />
+  </p>
+</details>
+
+  <p>VIEWS ON THE COMPUTER SCREEN</p>
+  <p>
+  <img src="/src/assets/imgReadme2/01.png" width="24%" />
+  <img src="/src/assets/imgReadme2/02.png" width="24%" />
+  <img src="/src/assets/imgReadme2/03.png" width="24%" />
+  <img src="/src/assets/imgReadme2/04.png" width="24%" />
+  </p>
+  <p>
+  <img src="/src/assets/imgReadme2/05.png" width="24%" />
+  <img src="/src/assets/imgReadme2/06.png" width="24%" />
+  <img src="/src/assets/imgReadme2/07.png" width="24%" />
+  <img src="/src/assets/imgReadme2/08.png" width="24%" />
+  </p>
+</div>
+
+
+<!-- <details>
 <summary>AUTH routes</summary>
 
 -   REGISTER new user
     
         POST http://localhost:4500/auth/register
-
     body:
     
     ``` js
@@ -293,9 +365,9 @@ Find here the collection of all endpoints in Thunder Client:
 1. You have to open Thunder Client
 2. Go to collections
 3. Import this file: `./HTTP/thunder-collection_STUDIO TATTOO.json`
+ -->
 
-
-## Project Development:
+<!-- ## Project Development:
 
 <details>
   <summary>1. SQL - Database design:</summary>
@@ -465,18 +537,23 @@ you will need -h (host), -P (port), -u (username) and -p (password)
 - In order to check out this project, you'll need to ppopulate the database.
 
 - Follow steps 5 and 6 of the <a href="#instalation-local">instalation</a>
-</details>
+</details> -->
 
 
 ## Deployment
-The project is deployed here:
-*PENDING DEPLOYMENT*
 
-You can use this route for all the endpoints.
+*PENDING DEPLOYMENT*
 
 
 ## Author
 <div align="center">
-<a href = "mailto:a.sergiotorres@gmail.com"><img src="https://img.shields.io/badge/Gmail-C6362C?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
-<a href="https://github.com/SergioTorresGarcia" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a> 
+<a href = "mailto:a.sergiotorres@gmail.com">
+<img src="https://img.shields.io/badge/Gmail-C6362C?style=for-the-badge&logo=gmail&logoColor=white" target="_blank">
+</a>
+<a href="https://github.com/SergioTorresGarcia" target="_blank">
+<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+</a> 
+<a href="https://www.linkedin.com/in/s-t-g/" target="_blank">
+<img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+</a> 
 </div>
