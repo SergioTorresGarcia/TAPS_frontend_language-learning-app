@@ -53,16 +53,15 @@ With Taps, learning becomes playtime. Engaging games, review modes, and interact
 Boost your memory retention with our captivating visuals and vibrant and soothing colors. Each word is accompanied by an eye-catching image, forging strong associations between the word and its meaning. Say hello to seamless language recall!
   
 
-  <div style="display: flex;">
-  <div style="flex: 35%; padding: 0 10px;">
+  <div float="left">
 
-![Profile Demo](src/assets/video/demoProfile.gif)
-</div>
-  <div style="flex: 35%; padding: 0 auto; margin: 0 auto;">
+<p>
 
-![Game Demo](src/assets/video/demoGame.gif)
+<img src="/src/assets/video/demoGame.gif" width="35%"  alt="Game Demo"/>
 
-  </div>
+<img src="/src/assets/video/demoProfile.gif" width="35%" alt="Profile Demo"/>
+
+  </p>
 </div>
 
 
