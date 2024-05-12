@@ -3,12 +3,32 @@
 This is the FINAL PROJECT of the Full Stack Development Bootcamp with <a href="https://github.com/GeeksHubsAcademy" target="_blank">Geekshubs Academy</a>.
 
 
-## Idea overview
+<hr/>
 
+<div style="display: flex;">
+  <div style="flex: 60%; padding: 0 10px;">
+
+## Idea overview
 This is a language learning program (mobile first) designed to help users learn and practice Japanese vocabulary in an enjoyable and engaging way. 
 The program provides various types of word quizzes, pictogram and word recognition, and progress tracking to enhance the learning experience. It gives instant feedback on your progress.
 
-<hr/>
+## How the game works
+
+#### Stay Motivated
+Easily form a language learning habit with the game-based features and enjoyable challenges with perfect level and pace for you.
+
+#### Effective and Fun Learning Games
+With Taps, learning becomes playtime. Engaging games, review modes, and interactive challenges transform language acquisition into a joyful experience.
+
+#### Memorable Illustrations
+Boost your memory retention with our captivating visuals and vibrant and soothing colors. Each word is accompanied by an eye-catching image, forging strong associations between the word and its meaning. Say hello to seamless language recall!
+  </div>
+  <div style="flex: 40%; padding: 0 auto; margin: 0 auto;">
+    <img src="/src/assets/video/demoGame.gif" alt="Game Demo" />
+  </div>
+</div>
+
+
 
 <details>
   <summary>Table of Contents</summary>
@@ -26,16 +46,7 @@ The program provides various types of word quizzes, pictogram and word recogniti
 
 <hr/>
 
-## How the game works
 
-#### Stay Motivated
-Easily form a language learning habit with the game-based features and enjoyable challenges with perfect level and pace for you.
-
-#### Effective and Fun Learning Games
-With Taps, learning becomes playtime. Engaging games, review modes, and interactive challenges transform language acquisition into a joyful experience.
-
-#### Memorable Illustrations
-Boost your memory retention with our captivating visuals and vibrant and soothing colors. Each word is accompanied by an eye-catching image, forging strong associations between the word and its meaning. Say hello to seamless language recall!
 
 <hr/>
 

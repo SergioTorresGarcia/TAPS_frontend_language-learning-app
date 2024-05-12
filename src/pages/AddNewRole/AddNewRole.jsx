@@ -138,7 +138,7 @@ export const AddNewRole = () => {
                                     />
                                 </div>
                             </div>
-                        )};
+                        )}
                     </>
                 ) : (
                     <div className="roleDesign">

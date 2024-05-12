@@ -37,3 +37,14 @@
     color: white;
     box-shadow: 0 0 2em 2em rgba(255, 255, 255, 0.5);
 }
+
+.overDemo {
+    z-index: 900;
+    width: 75%;
+    transform: rotate(10deg);
+}
+
+.whiteText {
+    color: white;
+    cursor: pointer;
+}
