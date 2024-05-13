@@ -144,6 +144,12 @@ export const Profile = () => {
               functionEmit={write === "" ? updateData : () => setWrite("")}
             />
             <div className="error">{userError.usernameError}</div>
+
+            <CButton
+              className={"leftText"}
+              title={"◹ Delete profile?"}
+              functionEmit={() => navigate("/delete-profile")}
+            />
           </div>
         )}
       </div>
