@@ -1,20 +1,21 @@
-// Profile.jsx
-import React, { useState, useEffect } from "react";
+
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router";
 import "./Profile.css";
 import { GetProfile, UpdateProfile } from "../../services/apiCalls";
 import { CInput } from "../../common/CInput/CInput";
 import { CButton } from "../../common/CButton/CButton";
 import { validame } from "../../utils/functions";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
-import { updateUsername } from "../../redux/actions";
-import { useNavigate, useLocation } from "react-router-dom";
 
 export const Profile = () => {
-  const rdxUserData = useSelector(userData);
-  const dispatch = useDispatch();
+  //Redux reading mode
+  const rdxUserData = useSelector(userData)
+
   const navigate = useNavigate();
   const location = useLocation();
+
   const [write, setWrite] = useState("disabled");
   const [tokenStorage, setTokenStorage] = useState(rdxUserData.credentials.token);
   const [loadedData, setLoadedData] = useState(false);
@@ -22,6 +23,7 @@ export const Profile = () => {
     username: "",
     email: "",
   });
+
   const [userError, setUserError] = useState({
     usernameError: "",
     emailError: "",
@@ -54,10 +56,12 @@ export const Profile = () => {
       try {
         const fetched = await GetProfile(tokenStorage);
         setLoadedData(true);
+
         setUser({
           username: fetched.data.username,
           email: fetched.data.email,
         });
+
       } catch (error) {
         console.log(error);
       }
@@ -66,34 +70,55 @@ export const Profile = () => {
     if (!loadedData) {
       getUserProfile();
     }
-  }, [tokenStorage, loadedData]);
+  }, [user]);
+
+  //Syncronising the menu username when editing profile
+  useEffect(() => {
+    rdxUserData.credentials.decoded.username = user?.username
+  }, [user]);
 
   const updateData = async () => {
+
     try {
-      const fetched = await UpdateProfile(tokenStorage, user);
+      const fetched = await UpdateProfile(tokenStorage, user)
+
       setUser({
         username: fetched.data.username,
-        email: fetched.data.email,
-      });
-      setWrite("disabled");
-      dispatch(updateUsername(fetched.data.username));
+        email: fetched.data.email
+      })
+
+      setWrite("disabled")
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   return (
     <>
       <div className="profileDesign">
+
         {!loadedData ? (
           <div>CARGANDO</div>
         ) : (
           <div className="vertical">
             <div className="leftText">
-              {/* Left Text */}
+              <CButton
+                className={"leftText"}
+                title={"◹ Check the rules?"}
+                functionEmit={() => { navigate("/rules") }}
+              />
+              <br />
+              <CButton
+                className={"leftText"}
+                title={"◹ Check your progress?"}
+                functionEmit={() => { navigate("/progress") }}
+              />
+              <br /><br />
+              <div className="leftText">◹ Your data:</div>
             </div>
             <CInput
-              className={`inputDesign ${userError.usernameError !== "" ? "inputDesignError" : ""}`}
+              className={`inputDesign ${userError.usernameError !== "" ? "inputDesignError" : ""
+                }`}
               type={"text"}
               placeholder={""}
               name={"username"}
@@ -103,7 +128,8 @@ export const Profile = () => {
               onBlurFunction={(e) => checkError(e)}
             />
             <CInput
-              className={`inputDesign ${userError.emailError !== "" ? "inputDesignError" : ""}`}
+              className={`inputDesign ${userError.emailError !== "" ? "inputDesignError" : ""
+                }`}
               type={"email"}
               placeholder={""}
               name={"email"}
@@ -118,10 +144,10 @@ export const Profile = () => {
               functionEmit={write === "" ? updateData : () => setWrite("")}
             />
             <div className="error">{userError.usernameError}</div>
-            {/* Delete Profile Button */}
           </div>
         )}
       </div>
     </>
   );
 };
+
