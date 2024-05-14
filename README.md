@@ -91,6 +91,74 @@ Boost your memory retention with our captivating visuals and vibrant and soothin
 - Views tha consum all endpoints from backend (at least 2 full CRUDs)
 
 
+## LOGIC BEHIND THE GAME
+
+The game (for now) consists of 50 words, divided in 5 levels of 10 words each.
+
+This is important as for each level the game plays around these 10 words only, before passing onto the next one.
+
+1- first screen shows us the „WORD AT PLAY”. We can read all the options:
+	- symbol
+	- English word
+	- Japanese word
+	- Romanji word (romanised version of the Japanese word)
+
+2- second screen shows us the symbol and 2 written words to choose from (the correct one and one to divert)
+	This second „WORD TO DIVERT” comes randomly from the other 9 words of the current level.
+
+3- third screen is a variation of the second screen. 
+	A written word (in Japanese and Romanji) is accompanied with 2 different symbols to choose from.
+
+4- fourth screen offers 4 options (3 words to divert plus the corresponding word).
+	The 3 words for diversion come as well from the other 9 of the same level.
+
+5- fifth switches words and symbols in the fourth.
+
+6- and last offers a symbol and a Japanese word.
+	TRUE or FALSE options to choose from.
+
+<img src="public/imgReadme/09-word.png" width="10%"  alt="new word"/>
+<img src="public/imgReadme/11-game1.png" width="12%"  alt="new word"/>
+<img src="public/imgReadme/12-game2.png" width="14%"  alt="new word"/>
+<img src="public/imgReadme/13-game3.png" width="16%"  alt="new word"/>
+<img src="public/imgReadme/14-game4.png" width="18%"  alt="new word"/>
+<img src="public/imgReadme/15-game5.png" width="20%"  alt="new word"/>
+<details>
+
+<summary>read more</summary>
+
+It is ensured that within the random words to divert, same word is not offered twice.
+The position of the correct answer within the different options changes „randomly” (meaning using module of 2 and 3)
+Same happens with the last True/False screen.
+
+
+FOR NOW, the last screen decides if the word is learnt of not.
+	- if answered correctly, the word is added to the LEARNT WORDS list (that each user has: table UserWord in DataBase) 
+	- securing it down in the database, we can make sure that the progression during the game is saved despite the user login out or even changing phones/computers.
+	- game continues with first screen (offering the next word)
+
+	- if answered incorrectly, it loops back to first screen offering again the whole set of screen with the same word, until answered correctly.
+
+WHAT HAPPENS AFTER LEVEL IS COMPLETED?
+	- once the user has played and successfully learnt 10 words from a level, a congratulation screen is displayed, informing user of the progress: which level was accomplished and how many left till end of game.
+	- after the pause, player can keep on learning.
+
+</details>
+
+<details>
+<summary>FUTURE FEATURES</summary>
+
+WHY have I said „for now”?
+	- Well, because of time constraints (this project was due in a limited less than 2 weeks period and the MVP included other things, back and frontend related. 
+	So the strategy behind was to create a simple module that made sense and was scalable, to keep on developing afterwards. For instance:
+
+		- I would like to add other versions of the screens (where no Romanji is offered - so that Japanese letter recognition is reinforced)
+		- Also different type of challenges where spelling and slices of arrays are to be put in order to pass the level.
+		- I would also like to add the audio feature, where the word has a short clip with the sound of the word. It would be offered together with the concept, and also after every successful answer.
+		- Time constraint. Setting up a time limit would force user to focus on the game, in an engaging way, let’s call it „healthy addiction”.
+
+</details>
+
 ## Database diagram (MySQL)
 <div align="center">
 
