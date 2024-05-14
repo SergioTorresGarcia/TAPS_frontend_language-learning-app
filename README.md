@@ -116,13 +116,16 @@ This is important as for each level the game plays around these 10 words only, b
 
 6- and last offers a symbol and a Japanese word.
 	TRUE or FALSE options to choose from.
-
+<div float="left">
+<p>
 <img src="public/imgReadme/09-word.png" width="10%"  alt="new word"/>
 <img src="public/imgReadme/11-game1.png" width="12%"  alt="new word"/>
 <img src="public/imgReadme/12-game2.png" width="14%"  alt="new word"/>
 <img src="public/imgReadme/13-game3.png" width="16%"  alt="new word"/>
 <img src="public/imgReadme/14-game4.png" width="18%"  alt="new word"/>
 <img src="public/imgReadme/15-game5.png" width="20%"  alt="new word"/>
+</p>
+</div>
 <details>
 
 <summary>read more</summary>
@@ -171,8 +174,8 @@ WHY have I said „for now”?
 2.  Navigate to the project directory `$ cd project-name`
 3.  Install dependencies: run ` $ npm i ` in terminal
 
-⚠️ MAKE SURE THAT BACKEND & DATABASE ARE RUNNING AS WELL ⚠️
-⚠️ & you've set up all environment variables accordingly ⚠️
+<p>⚠️ MAKE SURE THAT BACKEND & DATABASE ARE RUNNING AS WELL ⚠️</p>
+⚠️ & you've set up all environment variables accordingly ⚠️</p>
 
 4.  Once both back and front-end are running, start server with ` $ npm run dev ` in terminal and access the application (http://localhost:5173/)
 
