@@ -78,7 +78,7 @@ export const Play = () => {
                                 <div className="borderConcept">
 
                                     <br />
-                                    <img className="img text" src={!wordToPlay ? `../../src/assets/${word.image.slice(2)}` : `../../src/assets/${wordToPlay?.image.slice(2)}`} alt="" />
+                                    <img className="img text" src={!wordToPlay ? `src/assets/${word.image}` : `src/assets/${wordToPlay?.image}`} alt="" />
                                     <h3 className="text2">{!wordToPlay ? word.JP : wordToPlay?.JP}</h3>
                                     <h5 className="white">'{!wordToPlay ? word.romanji : wordToPlay?.romanji}'</h5>
                                     <h4 className="text2">{!wordToPlay ? word.EN : wordToPlay?.EN}</h4>

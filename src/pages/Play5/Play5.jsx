@@ -77,7 +77,7 @@ export const Play5 = () => {
                         <div className="game">
                             <div className="borderPlay5">
                                 <br /><br />
-                                <img className="img text " src={wordToPlay && wordToPlay?.image ? `../../src/assets/${wordToPlay?.image.slice(2)}` : ''} alt={wordToPlay?.EN} />
+                                <img className="img text " src={wordToPlay && wordToPlay?.image ? `src/assets/${wordToPlay?.image}` : ''} alt={wordToPlay?.EN} />
                                 <br />
                                 {wordToPlay?.id % 3 == 0
                                     // corresponding word

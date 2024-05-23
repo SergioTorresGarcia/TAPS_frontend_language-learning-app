@@ -96,7 +96,7 @@ export const Play3 = () => {
                                         ))}
                                     </div>
                                     {/* Image */}
-                                    <img className="img text" src={wordToPlay && wordToPlay.image ? `../../src/assets/${wordToPlay.image.slice(2)}` : ''} alt={wordToPlay.EN} />
+                                    <img className="img text" src={wordToPlay && wordToPlay.image ? `../../src/assets/${wordToPlay.image}` : ''} alt={wordToPlay.EN} />
                                     {/* Last two options */}
                                     <div className="row">
                                         {(shuffledOptions.slice(2)).map((word, index) => (
