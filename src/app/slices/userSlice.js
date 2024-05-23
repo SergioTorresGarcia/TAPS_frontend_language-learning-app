@@ -7,16 +7,10 @@ export const userSlice = createSlice({
     },
     reducers: {
         login: (state, action) => {
-            return {
-                ...state,
-                ...action.payload
-            }
+            state.credentials = action.payload.credentials;
         },
-        logout: (state, action) => {
-            return {
-                ...state,
-                ...action.payload
-            }
+        logout: (state) => {
+            state.credentials = null;
         },
         updateUsername: (state, action) => {
             state.credentials.decoded.username = action.payload;
@@ -29,3 +23,4 @@ export const { login, logout, updateUsername } = userSlice.actions;
 export const userData = (state) => state.user;
 
 export default userSlice.reducer;
+

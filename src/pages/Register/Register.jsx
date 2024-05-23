@@ -5,10 +5,13 @@ import { CButton } from "../../common/CButton/CButton";
 import { RegisterUser } from "../../services/apiCalls";
 import { validame } from "../../utils/functions";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { decodeToken } from "react-jwt";
+import { login } from "../../app/slices/userSlice";
 
 
 export const Register = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -53,8 +56,20 @@ export const Register = () => {
       }
 
       const fetched = await RegisterUser(user);
-      setMsgError(fetched.message);
-      navigate('/login');
+
+      // Assuming fetched contains the token
+      const { token } = fetched;
+      const decoded = decodeToken(token);
+      const passport = {
+        token: token,
+        decoded: decoded,
+      };
+
+      // Dispatch login action
+      dispatch(login({ credentials: passport }));
+
+      // Redirect to the home page or any other page
+      navigate('/');
 
     } catch (error) {
       setMsgError(error.message);
