@@ -2,13 +2,12 @@ import { useState } from "react";
 import { CInput } from "../../common/CInput/CInput";
 import "./Register.css";
 import { CButton } from "../../common/CButton/CButton";
-import { RegisterUser } from "../../services/apiCalls";
+import { RegisterUser, LoginUser } from "../../services/apiCalls";
 import { validame } from "../../utils/functions";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { decodeToken } from "react-jwt";
 import { login } from "../../app/slices/userSlice";
-
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -28,9 +27,7 @@ export const Register = () => {
 
   const [msgError, setMsgError] = useState("");
 
-  //funcion emit in father, we pass it to custum input
   const inputHandler = (e) => {
-    //binding...
     setUser((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -46,31 +43,54 @@ export const Register = () => {
     }));
   };
 
-  //funcion emit in father, for registering
-  const registerMe = async () => {
-    try {
-      for (let elemento in user) {
-        if (user[elemento] === "") {
-          throw new Error("All fields are required");
+  const validateForm = () => {
+    let isValid = true;
+    let errors = {};
+
+    for (let elemento in user) {
+      if (user[elemento] === "") {
+        errors[elemento + "Error"] = "This field is required";
+        isValid = false;
+      } else {
+        const error = validame(elemento, user[elemento]);
+        if (error) {
+          errors[elemento + "Error"] = error;
+          isValid = false;
         }
       }
+    }
 
-      const fetched = await RegisterUser(user);
+    setUserError(errors);
+    return isValid;
+  };
 
-      // Assuming fetched contains the token
-      const { token } = fetched;
-      const decoded = decodeToken(token);
+  const registerMe = async () => {
+    try {
+      if (!validateForm()) {
+        throw new Error("Please fix the validation errors before submitting");
+      }
+
+      const registerResponse = await RegisterUser(user);
+
+      if (!registerResponse.success) {
+        throw new Error("Registration failed. Please try again.");
+      }
+
+      const loginCredentials = {
+        email: user.email,
+        password: user.password
+      };
+
+      const loginResponse = await LoginUser(loginCredentials);
+
+      const decoded = decodeToken(loginResponse.token);
       const passport = {
-        token: token,
+        token: loginResponse.token,
         decoded: decoded,
       };
 
-      // Dispatch login action
       dispatch(login({ credentials: passport }));
-
-      // Redirect to the home page or any other page
       navigate('/');
-
     } catch (error) {
       setMsgError(error.message);
     }
