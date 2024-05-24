@@ -36,7 +36,7 @@ export const Home = () => {
             </div>}
             {showGif && <div>
               <p className="whiteText" onClick={() => setShowGif(false)}></p>
-              <img src="src/assets/video/demoGame.gif" alt="GAME DEMO" className="overDemo" />
+              <img src="/assets/video/demoGame.gif" alt="GAME DEMO" className="overDemo" />
             </div>}
           </div>
 
