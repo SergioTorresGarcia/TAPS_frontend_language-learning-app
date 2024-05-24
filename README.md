@@ -331,7 +331,7 @@ WHY have I said „for now”?
 
 ## Deployment
 
-*PENDING DEPLOYMENT*
+https://master.dvdetud9ckjiz.amplifyapp.com/
 
 
 ## Author
