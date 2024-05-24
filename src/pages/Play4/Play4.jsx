@@ -104,7 +104,7 @@ export const Play4 = () => {
                                     <div className="row">
                                         {(shuffledOptions.slice(0, 2)).map((word, index) => (
                                             <div key={index} className="option" onClick={word === wordToPlay ? gotItRight : gotItWrong}>
-                                                <img className="img4 text" src={word && word.image ? `src/assets/${word.image}` : ''} alt={word.EN} />
+                                                <img className="img4 text" src={word && word.image ? `/assets/${word.image}` : ''} alt={word.EN} />
                                             </div>
                                         ))}
                                     </div>
@@ -119,7 +119,7 @@ export const Play4 = () => {
                                     <div className="row">
                                         {(shuffledOptions.slice(2)).map((word, index) => (
                                             <div key={index} className="option" onClick={word === wordToPlay ? gotItRight : gotItWrong}>
-                                                <img className="img4 text" src={word && word.image ? `src/assets/${word.image}` : ''} alt={word.EN} />
+                                                <img className="img4 text" src={word && word.image ? `/assets/${word.image}` : ''} alt={word.EN} />
                                             </div>
                                         ))}
                                     </div>

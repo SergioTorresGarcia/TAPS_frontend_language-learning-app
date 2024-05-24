@@ -147,24 +147,6 @@ export const Admin = () => {
                                 functionEmit={() => { navigate("/admin/words") }}
                             />
                         </div>
-                        {/* 
-                        BOTON CON ROLES
-                        BOTON CREAR ROLE
-                        BOTON CAMBIAR ROLE (hacer admin)
-
-                        BOTON CON USUARIOS (poder borrar)
-
-                        BOTON CON NIVELES (poder editar/borrar)
-                        BOTON CREAR NIVEL
-
-                        BOTON CON PALABRAS CARDS
-                        BOTON CON PALABRAS TABLA */}
-
-
-
-
-
-
                     </>
                 ) : (
                     <div className="wordDesign">

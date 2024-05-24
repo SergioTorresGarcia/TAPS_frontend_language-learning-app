@@ -81,10 +81,10 @@ export const Play2a = () => {
                                 <br />
                                 {wordToPlay?.id % 3 == 0 ?
                                     (<div className="right" onClick={() => { gotItRight() }}>
-                                        <img className="img2a text " src={wordToPlay && wordToPlay?.image ? `src/assets/${wordToPlay?.image}` : ''} alt={wordToPlay?.EN} />
+                                        <img className="img2a text " src={wordToPlay && wordToPlay?.image ? `/assets/${wordToPlay?.image}` : ''} alt={wordToPlay?.EN} />
                                     </div>)
                                     : (<div className="wrong" onClick={() => { gotItWrong() }}>
-                                        <img className="img2a text " src={oneToDivert && oneToDivert?.image ? `src/assets/${oneToDivert?.image}` : ''} alt={oneToDivert?.EN} />
+                                        <img className="img2a text " src={oneToDivert && oneToDivert?.image ? `/assets/${oneToDivert?.image}` : ''} alt={oneToDivert?.EN} />
                                     </div>)
                                 }
                                 <br />
@@ -93,10 +93,10 @@ export const Play2a = () => {
                                 <br /><br />
                                 {wordToPlay?.id % 3 != 0 ?
                                     (<div className="right" onClick={() => { gotItRight() }}>
-                                        <img className="img2a text " src={wordToPlay && wordToPlay?.image ? `src/assets/${wordToPlay?.image}` : ''} alt={wordToPlay?.EN} />
+                                        <img className="img2a text " src={wordToPlay && wordToPlay?.image ? `/assets/${wordToPlay?.image}` : ''} alt={wordToPlay?.EN} />
                                     </div>)
                                     : (<div className="wrong" onClick={() => { gotItWrong() }}>
-                                        <img className="img2a text " src={oneToDivert && oneToDivert?.image ? `src/assets/${oneToDivert?.image}` : ''} alt={oneToDivert?.EN} />
+                                        <img className="img2a text " src={oneToDivert && oneToDivert?.image ? `/assets/${oneToDivert?.image}` : ''} alt={oneToDivert?.EN} />
                                     </div>)
                                 }
 

@@ -22,7 +22,7 @@ export const Footer = () => {
                         {rdxUserData.credentials.decoded.roleName === "admin" && (
                             <>
                                 {loc !== '/admin' ?
-                                    <Navigator title={"ADMIN"} destination={"/admin"} />
+                                    <Navigator title={"HOME"} destination={"/"} />
                                     : null}
                                 {loc === '/admin/words' ?
                                     <Navigator title={"+WORD"} destination={"/admin/words/new"} />

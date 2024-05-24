@@ -37,7 +37,7 @@ export const Header = () => {
                 ? <div onClick={logOut}><Navigator title={"log out"} destination={"/"} /></div>
                 : <div onClick={() => setShowGif(false)}><Navigator title={"⇠"} destination={"/profile/me"} /></div>
             )
-            : <Navigator title={"⇠"} destination={"/"} />
+            : ((loc === '/admin/levels' || loc === '/admin/roles' || loc === '/admin/users' || loc === '/admin/words') ? <Navigator title={"⇠"} destination={"/admin"} /> : <Navigator title={"⇠"} destination={"/"} />)
         ) : (
 
           loc === '/login' || loc === '/register' ? (

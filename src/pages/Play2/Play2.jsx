@@ -88,7 +88,7 @@ export const Play2 = () => {
                                     </div>)
                                 }
                                 <br />
-                                <img className="img text " src={wordToPlay && wordToPlay?.image ? `src/assets/${wordToPlay?.image}` : ''} alt={wordToPlay?.EN} />
+                                <img className="img text " src={wordToPlay && wordToPlay?.image ? `/assets/${wordToPlay?.image}` : ''} alt={wordToPlay?.EN} />
                                 <br />
                                 {wordToPlay?.id % 2 != 0 ?
                                     (<div className="right" onClick={() => { gotItRight() }}>
