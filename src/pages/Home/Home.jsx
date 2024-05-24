@@ -26,7 +26,7 @@ export const Home = () => {
       <div className="homeDesign" >
         {rdxUserData.credentials?.token ? (
 
-          <div className="logo" onClick={() => { navigate('/play') }}><img className="logo" src="/src/assets/playBtn.jpg" alt="play button" /></div>
+          <div className="logo" onClick={() => { navigate('/play') }}><img className="logo" src="/assets/playBtn.jpg" alt="play button" /></div>
 
         ) : (
 
